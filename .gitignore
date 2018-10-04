@@ -2,3 +2,7 @@
 .vscode/
 *.iml
 .env
+target/
+.classpath
+.settings/
+.project
