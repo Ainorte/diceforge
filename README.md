@@ -9,7 +9,7 @@
 
 - William
 - Maxime
-- Tao
+- Ta0
 - Ivan
 
 ## Milestones
