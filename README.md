@@ -11,6 +11,7 @@
 - Maxime
 - Tao
 - Ivan
+- Sow thierno
 
 ## Milestones
 
