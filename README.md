@@ -33,9 +33,4 @@
     - Entrainement seul pour déterminer une stratégie qui maximise les points de victoire seul.
 
 6. Adaptation à plusieurs bot (Rendu 6 : 13/12) :
-    - Entrainement des bots en interaction pour améliorer leur stratégie de 5. quand celle ci est devenu impossible suite à une action d'un autre bot.
-
-7. Peaufinage global (Rendu 6 : 13/12) :
-    - Code review et code cleaning. 
-    - Refactoring possible.
-    - Recherche de bug ayant passé les test précédent etc...
+    - Entrainement des bots en interaction pour améliorer leur stratégie de 5. quand celle ci est devenu impossible suite à une action d'un autre bot.S
