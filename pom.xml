@@ -33,23 +33,22 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
                 <executions>
                     <execution>
                         <id>partie</id>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                        <configuration>
-                            <mainClass>com.github.l3pi.App</mainClass>
-                        </configuration>
+                        <goals><goal>java</goal></goals>
+                        <configuration><arguments>
+                            <argument>1</argument>
+                        </arguments></configuration>
                     </execution>
                     <execution>
                         <id>stat</id>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                        <configuration>
-                            <mainClass>com.github.l3pi.AppStat</mainClass>
-                        </configuration>
+                        <goals><goal>java</goal></goals>
+                        <configuration><arguments>
+                            <argument>500</argument>
+                        </arguments></configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <mainClass>com.github.l3pi.App</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
