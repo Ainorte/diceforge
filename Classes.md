@@ -1,20 +1,25 @@
 - [x] FacetType<enum>
 - [x] ResourceType<enum>
-- [x] CardType<enum>
 
 - [x] Operation
 
 - [X] Facet<FacetType, count>
-- [X] Player<ResourceInventory, MovementCount, CardInventory, FacetInventory, Dice<[6 facet]>[2]>
+- [X] Player<ResourceInventory, MovementCount, FacetInventory, Dice<[6 facet]>[2]>
 - [X] TempPlayer<Player, Facets, Operations>
 
 - [x] Rule
 - [x] FacetRule<Rule>
-- [x] CardRule<Rule>
-- [x] GameRule<Rule>
-- [ ] RuleSet<FacetRule[], CardRule[], GameRule[]>
+- [ ] RuleSet<FacetRule[]>
 - [ ] RuleFactory -> resolveRuleSet(playerCount) => RuleSet
 
 - [ ] FacetRuleManager -> resolve(Facet[]) => Operation[]
 
 - [X] Game<Player[], RuleSet, FacetRuleManager>
+
+## P2
+
+- [ ] CardType<enum>
+- Player += <CardInventory>
+- [ ] CardRule<Rule>
+- [ ] GameRule<Rule>
+- RuleSet += <CardRule[], GameRule[]>
