@@ -4,7 +4,6 @@ import com.github.l3pi.type.FacetType;
 import java.util.HashMap;
 
 public final class RuleSet {
-
     public final HashMap<FacetType,FacetRule> facetRule;
 
     public RuleSet(HashMap<FacetType,FacetRule> facetRule) {
