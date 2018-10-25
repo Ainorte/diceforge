@@ -1,4 +1,4 @@
 package com.github.l3pi.rule;
 
-public class GameRule {
+public class GameRule implements Rule {
 }
