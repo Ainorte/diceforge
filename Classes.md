@@ -19,7 +19,7 @@
 ## P2
 
 - [ ] CardType<enum>
-- [ ] Player += <CardInventory>
+- [ ] Player += `<CardInventory>`
 - [ ] CardRule<Rule>
 - [ ] GameRule<Rule>
-- [ ] RuleSet += <CardRule[], GameRule[]>
+- [ ] RuleSet += `<CardRule[], GameRule[]>`
