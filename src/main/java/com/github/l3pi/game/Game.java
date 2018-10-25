@@ -4,32 +4,34 @@ import com.github.l3pi.rule.RuleSet;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Game {
     private List<Player> players;
-    private RuleSet ruleSet;
     private FacetRuleManager facetRuleManager;
 
-    public Game(List<Player> players, RuleSet ruleSet, FacetRuleManager facetRuleManager) {
+    public Game(List<Player> players, RuleSet ruleSet) {
         this.players = players;
-        this.ruleSet = ruleSet;
-        this.facetRuleManager = facetRuleManager;
+        this.facetRuleManager = new FacetRuleManager(ruleSet);
     }
 
     public void round() {
-        List<TempPlayer> tempPlayers = new ArrayList<TempPlayer>();
+        List<TempPlayer> tempPlayers = new ArrayList<>();
         for (Player player : players) {
             tempPlayers.add(new TempPlayer(player, player.throwDice()));
         }
-        //TODO : Get operation from manager
-        //TODO : Apply operation on game states
+        for (TempPlayer tempPlayer : tempPlayers){
+            tempPlayer.operations = facetRuleManager.resolve(tempPlayer.facets);
+        }
+        for (TempPlayer tempPlayer : tempPlayers){
+            tempPlayer.operations.forEach(operation -> operation.apply(this,tempPlayer));
+        }
     }
 
     //TODO P2 : GAME STATE HISTORY
 
-
     @Override
     public String toString() {
-        return String.join("/n", (String[]) players.stream().map(player -> player.toString()).toArray());
+        return players.stream().map(Player::toString).collect(Collectors.joining("\n"));
     }
 }

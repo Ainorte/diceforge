@@ -1,10 +1,12 @@
 package com.github.l3pi.game;
 
+import java.util.List;
+
 public class GameManager {
     private Game game;
 
-    public GameManager(Game game){
-        this.game = game;
+    public GameManager(List<Player> players){
+        this.game = new Game(players, RuleFactory.getInstance().getRules(players.size()));
     }
 
     public void run(){
