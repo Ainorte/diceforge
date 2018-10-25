@@ -1,5 +1,6 @@
 - [x] FacetType<enum>
 - [x] ResourceType<enum>
+- [x] CardType<enum>
 
 - [x] Operation
 
