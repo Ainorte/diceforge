@@ -16,11 +16,13 @@ public class FacetRuleManager {
         List<Operation> ops = new ArrayList<>();
 
         for (Facet f : facets) {
-            ops.addAll(
-                this.rules.facetRule
-                    .get(f.facetType)
-                    .getOperations(f)
-            );
+            List<Operation> facetOps = this.rules.facetRule
+                .get(f.facetType)
+                .getOperations(f);
+
+            for (int x = 0; x < f.count; ++x) {
+                ops.addAll(facetOps);
+            }
         }
 
         return ops;
