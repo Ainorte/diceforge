@@ -9,17 +9,17 @@
 
 - [x] Rule
 - [x] FacetRule<Rule>
-- [ ] RuleSet<FacetRule[]>
-- [ ] RuleFactory -> resolveRuleSet(playerCount) => RuleSet
+- [x] RuleSet<FacetRule[]>
+- [x] RuleFactory -> resolveRuleSet(playerCount) => RuleSet
 
-- [ ] FacetRuleManager -> resolve(Facet[]) => Operation[]
+- [x] FacetRuleManager -> resolve(Facet[]) => Operation[]
 
 - [X] Game<Player[], RuleSet, FacetRuleManager>
 
 ## P2
 
 - [ ] CardType<enum>
-- Player += <CardInventory>
+- [ ] Player += <CardInventory>
 - [ ] CardRule<Rule>
 - [ ] GameRule<Rule>
-- RuleSet += <CardRule[], GameRule[]>
+- [ ] RuleSet += <CardRule[], GameRule[]>
