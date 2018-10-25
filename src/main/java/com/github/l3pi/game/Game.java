@@ -15,6 +15,10 @@ public class Game {
         this.facetRuleManager = new FacetRuleManager(ruleSet);
     }
 
+    public List<Player> getPlayers() {
+        return players;
+    }
+
     public void round() {
         List<TempPlayer> tempPlayers = new ArrayList<>();
         for (Player player : players) {

@@ -1,6 +1,10 @@
 package com.github.l3pi.game;
 
+import com.github.l3pi.type.ResourceType;
+
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameManager {
     private Game game;
@@ -9,10 +13,14 @@ public class GameManager {
         this.game = new Game(players, RuleFactory.getInstance().getRules(players.size()));
     }
 
-    public void run(){
+    public List<Player> run(){
         for(int round = 0; round < 9; round++ ) {
             game.round();
             System.out.println(String.format("Round: %d\n%s",round,game));
         }
+
+        List<Player> players = game.getPlayers();
+        int max = players.stream().max(Comparator.comparingInt(player -> player.resources.get(ResourceType.GLORY))).get().resources.get(ResourceType.GLORY);
+        return players.stream().filter(player -> player.resources.get(ResourceType.GLORY) == max).collect(Collectors.toList());
     }
 }
