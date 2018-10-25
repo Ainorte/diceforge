@@ -6,8 +6,9 @@ package com.github.l3pi;
  */
 public class App 
 {
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+    public static void main( String[] args ) {
+        if (args.length != 3) {
+            System.err.printf("Usage: %s <run-count> <player-count(>=2)>", args[0]);
+        }
     }
 }

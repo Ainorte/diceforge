@@ -22,8 +22,8 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -34,21 +34,26 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
                     <execution>
                         <id>partie</id>
                         <goals><goal>java</goal></goals>
-                        <configuration><arguments>
-                            <argument>1</argument>
-                        </arguments></configuration>
+                        <configuration>
+                            <arguments>
+                                <argument>1</argument>
+                                <argument>2</argument>
+                            </arguments>
+                            <mainClass>com.github.l3pi.App</mainClass>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>stat</id>
                         <goals><goal>java</goal></goals>
-                        <configuration><arguments>
-                            <argument>500</argument>
-                        </arguments></configuration>
+                        <configuration>
+                            <arguments>
+                                <argument>500</argument>
+                                <argument>2</argument>
+                            </arguments>
+                            <mainClass>com.github.l3pi.App</mainClass>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <mainClass>com.github.l3pi.App</mainClass>
-                </configuration>
             </plugin>
         </plugins>
     </build>

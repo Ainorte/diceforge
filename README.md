@@ -1,9 +1,17 @@
 # L3 Projet informatique
 
+## Run parameter usage
+
+```
+Usage:
+./game.jar <run-count> <player-count>
+```
+
 ## How to work
 
 - Running the tests: `mvn test`
-- Running the program (main): `mvn exec:java`
+- Running a single game: `mvn exec:java@partie`
+- Running a stat game (500 games): `mvn exec:java@stat`
 
 ## Groupe
 
