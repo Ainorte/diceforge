@@ -15,8 +15,10 @@ public class GameManager {
 
     public List<Player> run(){
         for(int round = 0; round < 9; round++ ) {
+            System.out.println(String.format("==========Round %d==========\n",round));
             game.round();
-            System.out.println(String.format("Round: %d\n%s",round,game));
+            System.out.println(String.format(game.toString()));
+            System.out.println(String.format("\n========End Round %d========\n",round));
         }
 
         List<Player> players = game.getPlayers();

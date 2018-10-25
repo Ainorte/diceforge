@@ -3,10 +3,7 @@ package com.github.l3pi.game;
 import com.github.l3pi.type.FacetType;
 import com.github.l3pi.type.ResourceType;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Player {
     public final HashMap<ResourceType, Integer> resources;
@@ -57,6 +54,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return String.format("Name : %s, Dices : %s, Ressouces : %s", name, dices, resources);
+        return String.format("Name : %s,\nDices : %s,\nRessouces : %s", name, Arrays.deepToString(dices), resources);
     }
 }

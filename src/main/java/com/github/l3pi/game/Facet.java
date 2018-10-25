@@ -10,4 +10,9 @@ public final class Facet {
         this.facetType = facetType;
         this.count = count;
     }
+
+    @Override
+    public String toString() {
+        return String.format("FacetType : %s, Count : %d", facetType, count);
+    }
 }
