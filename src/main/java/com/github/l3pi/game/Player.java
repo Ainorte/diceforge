@@ -3,13 +3,18 @@ package com.github.l3pi.game;
 import com.github.l3pi.type.FacetType;
 import com.github.l3pi.type.ResourceType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 public class Player {
     public final HashMap<ResourceType, Integer> resources;
     public final Facet[][] dices;
+    public final String name;
+    private final Random random;
 
-    public Player(int goldCount){
+    public Player(int goldCount, String name){
         this.resources = new HashMap<ResourceType, Integer>();
         this.resources.put(ResourceType.GOLD,goldCount);
         this.resources.put(ResourceType.LUNAR,0);
@@ -34,5 +39,20 @@ public class Player {
                 new Facet(FacetType.GLORY, 2)
             }
         };
+        this.name = name;
+        this.random = new Random();
+    }
+
+    public List<Facet> throwDice(){
+        List<Facet> facets = new ArrayList<Facet>();
+        for(Facet[] dice : dices){
+            facets.add(dice[random.nextInt(dice.length)]);
+        }
+        return facets;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Name : %s, Dices : %s, Ressouces : %s", name, dices, resources);
     }
 }
