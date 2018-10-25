@@ -21,7 +21,6 @@ public class App
             players.add(new Player(3,"player1"));
             players.add(new Player(2,"player2"));
             GameManager gameManager = new GameManager(players);
-            gameManager.run();
             List<Player> winners = gameManager.run();
             System.out.print("the winners are : ");
             for(Player p:winners){
