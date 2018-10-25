@@ -1,5 +1,4 @@
 package com.github.l3pi.rule;
-import com.github.l3pi.game.Facet;
 import com.github.l3pi.type.FacetType;
 
 import java.util.HashMap;
