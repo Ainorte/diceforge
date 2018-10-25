@@ -9,9 +9,15 @@ Usage:
 
 ## How to work
 
+> Note that you firstly need to build the code,
+> by running `mvn install`.
+
 - Running the tests: `mvn test`
 - Running a single game: `mvn exec:java@partie`
 - Running a stat game (500 games): `mvn exec:java@stat`
+
+> You can both install and execute the program by joining both tasks,
+> e.g. `mvn install exec:java@partie`.
 
 ## Groupe
 
