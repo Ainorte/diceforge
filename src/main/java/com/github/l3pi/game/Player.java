@@ -51,6 +51,10 @@ public class Player {
         return facets;
     }
 
+    public String getName(){
+        return this.name;
+    }
+
     @Override
     public String toString() {
         return String.format("Name : %s, Dices : %s, Ressouces : %s", name, dices, resources);
