@@ -32,14 +32,24 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
                 <version>1.2.1</version>
                 <executions>
                     <execution>
+                        <id>partie</id>
                         <goals>
                             <goal>java</goal>
                         </goals>
+                        <configuration>
+                            <mainClass>com.github.l3pi.App</mainClass>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stat</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>com.github.l3pi.AppStat</mainClass>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <mainClass>com.github.l3pi.App</mainClass>
-                </configuration>
             </plugin>
         </plugins>
     </build>
