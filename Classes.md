@@ -4,9 +4,9 @@
 
 - [x] Operation
 
-- [ ] Facet<FacetType, count>
-- [ ] Player<ResourceInventory, MovementCount, CardInventory, FacetInventory, Dice<[6 facet]>[2]>
-- [ ] TempPlayer<Player, Facets, Operations>
+- [X] Facet<FacetType, count>
+- [X] Player<ResourceInventory, MovementCount, CardInventory, FacetInventory, Dice<[6 facet]>[2]>
+- [X] TempPlayer<Player, Facets, Operations>
 
 - [x] Rule
 - [x] FacetRule<Rule>
@@ -17,4 +17,4 @@
 
 - [ ] FacetRuleManager -> resolve(Facet[]) => Operation[]
 
-- [ ] Game<Player[], RuleSet, FacetRuleManager>
+- [X] Game<Player[], RuleSet, FacetRuleManager>
