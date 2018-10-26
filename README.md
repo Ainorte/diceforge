@@ -32,7 +32,7 @@ Usage:
 1.  Rendu 1 : 25/10 :
     - Partie à 2 bots
     - Inventaire
-    - Lancer un dé non modifiable
+    - Lancer deux dés non modifiable
     - Condition de victoire
     - Execution Maven du programme
 
