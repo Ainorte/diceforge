@@ -3,192 +3,26 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="52.5" y="427.0">com.github.l3pi.game.GameManager</node>
-    <node x="1899.0" y="972.0">com.github.l3pi.rule.FacetRule</node>
-    <node x="1921.5" y="1252.0">com.github.l3pi.game.Operation</node>
-    <node x="2558.0" y="1375.5">com.github.l3pi.game.TempPlayer</node>
-    <node x="3042.5" y="935.0">com.github.l3pi.game.Facet</node>
-    <node x="1439.0" y="759.5">com.github.l3pi.rule.RuleSet</node>
-    <node x="3433.5" y="98.5">com.github.l3pi.game.Player</node>
-    <node x="425.0" y="1562.5">com.github.l3pi.game.Game</node>
-    <node x="93.0" y="-28.0">com.github.l3pi.App</node>
-    <node x="2816.0" y="736.0">com.github.l3pi.type.FacetType</node>
-    <node x="2682.0" y="416.0">com.github.l3pi.type.ResourceType</node>
-    <node x="2308.0" y="735.0">com.github.l3pi.game.RuleFactory</node>
-    <node x="980.0" y="1067.0">com.github.l3pi.game.FacetRuleManager</node>
+    <node x="315.0" y="699.0">com.github.l3pi.game.Operation</node>
+    <node x="0.0" y="699.0">com.github.l3pi.rule.FacetRule</node>
+    <node x="0.0" y="557.0">com.github.l3pi.game.GameManager</node>
+    <node x="475.0" y="231.0">com.github.l3pi.game.TempPlayer</node>
+    <node x="248.0" y="231.0">com.github.l3pi.game.Facet</node>
+    <node x="269.0" y="557.0">com.github.l3pi.rule.RuleSet</node>
+    <node x="0.0" y="0.0">com.github.l3pi.game.Player</node>
+    <node x="351.0" y="0.0">com.github.l3pi.game.Game</node>
+    <node x="600.0" y="699.0">com.github.l3pi.App</node>
+    <node x="167.0" y="395.0">com.github.l3pi.type.FacetType</node>
+    <node x="0.0" y="395.0">com.github.l3pi.type.ResourceType</node>
+    <node x="0.0" y="231.0">com.github.l3pi.game.RuleFactory</node>
+    <node x="314.0" y="395.0">com.github.l3pi.game.FacetRuleManager</node>
   </nodes>
   <notes />
-  <edges>
-    <edge source="com.github.l3pi.game.Game" target="com.github.l3pi.game.Player">
-      <point x="0.0" y="77.5" />
-      <point x="600.0" y="1760.0" />
-      <point x="3640.0" y="1760.0" />
-      <point x="0.0" y="101.5" />
-    </edge>
-    <edge source="com.github.l3pi.game.Facet" target="com.github.l3pi.type.FacetType">
-      <point x="-40.0" y="-65.0" />
-      <point x="3120.0" y="800.0" />
-      <point x="64.0" y="0.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.RuleFactory" target="com.github.l3pi.rule.FacetRule">
-      <point x="0.0" y="65.0" />
-      <point x="2440.0" y="980.0" />
-      <point x="181.0" y="-20.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.RuleFactory" target="com.github.l3pi.game.TempPlayer">
-      <point x="132.0" y="20.0" />
-      <point x="2720.0" y="820.0" />
-      <point x="0.0" y="-64.5" />
-    </edge>
-    <edge source="com.github.l3pi.rule.FacetRule" target="com.github.l3pi.game.Facet">
-      <point x="181.0" y="0.0" />
-      <point x="-117.5" y="0.0" />
-    </edge>
-    <edge source="com.github.l3pi.rule.RuleSet" target="com.github.l3pi.type.FacetType">
-      <point x="0.0" y="-40.5" />
-      <point x="1640.0" y="600.0" />
-      <point x="2880.0" y="600.0" />
-      <point x="0.0" y="-64.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.RuleFactory" target="com.github.l3pi.type.FacetType">
-      <point x="132.0" y="0.0" />
-      <point x="-64.0" y="0.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.TempPlayer" target="com.github.l3pi.game.Facet">
-      <point x="162.0" y="-20.0" />
-      <point x="3320.0" y="1420.0" />
-      <point x="3320.0" y="1000.0" />
-      <point x="117.5" y="0.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.FacetRuleManager" target="com.github.l3pi.rule.RuleSet">
-      <point x="0.0" y="-53.0" />
-      <point x="1160.0" y="820.0" />
-      <point x="-201.0" y="20.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.Player" target="com.github.l3pi.type.ResourceType">
-      <point x="-160.0" y="101.5" />
-      <point x="3480.0" y="480.0" />
-      <point x="78.0" y="0.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.Player" target="com.github.l3pi.type.FacetType">
-      <point x="-140.0" y="101.5" />
-      <point x="3500.0" y="760.0" />
-      <point x="64.0" y="-40.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.RuleFactory" target="com.github.l3pi.game.Operation">
-      <point x="132.0" y="40.0" />
-      <point x="2640.0" y="840.0" />
-      <point x="2640.0" y="1260.0" />
-      <point x="158.5" y="-20.0" />
-    </edge>
-    <edge source="com.github.l3pi.rule.FacetRule" target="com.github.l3pi.game.Operation">
-      <point x="0.0" y="28.0" />
-      <point x="0.0" y="-28.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.TempPlayer" target="com.github.l3pi.game.Player">
-      <point x="0.0" y="64.5" />
-      <point x="2720.0" y="1560.0" />
-      <point x="3600.0" y="1560.0" />
-      <point x="-40.0" y="101.5" />
-    </edge>
-    <edge source="com.github.l3pi.game.TempPlayer" target="com.github.l3pi.game.Operation">
-      <point x="-40.0" y="-64.5" />
-      <point x="2680.0" y="1280.0" />
-      <point x="158.5" y="0.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.Operation" target="com.github.l3pi.game.TempPlayer">
-      <point x="0.0" y="28.0" />
-      <point x="2080.0" y="1400.0" />
-      <point x="-162.0" y="-40.0" />
-    </edge>
-    <edge source="com.github.l3pi.App" target="com.github.l3pi.game.GameManager">
-      <point x="0.0" y="28.0" />
-      <point x="0.0" y="-53.0" />
-    </edge>
-    <edge source="com.github.l3pi.App" target="com.github.l3pi.game.Player">
-      <point x="107.0" y="0.0" />
-      <point x="3920.0" y="0.0" />
-      <point x="3920.0" y="200.0" />
-      <point x="206.5" y="0.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.RuleFactory" target="com.github.l3pi.rule.RuleSet">
-      <point x="-132.0" y="0.0" />
-      <point x="201.0" y="0.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.GameManager" target="com.github.l3pi.game.Game">
-      <point x="147.5" y="40.0" />
-      <point x="560.0" y="520.0" />
-      <point x="-40.0" y="-77.5" />
-    </edge>
-    <edge source="com.github.l3pi.game.Player" target="com.github.l3pi.game.Facet">
-      <point x="-80.0" y="101.5" />
-      <point x="3560.0" y="960.0" />
-      <point x="117.5" y="-40.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.Game" target="com.github.l3pi.game.TempPlayer">
-      <point x="175.0" y="-13.333333333333258" />
-      <point x="2680.0" y="1626.6666666666667" />
-      <point x="-40.0" y="64.5" />
-    </edge>
-    <edge source="com.github.l3pi.game.GameManager" target="com.github.l3pi.type.ResourceType">
-      <point x="147.5" y="0.0" />
-      <point x="-78.0" y="0.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.GameManager" target="com.github.l3pi.game.RuleFactory">
-      <point x="147.5" y="20.0" />
-      <point x="2640.0" y="500.0" />
-      <point x="2640.0" y="760.0" />
-      <point x="132.0" y="-40.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.FacetRuleManager" target="com.github.l3pi.game.Operation">
-      <point x="0.0" y="53.0" />
-      <point x="1160.0" y="1280.0" />
-      <point x="-158.5" y="0.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.Operation" target="com.github.l3pi.game.Game">
-      <point x="-40.0" y="28.0" />
-      <point x="2040.0" y="1600.0" />
-      <point x="175.0" y="-40.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.Game" target="com.github.l3pi.game.FacetRuleManager">
-      <point x="80.0" y="-77.5" />
-      <point x="680.0" y="1120.0" />
-      <point x="-180.0" y="0.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.RuleFactory" target="com.github.l3pi.game.Game">
-      <point x="0.0" y="-65.0" />
-      <point x="2440.0" y="560.0" />
-      <point x="600.0" y="560.0" />
-      <point x="0.0" y="-77.5" />
-    </edge>
-    <edge source="com.github.l3pi.rule.RuleSet" target="com.github.l3pi.rule.FacetRule">
-      <point x="0.0" y="40.5" />
-      <point x="1640.0" y="1000.0" />
-      <point x="-181.0" y="0.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.GameManager" target="com.github.l3pi.game.Player">
-      <point x="40.0" y="-53.0" />
-      <point x="240.0" y="200.0" />
-      <point x="-206.5" y="0.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.Game" target="com.github.l3pi.rule.RuleSet">
-      <point x="40.0" y="-77.5" />
-      <point x="640.0" y="800.0" />
-      <point x="-201.0" y="0.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.RuleFactory" target="com.github.l3pi.type.ResourceType">
-      <point x="132.0" y="-20.0" />
-      <point x="2760.0" y="780.0" />
-      <point x="0.0" y="64.0" />
-    </edge>
-    <edge source="com.github.l3pi.game.FacetRuleManager" target="com.github.l3pi.game.Facet">
-      <point x="180.0" y="0.0" />
-      <point x="3120.0" y="1120.0" />
-      <point x="-40.0" y="65.0" />
-    </edge>
-  </edges>
-  <settings layout="Hierarchic Group" zoom="0.3336628769154721" x="1987.0" y="790.5044444444443" />
-  <SelectedNodes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="0.9336628769154721" x="646.9422806747184" y="495.6808059559627" />
+  <SelectedNodes>
+    <node>com.github.l3pi.game.TempPlayer</node>
+  </SelectedNodes>
   <Categories>
     <Category>Fields</Category>
     <Category>Constructors</Category>
