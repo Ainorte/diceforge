@@ -1,5 +1,6 @@
 package com.github.l3pi.game;
 
+import com.github.l3pi.factory.RuleFactory;
 import com.github.l3pi.type.FacetType;
 import org.junit.Before;
 import org.junit.Test;

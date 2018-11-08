@@ -1,5 +1,6 @@
 package com.github.l3pi;
 
+import com.github.l3pi.Bot.RandomBot;
 import com.github.l3pi.game.GameManager;
 import com.github.l3pi.game.Player;
 
@@ -18,8 +19,8 @@ public class App
         }
         else{
             List<Player> players = new ArrayList<Player>();
-            players.add(new Player(3,"player1"));
-            players.add(new Player(2,"player2"));
+            players.add(new RandomBot("player1"));
+            players.add(new RandomBot("player2"));
             GameManager gameManager = new GameManager(players);
             List<Player> winners = gameManager.run();
             System.out.print("the winners are : ");

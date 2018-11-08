@@ -1,6 +1,7 @@
 package com.github.l3pi.game;
 
 import com.github.l3pi.rule.RuleSet;
+import com.github.l3pi.type.FacetType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,15 +17,14 @@ public class FacetRuleManager {
         List<Operation> ops = new ArrayList<>();
 
         for (Facet f : facets) {
-            List<Operation> facetOps = this.rules.facetRule
-                .get(f.facetType)
-                .getOperations(f);
+            for(FacetType ft : f.getFacetTypes()) {
+                List<Operation> facetOps = this.rules.getFacetRule()
+                    .get(ft)
+                    .getOperations(f);
 
-            for (int x = 0; x < f.count; ++x) {
                 ops.addAll(facetOps);
             }
         }
-
         return ops;
     }
 }

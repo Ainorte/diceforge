@@ -1,28 +1,26 @@
 package com.github.l3pi.game;
 
-import com.github.l3pi.type.ResourceType;
+import com.github.l3pi.factory.RuleFactory;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 public class GameManager {
-    private Game game;
+    private List<Player> players;
 
     public GameManager(List<Player> players){
-        this.game = new Game(players, RuleFactory.getInstance().getRules(players.size()));
+        this.players = players;
     }
 
-    public List<Player> run(){
-        for(int round = 0; round < 9; round++ ) {
+    public List<Player> run() {
+        Game game = new Game(players, RuleFactory.getInstance().getRules(players.size()));
+        for (int round = 1; round <= 9; round++) {
             System.out.println(String.format("==========Round %d==========\n",round));
             game.round();
-            System.out.println(String.format(game.toString()));
+            System.out.println(game.toString());
             System.out.println(String.format("\n========End Round %d========\n",round));
         }
-
-        List<Player> players = game.getPlayers();
-        int max = players.stream().max(Comparator.comparingInt(player -> player.resources.get(ResourceType.GLORY))).get().resources.get(ResourceType.GLORY);
-        return players.stream().filter(player -> player.resources.get(ResourceType.GLORY) == max).collect(Collectors.toList());
+        return game.getBestPlayer();
     }
+
 }

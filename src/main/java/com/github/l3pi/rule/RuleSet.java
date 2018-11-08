@@ -4,9 +4,13 @@ import com.github.l3pi.type.FacetType;
 import java.util.HashMap;
 
 public final class RuleSet {
-    public final HashMap<FacetType,FacetRule> facetRule;
+    private final HashMap<FacetType,FacetRule> facetRule;
 
     public RuleSet(HashMap<FacetType,FacetRule> facetRule) {
         this.facetRule = facetRule;
+    }
+
+    public HashMap<FacetType, FacetRule> getFacetRule() {
+        return facetRule;
     }
 }

@@ -1,5 +1,6 @@
 package com.github.l3pi.game;
 
+import com.github.l3pi.factory.RuleFactory;
 import com.github.l3pi.rule.FacetRule;
 import com.github.l3pi.rule.RuleSet;
 import com.github.l3pi.type.FacetType;
@@ -21,7 +22,7 @@ public class RuleFactoryTest {
 
     @Test
     public void getRules() {
-        HashMap<FacetType, FacetRule> facetRules = set.facetRule;
+        HashMap<FacetType, FacetRule> facetRules = set.getFacetRule();
         Set<FacetType> facets = facetRules.keySet();
 
         assertTrue(facets.contains(FacetType.GOLD));
