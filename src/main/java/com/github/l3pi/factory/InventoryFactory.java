@@ -1,7 +1,9 @@
 package com.github.l3pi.factory;
 
 import com.github.l3pi.game.Facet;
+import com.github.l3pi.game.Game;
 import com.github.l3pi.game.Inventory;
+import com.github.l3pi.game.Player;
 import com.github.l3pi.type.FacetType;
 import com.github.l3pi.type.ResourceType;
 
@@ -17,8 +19,8 @@ public class InventoryFactory {
     private InventoryFactory() {
     }
 
-    public Inventory getInventory(int playerIndex) {
-        return new Inventory(getInitialDices(), getRessousces(playerIndex));
+    public Inventory getInventory(Game game, Player player, int playerIndex) {
+        return new Inventory(game,player,getInitialDices(), getRessousces(playerIndex));
     }
 
     private Facet[][] getInitialDices() {

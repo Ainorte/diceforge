@@ -16,9 +16,10 @@ public class Game {
 
     public Game(List<Player> players, RuleSet ruleSet) {
         this.players = new HashMap<>();
+        this.sanctuaryDice = new SanctuaryDice();
 
         for (int i = 0; i < players.size(); i++) {
-            this.players.put(players.get(i), InventoryFactory.getInstance().getInventory(i));
+            this.players.put(players.get(i), InventoryFactory.getInstance().getInventory(this,players.get(i),i));
         }
 
         this.facetRuleManager = new FacetRuleManager(ruleSet);
