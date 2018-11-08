@@ -1,8 +1,8 @@
 # TODO
 
-- [ ] Isolate inventory into InventoryService
+- [x] Isolate inventory into InventoryService
 - [ ] Create GameState data container
-- [ ] Move RuleSetManager into GameManager
-- [ ] Work on LogDAO (base version) for text output
+- [x] Move RuleSetManager into GameManager
+- [x] Work on LogDAO (base version) for text output
 - [ ] p2: SnapshotMap
-- [ ] Store Game into GameManager
+- [x] Store Game into GameManager
