@@ -1,6 +1,6 @@
 package com.github.l3pi;
 
-import com.github.l3pi.Bot.RandomBot;
+import com.github.l3pi.bot.RandomBot;
 import com.github.l3pi.game.GameManager;
 import com.github.l3pi.game.Player;
 
