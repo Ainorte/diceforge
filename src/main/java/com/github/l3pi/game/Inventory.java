@@ -27,6 +27,10 @@ public class Inventory {
         return facets;
     }
 
+    public Facet[][] getDices() {
+        return dices;
+    }
+
     public Facet[] getFaceUp(){
         return Arrays.copyOf(faceUp,faceUp.length);
     }

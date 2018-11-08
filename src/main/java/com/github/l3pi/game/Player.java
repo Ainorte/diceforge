@@ -1,5 +1,7 @@
 package com.github.l3pi.game;
 
+import java.util.List;
+
 public abstract class Player {
 
     private String name;
@@ -11,6 +13,10 @@ public abstract class Player {
     public String getName(){
         return this.name;
     }
+
+    abstract Facet chooseDiceFacet(List<Facet> listFacet);
+
+    abstract void forgeMyDice(Game game,int diceNumber,int faceNumber);
 
     @Override
     public String toString() {

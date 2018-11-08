@@ -12,6 +12,7 @@ import static com.github.l3pi.sys.LogDAO.log;
 public class Game {
     private HashMap<Player, Inventory> players;
     private FacetRuleManager facetRuleManager;
+    private SanctuaryDice sanctuaryDice;
 
     public Game(List<Player> players, RuleSet ruleSet) {
         this.players = new HashMap<>();
@@ -35,6 +36,10 @@ public class Game {
         for (TempPlayer tempPlayer : tempPlayers){
             tempPlayer.getOperations().forEach(operation -> operation.apply(this, tempPlayer));
         }
+    }
+
+    public SanctuaryDice getSanctuaryDice() {
+        return sanctuaryDice;
     }
 
     private Set<Player> getPlayers() {
