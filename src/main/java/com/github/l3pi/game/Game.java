@@ -7,6 +7,8 @@ import com.github.l3pi.type.ResourceType;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.github.l3pi.sys.LogDAO.log;
+
 public class Game {
     private HashMap<Player, Inventory> players;
     private FacetRuleManager facetRuleManager;
@@ -25,6 +27,7 @@ public class Game {
         List<TempPlayer> tempPlayers = new ArrayList<>();
         for (Player player : getPlayers()) {
             tempPlayers.add(new TempPlayer(player, players.get(player).throwDice()));
+            log(player.getName() + " à lancé " + Arrays.toString(players.get(player).getFaceUp()));
         }
         for (TempPlayer tempPlayer : tempPlayers){
             tempPlayer.setOperations(facetRuleManager.resolve(tempPlayer.getFacets()));
