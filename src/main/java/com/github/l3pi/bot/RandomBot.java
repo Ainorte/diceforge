@@ -1,4 +1,4 @@
-package com.github.l3pi.Bot;
+package com.github.l3pi.bot;
 
 import com.github.l3pi.game.Player;
 
