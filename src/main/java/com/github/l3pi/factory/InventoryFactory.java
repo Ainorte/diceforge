@@ -20,7 +20,7 @@ public class InventoryFactory {
     }
 
     public Inventory getInventory(Game game, Player player, int playerIndex) {
-        return new Inventory(game,player,getInitialDices(), getRessousces(playerIndex));
+        return new Inventory(game,player,getInitialDices(), getRessources(playerIndex));
     }
 
     private Facet[][] getInitialDices() {
@@ -44,7 +44,7 @@ public class InventoryFactory {
         };
     }
 
-    private HashMap<ResourceType, Integer> getRessousces(int playerIndex) {
+    private HashMap<ResourceType, Integer> getRessources(int playerIndex) {
         return new HashMap<ResourceType, Integer>() {{
             put(ResourceType.GOLD, getGoldCount(playerIndex));
             put(ResourceType.LUNAR, 0);

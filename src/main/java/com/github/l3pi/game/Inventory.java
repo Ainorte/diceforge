@@ -53,7 +53,7 @@ public class Inventory {
         return Arrays.copyOf(faceUp,faceUp.length);
     }
 
-    public int getRessouce(ResourceType resourceType) {
+    public int getResource(ResourceType resourceType) {
         return resources.get(resourceType);
     }
 

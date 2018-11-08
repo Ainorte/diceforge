@@ -1,6 +1,8 @@
 package com.github.l3pi.bot;
 
 import com.github.l3pi.game.*;
+import com.github.l3pi.type.ResourceType;
+
 import java.util.List;
 import java.util.Random;
 
@@ -12,9 +14,12 @@ public class RandomBot extends Player {
     }
 
     public Facet chooseDiceFacet(Game game){
-        List<Facet> availableFacets = game.getSanctuaryDice().getAvailableInventory();
-        if(availableFacets.size() > 0) {
-            return availableFacets.get(this.gen.nextInt(availableFacets.size()) - 1);
+        List<Facet> purchasableFacets = game.getSanctuaryDice().getPurchasableInventory(game.getInventory(this).getResource(ResourceType.GOLD));
+        if(purchasableFacets.size() > 0) {
+            if(purchasableFacets.size() == 1){
+                return purchasableFacets.get(0);
+            }
+            return purchasableFacets.get(this.gen.nextInt(purchasableFacets.size() - 1));
         }
         return null;
     }

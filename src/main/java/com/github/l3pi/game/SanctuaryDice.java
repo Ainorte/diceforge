@@ -1,5 +1,6 @@
 package com.github.l3pi.game;
 import com.github.l3pi.type.FacetType;
+import com.github.l3pi.type.ResourceType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +12,27 @@ public class SanctuaryDice {
     public HashMap<Facet,Item> diceSanctuary;
 
     public SanctuaryDice(){
+
         diceSanctuary = new HashMap<>();
+        diceSanctuary.put(new Facet(FacetType.GOLD, 3),new Item(4,2));
+        diceSanctuary.put(new Facet(FacetType.GOLD, 4),new Item(4,3));
+        diceSanctuary.put(new Facet(FacetType.GOLD, 6),new Item(1,4));
+
+
+        diceSanctuary.put(new Facet(FacetType.SOLAR, 1),new Item(4,3));
+        diceSanctuary.put(new Facet(FacetType.SOLAR, 2),new Item(4,8));
+
+
+        diceSanctuary.put(new Facet(FacetType.LUNAR, 1),new Item(4,2));
+        diceSanctuary.put(new Facet(FacetType.LUNAR, 2),new Item(4,6));
+
+        diceSanctuary.put(new Facet(FacetType.GLORY, 3),new Item(4,8));
+
+        diceSanctuary.put(new Facet(new HashMap<FacetType,Integer>(){{put(FacetType.GLORY,1); put(FacetType.SOLAR,1);}}),new Item(1,4));
+        diceSanctuary.put(new Facet(new HashMap<FacetType,Integer>(){{put(FacetType.GOLD,2); put(FacetType.LUNAR,1);}}),new Item(1,4));
+        diceSanctuary.put(new Facet(new HashMap<FacetType,Integer>(){{put(FacetType.GLORY,2); put(FacetType.LUNAR,2);}}),new Item(1,12));
+        diceSanctuary.put(new Facet(new HashMap<FacetType,Integer>(){{put(FacetType.GLORY,1); put(FacetType.SOLAR,1);put(FacetType.LUNAR,1);put(FacetType.GOLD,1);}}),new Item(1,12));
+
     }
 
     public List<Facet> getAvailableInventory(){
@@ -20,10 +41,19 @@ public class SanctuaryDice {
             .collect(Collectors.toList());
     }
 
-    public void buyDice(Inventory inventory,Facet facet){
-        if(diceSanctuary.get(facet).getCount()>0){
-            diceSanctuary.get(facet).decreaseCount();
-            inventory.forge(facet);
+    public List<Facet> getPurchasableInventory(int gold){
+        return diceSanctuary.entrySet().stream().filter( entry -> (entry.getValue().getCount() > 0 && entry.getValue().isItemPurchable(gold)))
+            .map(Map.Entry::getKey)
+            .collect(Collectors.toList());
+    }
+
+    public void buyFacet(Inventory inventory,Facet facet){
+        if(facet != null) {
+            if (diceSanctuary.get(facet).getCount() > 0) {
+                diceSanctuary.get(facet).decreaseCount();
+                inventory.addResources(ResourceType.GOLD, -(diceSanctuary.get(facet).getPrice()));
+                inventory.forge(facet);
+            }
         }
     }
 

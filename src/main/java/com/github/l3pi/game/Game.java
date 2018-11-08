@@ -41,7 +41,8 @@ public class Game {
 
         for (Player player : getPlayers()) {
             Facet facet = player.chooseDiceFacet(this);
-            players.get(player).forge(facet);
+            this.sanctuaryDice.buyFacet(this.getInventory(player),facet);
+            log(player.getName() + " à acheté " + facet);
         }
     }
 
@@ -60,13 +61,13 @@ public class Game {
     public List<Player> getBestPlayer() {
         int max = players.values()
             .stream()
-            .max(Comparator.comparingInt(inventory -> inventory.getRessouce(ResourceType.GLORY)))
+            .max(Comparator.comparingInt(inventory -> inventory.getResource(ResourceType.GLORY)))
             .get()
-            .getRessouce(ResourceType.GLORY);
+            .getResource(ResourceType.GLORY);
         return players
             .entrySet()
             .stream()
-            .filter(entry -> entry.getValue().getRessouce(ResourceType.GLORY) == max)
+            .filter(entry -> entry.getValue().getResource(ResourceType.GLORY) == max)
             .map(Map.Entry::getKey)
             .collect(Collectors.toList());
     }
