@@ -14,9 +14,9 @@ public abstract class Player {
         return this.name;
     }
 
-    abstract Facet chooseDiceFacet(List<Facet> listFacet);
+    public abstract Facet chooseDiceFacet(Game game);
 
-    abstract void forgeMyDice(Game game,int diceNumber,int faceNumber);
+    public abstract int[] forgeMyDice(Game game);
 
     @Override
     public String toString() {

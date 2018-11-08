@@ -15,9 +15,10 @@ public class RandomBot extends Player {
     public Facet chooseDiceFacet(Game game){
         List<Facet> availableFacets = game.getSanctuaryDice().getAvailableInventory();
         return availableFacets.get(this.gen.nextInt(availableFacets.size())-1);
-    };
+    }
 
-    public int[] chooseForgedFacet(){
+    @Override
+    public int[] forgeMyDice(Game game) {
         return new int[]{this.gen.nextInt(1),this.gen.nextInt(5)};
     }
 
