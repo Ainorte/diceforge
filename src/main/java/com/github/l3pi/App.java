@@ -19,13 +19,17 @@ import static com.github.l3pi.sys.LogDAO.log;
 public class App {
     public static void main(String[] args) {
         if (args.length != 2) {
-            System.err.printf("Usage: %s <run-count> <player-count(>=2)>", args[0]);
+            System.err.println("Usage: <run-count> <player-count(>=2)>");
             System.exit(1);
         }
 
         LogDAO.initialize(new ArrayList<Logger>() {{
             add(new StringLogger());
         }}, LogDAO.LogOutputPolicy.ON_LOG);
+
+        // TODO will be used later when introducing multiple games.
+        int runCount = Integer.parseInt(args[0]),
+            playerCount = Integer.parseInt(args[1]);
 
         List<Player> players = new ArrayList<Player>();
         players.add(new RandomBot("player1"));
