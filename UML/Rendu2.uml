@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="315.0" y="963.0">com.github.l3pi.game.Operation</node>
+    <node x="0.0" y="963.0">com.github.l3pi.rule.FacetRule</node>
+    <node x="458.0" y="801.0">com.github.l3pi.game.GameManager</node>
+    <node x="0.0" y="385.0">com.github.l3pi.factory.InventoryFactory</node>
+    <node x="515.0" y="615.0">com.github.l3pi.game.TempPlayer</node>
+    <node x="398.0" y="385.0">com.github.l3pi.game.Facet</node>
+    <node x="727.0" y="801.0">com.github.l3pi.rule.RuleSet</node>
+    <node x="484.0" y="0.0">com.github.l3pi.game.Player</node>
+    <node x="0.0" y="615.0">com.github.l3pi.game.Item</node>
+    <node x="757.0" y="0.0">com.github.l3pi.game.Game</node>
+    <node x="592.0" y="963.0">com.github.l3pi.App</node>
+    <node x="0.0" y="801.0">com.github.l3pi.type.FacetType</node>
+    <node x="736.0" y="385.0">com.github.l3pi.game.SanctuaryDice</node>
+    <node x="484.0" y="191.0">com.github.l3pi.bot.RandomBot</node>
+    <node x="803.0" y="615.0">com.github.l3pi.type.ResourceType</node>
+    <node x="267.0" y="615.0">com.github.l3pi.factory.RuleFactory</node>
+    <node x="147.0" y="801.0">com.github.l3pi.game.FacetRuleManager</node>
+    <node x="0.0" y="0.0">com.github.l3pi.game.Inventory</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.github.l3pi.bot.RandomBot" target="com.github.l3pi.game.Player">
+      <point x="0.0" y="-59.5" />
+      <point x="0.0" y="70.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6336628769154724" x="866.0773246529188" y="1451.8364927061389" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

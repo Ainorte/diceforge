@@ -17,7 +17,7 @@ public class Inventory {
         this.dices = dices;
         this.resources = resources;
         this.random = new Random();
-        this.faceUp = new Facet[dices.length];
+        this.faceUp = new Facet[]{dices[0][0],dices[1][0]};
         this.faceHistory = new ArrayList<Facet>();
         this.player = player;
         this.game = game;
@@ -52,6 +52,11 @@ public class Inventory {
     public Facet[] getFaceUp(){
         return Arrays.copyOf(faceUp,faceUp.length);
     }
+
+    public List<Facet> getFaceHistory(){
+        return faceHistory;
+    }
+
 
     public int getResource(ResourceType resourceType) {
         return resources.get(resourceType);
