@@ -25,7 +25,27 @@ public class Game {
         this.facetRuleManager = new FacetRuleManager(ruleSet);
     }
 
-    public void round() {
+    public void round(){
+        for(Player player:this.getPlayers()){
+            round(player);
+        }
+
+    }
+
+
+    private void round(Player player) {
+
+        divineBlessing();
+        Facet facet = player.chooseDiceFacet(this);
+        this.sanctuaryDice.buyFacet(this.getInventory(player),facet);
+        if(facet != null){
+            log(player.getName() + " à acheté " + facet + " pour "+ this.sanctuaryDice.getDiceSanctuary().get(facet).getPrice());
+
+        }
+    }
+
+    private void divineBlessing(){
+
         List<TempPlayer> tempPlayers = new ArrayList<>();
         for (Player player : getPlayers()) {
             tempPlayers.add(new TempPlayer(player, players.get(player).throwDice()));
@@ -38,13 +58,8 @@ public class Game {
         for (TempPlayer tempPlayer : tempPlayers){
             tempPlayer.getOperations().forEach(operation -> operation.apply(this, tempPlayer));
         }
-
-        for (Player player : getPlayers()) {
-            Facet facet = player.chooseDiceFacet(this);
-            this.sanctuaryDice.buyFacet(this.getInventory(player),facet);
-            log(player.getName() + " à acheté " + facet);
-        }
     }
+
 
     public SanctuaryDice getSanctuaryDice() {
         return sanctuaryDice;

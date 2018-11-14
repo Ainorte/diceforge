@@ -1,6 +1,7 @@
 package com.github.l3pi.game;
 
 import com.github.l3pi.type.ResourceType;
+import static com.github.l3pi.sys.LogDAO.log;
 
 import java.util.*;
 
@@ -30,6 +31,8 @@ public class Inventory {
             facets.add(dices[i][randIndex]);
             faceUp[i] = dices[i][randIndex];
         }
+
+        log(this.player + " a acheté "+ facets);
         return facets;
     }
     public void forge(Facet facetToForge){

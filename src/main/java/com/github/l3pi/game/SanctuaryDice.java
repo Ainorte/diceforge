@@ -57,4 +57,7 @@ public class SanctuaryDice {
         }
     }
 
+    public HashMap<Facet, Item> getDiceSanctuary() {
+        return diceSanctuary;
+    }
 }
