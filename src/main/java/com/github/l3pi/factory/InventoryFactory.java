@@ -26,7 +26,7 @@ public class InventoryFactory {
         return new Inventory(game, player, getInitialDices(), getRessources(playerIndex));
     }
 
-    private Facet[][] getInitialDices() {
+    public Facet[][] getInitialDices() {
         return new Facet[][]{
             new Facet[]{
                 new Facet(FacetType.GOLD, 1),
@@ -56,7 +56,7 @@ public class InventoryFactory {
         }};
     }
 
-    private int getGoldCount(int playerIndex) {
+    public int getGoldCount(int playerIndex) {
         switch (playerIndex) {
             case 0:
                 return 3;
