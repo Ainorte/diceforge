@@ -13,12 +13,12 @@ import static com.github.l3pi.sys.LogDAO.log;
  * Game instance
  */
 public class Game {
-    private HashMap<Player, Inventory> players;
+    private TreeMap<Player, Inventory> players;
     private FacetRuleManager facetRuleManager;
     private DiceSanctuary diceSanctuary;
 
     public Game(List<Player> players, RuleSet ruleSet) {
-        this.players = new HashMap<>();
+        this.players = new TreeMap<>();
         this.diceSanctuary = new DiceSanctuary();
 
         for (int i = 0; i < players.size(); i++) {

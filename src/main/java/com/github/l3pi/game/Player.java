@@ -5,7 +5,11 @@ package com.github.l3pi.game;
  * <p>
  * Base interface-type class for every AI that may be built.
  */
-public abstract class Player {
+public abstract class Player implements Comparable<Player> {
+    @Override
+    public int compareTo(Player p) {
+        return getName().compareTo(p.getName());
+    }
 
     private String name;
 
