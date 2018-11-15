@@ -20,39 +20,43 @@ public class InventoryTest {
 
     @Before
     public void setUp() throws Exception {
-        inventory = InventoryFactory.getInstance().getInventory(new Game(new ArrayList<>(), null),new RandomBot("test"), 0 );
+        inventory = InventoryFactory.getInstance().getInventory(new Game(new ArrayList<>(), null), new RandomBot("test"), 0);
     }
 
     @Test
-    public void throwDice() {/*
+    public void throwDice() {
         List<Facet> facets = inventory.throwDice();
 
-        assertEquals(2, facets.size());*/
+        assertEquals(2, facets.size());
     }
 
     @Test
-    public void forge(){
-        /*Facet[] original = inventory.getFaceUp();
-        inventory.forge(new Facet(new HashMap<FacetType,Integer>(){{put(FacetType.GLORY,1); put(FacetType.SOLAR,1);put(FacetType.LUNAR,1);put(FacetType.GOLD,1);}}));
+    public void forge() {
+        Facet[] original = inventory.getFaceUp();
+        inventory.forge(new Facet(new HashMap<FacetType, Integer>() {{
+            put(FacetType.GLORY, 1);
+            put(FacetType.SOLAR, 1);
+            put(FacetType.LUNAR, 1);
+            put(FacetType.GOLD, 1);
+        }}));
         Facet[] afterForge = inventory.getFaceUp();
 
-        assertFalse(Arrays.equals(original,afterForge));*/
+        assertFalse(Arrays.equals(original, afterForge));
     }
 
     @Test
-    public void getFaceUp(){/*
+    public void getFaceUp() {
         Facet[] faceUp = inventory.getFaceUp();
 
-        assertEquals(2, faceUp.length);*/
+        assertEquals(2, faceUp.length);
     }
 
     @Test
-    public void inventoryHistory(){/*
+    public void inventoryHistory() {
         this.forge();
         List<Facet> hist = inventory.getFaceHistory();
-        assertEquals(1,hist.size());*/
+        assertEquals(1, hist.size());
     }
-
 
 
 }
