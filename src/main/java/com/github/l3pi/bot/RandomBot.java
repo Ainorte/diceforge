@@ -13,6 +13,7 @@ public class RandomBot extends Player {
         gen = new Random();
     }
 
+    @Override
     public Facet chooseDiceFacet(Game game){
         List<Facet> purchasableFacets = game.getSanctuaryDice().getPurchasableInventory(game.getInventory(this).getResource(ResourceType.GOLD));
         if(purchasableFacets.size() > 0) {
@@ -25,7 +26,8 @@ public class RandomBot extends Player {
     }
 
     @Override
-    public int[] forgeMyDice(Game game) {
+    public int[] forgeMyDice(Game game,Facet facet) {
+
         return new int[]{this.gen.nextInt(1),this.gen.nextInt(5)};
     }
 

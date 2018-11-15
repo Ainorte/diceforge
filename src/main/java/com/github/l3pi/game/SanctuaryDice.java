@@ -47,14 +47,15 @@ public class SanctuaryDice {
             .collect(Collectors.toList());
     }
 
-    public void buyFacet(Inventory inventory,Facet facet){
+    public Facet buyFacet(Facet facet){
         if(facet != null) {
             if (diceSanctuary.get(facet).getCount() > 0) {
                 diceSanctuary.get(facet).decreaseCount();
-                inventory.addResources(ResourceType.GOLD, -(diceSanctuary.get(facet).getPrice()));
-                inventory.forge(facet);
+                return facet;
             }
+
         }
+        return null;
     }
 
     public HashMap<Facet, Item> getDiceSanctuary() {

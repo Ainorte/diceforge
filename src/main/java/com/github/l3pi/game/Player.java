@@ -16,7 +16,7 @@ public abstract class Player {
 
     public abstract Facet chooseDiceFacet(Game game);
 
-    public abstract int[] forgeMyDice(Game game);
+    public abstract int[] forgeMyDice(Game game,Facet facet);
 
     @Override
     public String toString() {

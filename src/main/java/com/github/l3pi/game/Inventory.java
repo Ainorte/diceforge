@@ -35,11 +35,8 @@ public class Inventory {
         log(this.player + " a acheté "+ facets);
         return facets;
     }
-    public void forge(Facet facetToForge){
+    public void forge(Facet facetToForge,int choosenDice,int choosenFacet){
         if (facetToForge != null) {
-            int[] choosenIndex = player.forgeMyDice(game);
-            int choosenDice = choosenIndex[0];
-            int choosenFacet = choosenIndex[1];
             faceHistory.add(dices[choosenDice][choosenFacet]);
             dices[choosenDice][choosenFacet] = facetToForge;
             faceUp[choosenDice] = dices[choosenDice][choosenFacet];
