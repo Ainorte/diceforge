@@ -6,6 +6,9 @@ import java.util.List;
 
 import static com.github.l3pi.sys.LogDAO.log;
 
+/**
+ * Class tasked with handling a game lifecycle, including rounds.
+ */
 public class GameManager {
     private List<Player> players;
 

@@ -1,31 +1,34 @@
 package com.github.l3pi.game;
 
-public class Item {
+/**
+ * Data class made to be tied with the Sanctuary, to allow
+ * storing of every sanctuary-related metadata associated with a given item.
+ *
+ * @see DiceSanctuary
+ */
+class Item {
 
     private int count;
     private int price;
 
-    public Item(int c,int p){
+    Item(int c, int p) {
         this.count = c;
         this.price = p;
     }
 
-    public void decreaseCount(){
-        this.count -=1;
+    void decreaseCount() {
+        this.count -= 1;
     }
 
-    public boolean isItemPurchable(int goldCount){
-        if(this.price > goldCount){
-            return  false;
-        }
-        return true;
+    boolean isItemPurchable(int goldCount) {
+        return this.price <= goldCount;
     }
 
-    public int getCount() {
+    int getCount() {
         return count;
     }
 
-    public int getPrice() {
+    int getPrice() {
         return price;
     }
 }

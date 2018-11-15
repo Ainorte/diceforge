@@ -1,7 +1,10 @@
 package com.github.l3pi.game;
 
-import java.util.List;
-
+/**
+ * Class tasked with handling "what a player is", including his behaviour.
+ * <p>
+ * Base interface-type class for every AI that may be built.
+ */
 public abstract class Player {
 
     private String name;
@@ -10,7 +13,7 @@ public abstract class Player {
         this.name = name;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 

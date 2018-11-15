@@ -9,24 +9,27 @@ import java.util.stream.Collectors;
 
 import static com.github.l3pi.sys.LogDAO.log;
 
+/**
+ * Game instance
+ */
 public class Game {
     private HashMap<Player, Inventory> players;
     private FacetRuleManager facetRuleManager;
-    private SanctuaryDice sanctuaryDice;
+    private DiceSanctuary diceSanctuary;
 
     public Game(List<Player> players, RuleSet ruleSet) {
         this.players = new HashMap<>();
-        this.sanctuaryDice = new SanctuaryDice();
+        this.diceSanctuary = new DiceSanctuary();
 
         for (int i = 0; i < players.size(); i++) {
-            this.players.put(players.get(i), InventoryFactory.getInstance().getInventory(this,players.get(i),i));
+            this.players.put(players.get(i), InventoryFactory.getInstance().getInventory(this, players.get(i), i));
         }
 
         this.facetRuleManager = new FacetRuleManager(ruleSet);
     }
 
-    public void round(){
-        for(Player player:this.getPlayers()){
+    void round() {
+        for (Player player : this.getPlayers()) {
             round(player);
         }
 
@@ -37,14 +40,14 @@ public class Game {
 
         divineBlessing();
         Facet facet = player.chooseDiceFacet(this);
-        this.sanctuaryDice.buyFacet(this.getInventory(player),facet);
-        if(facet != null){
-            log(player.getName() + " à acheté " + facet + " pour "+ this.sanctuaryDice.getDiceSanctuary().get(facet).getPrice());
+        this.diceSanctuary.buyFacet(this.getInventory(player), facet);
+        if (facet != null) {
+            log(player.getName() + " à acheté " + facet + " pour " + this.diceSanctuary.getDiceSanctuary().get(facet).getPrice());
 
         }
     }
 
-    private void divineBlessing(){
+    private void divineBlessing() {
 
         List<TempPlayer> tempPlayers = new ArrayList<>();
         for (Player player : getPlayers()) {
@@ -52,17 +55,17 @@ public class Game {
             log(player.getName() + " à lancé " + Arrays.toString(players.get(player).getFaceUp()));
         }
 
-        for (TempPlayer tempPlayer : tempPlayers){
+        for (TempPlayer tempPlayer : tempPlayers) {
             tempPlayer.setOperations(facetRuleManager.resolve(tempPlayer.getFacets()));
         }
-        for (TempPlayer tempPlayer : tempPlayers){
+        for (TempPlayer tempPlayer : tempPlayers) {
             tempPlayer.getOperations().forEach(operation -> operation.apply(this, tempPlayer));
         }
     }
 
 
-    public SanctuaryDice getSanctuaryDice() {
-        return sanctuaryDice;
+    public DiceSanctuary getDiceSanctuary() {
+        return diceSanctuary;
     }
 
     private Set<Player> getPlayers() {
@@ -73,7 +76,7 @@ public class Game {
         return players.get(player);
     }
 
-    public List<Player> getBestPlayer() {
+    List<Player> getBestPlayer() {
         int max = players.values()
             .stream()
             .max(Comparator.comparingInt(inventory -> inventory.getResource(ResourceType.GLORY)))
@@ -88,7 +91,7 @@ public class Game {
     }
     //TODO P2 : GAME STATE HISTORY
 
-    public String toString(Player player){
+    private String toString(Player player) {
         return player.toString() + "\n" + players.get(player).toString();
     }
 

@@ -5,6 +5,9 @@ import com.github.l3pi.game.Operation;
 
 import java.util.List;
 
+/**
+ * The rule providing a set of operations to apply to the game state, following the facet type and count.
+ */
 public interface FacetRule {
-    public List<Operation> getOperations(Facet facet);
+    List<Operation> getOperations(Facet facet);
 }

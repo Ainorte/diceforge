@@ -11,6 +11,9 @@ import com.github.l3pi.type.ResourceType;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Class made to provide rule sets depending on the player count of the game.
+ */
 public class RuleFactory {
     private static RuleFactory ourInstance = new RuleFactory();
 

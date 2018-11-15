@@ -17,8 +17,8 @@ public class FacetRuleManager {
         List<Operation> ops = new ArrayList<>();
 
         for (Facet f : facets) {
-            for(FacetType ft : f.getFacetTypes()) {
-                List<Operation> facetOps = this.rules.getFacetRule()
+            for (FacetType ft : f.getFacetTypes()) {
+                List<Operation> facetOps = this.rules.getFacetRules()
                     .get(ft)
                     .getOperations(f);
 
