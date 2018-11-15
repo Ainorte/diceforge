@@ -26,7 +26,7 @@ public class CardSanctuaryTest {
 
     @Test
     public void testPurshasableCard(){
-        /*List<Card> cards = this.cardSanctuary.getPurchasableCard(9999);
+        /*List<Card> cards = this.cardSanctuary.getPurchasableCard(12);
 
         assertTrue(cards.size()==15);
 
