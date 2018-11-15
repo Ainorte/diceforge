@@ -11,7 +11,13 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>RELEASE</version>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>2.23.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
