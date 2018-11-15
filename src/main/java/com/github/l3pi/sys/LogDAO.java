@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * The goal for this class is to have an unified way to log every output instead of directly passing strings to println.
- *
+ * <p>
  * It'll be useful when, for example, we'll run a batch of 500 games:
  * We'll store every game log into a separate file (all stored inside the same folder), which will allow
  * for quick comparison and parsing.
@@ -57,7 +57,7 @@ public class LogDAO {
         }
     }
 
-    public void handleIncomingLogs() {
+    private void handleIncomingLogs() {
         while (!logQueue.isEmpty()) {
             final String m = logQueue.poll();
             loggers.forEach(l -> l.log(m));

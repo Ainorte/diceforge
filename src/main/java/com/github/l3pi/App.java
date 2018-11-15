@@ -37,7 +37,7 @@ public class App {
         GameManager gameManager = new GameManager(players);
         List<Player> winners = gameManager.run();
 
-        String b = "the winners are : " +
+        String b = (winners.size() == 1 ? "the winner is : " : "the winners are : ") +
             winners.stream().map(Player::getName).collect(Collectors.joining(", ")) +
             "\n";
         log(b);
