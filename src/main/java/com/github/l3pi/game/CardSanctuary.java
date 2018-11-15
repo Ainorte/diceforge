@@ -14,6 +14,7 @@ public class CardSanctuary {
     private HashMap<Card,Integer> cardSanctuary;
 
     CardSanctuary(){
+        cardSanctuary = new HashMap<>();
         this.cardSanctuary.put(new Card(1, ResourceType.LUNAR,CardLocationType.LUNAR1,(Game game, Inventory inventory)->{},true,false),4);
         this.cardSanctuary.put(new Card(1,ResourceType.LUNAR,CardLocationType.LUNAR1,(Game game, Inventory inventory)->{},false,false),4);
 
@@ -63,15 +64,4 @@ public class CardSanctuary {
         }
         return null;
     }
-
-<<<<<<< Updated upstream
-=======
-    int getPriceForFacet(Card card) {
-        return cardSanctuary.containsKey(card) ? cardSanctuary.get(card) : 0;
-    }
-
-    public HashMap<Card, Integer> getCardSanctuary() {
-        return cardSanctuary;
-    }
->>>>>>> Stashed changes
 }
