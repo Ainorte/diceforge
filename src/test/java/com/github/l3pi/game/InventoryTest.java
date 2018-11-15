@@ -38,7 +38,7 @@ public class InventoryTest {
             put(FacetType.SOLAR, 1);
             put(FacetType.LUNAR, 1);
             put(FacetType.GOLD, 1);
-        }}));
+        }}), 0, 0);
         Facet[] afterForge = inventory.getFaceUp();
 
         assertFalse(Arrays.equals(original, afterForge));
