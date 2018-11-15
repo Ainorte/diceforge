@@ -64,4 +64,14 @@ public class CardSanctuary {
         return null;
     }
 
+<<<<<<< Updated upstream
+=======
+    int getPriceForFacet(Card card) {
+        return cardSanctuary.containsKey(card) ? cardSanctuary.get(card) : 0;
+    }
+
+    public HashMap<Card, Integer> getCardSanctuary() {
+        return cardSanctuary;
+    }
+>>>>>>> Stashed changes
 }

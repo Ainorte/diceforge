@@ -107,4 +107,8 @@ public class DiceSanctuary {
     int getPriceForFacet(Facet facet) {
         return diceSanctuary.containsKey(facet) ? diceSanctuary.get(facet).getPrice() : 0;
     }
+
+    public HashMap<Facet, Item> getDiceSanctuary() {
+        return diceSanctuary;
+    }
 }
