@@ -10,12 +10,12 @@ import java.util.stream.Collectors;
 import static com.github.l3pi.sys.LogDAO.log;
 
 public class Game {
-    private SortedMap<Player, Inventory> players;
+    private HashMap<Player, Inventory> players;
     private FacetRuleManager facetRuleManager;
     private SanctuaryDice sanctuaryDice;
 
     public Game(List<Player> players, RuleSet ruleSet) {
-        this.players = new HashMap<>();
+        this.players = new HashMap<Player,Inventory>();
         this.sanctuaryDice = new SanctuaryDice();
 
         for (int i = 0; i < players.size(); i++) {
@@ -37,7 +37,7 @@ public class Game {
         divineBlessing();
         Facet facet = player.chooseDiceFacet(this);
         if(facet != null){
-            this.sanctuaryDice.buyFacet(this.getInventory(player),facet);
+            this.sanctuaryDice.buyFacet(facet);
             log(player.getName() + " à acheté " + facet + " pour "+ this.sanctuaryDice.getDiceSanctuary().get(facet).getPrice());
             if(facet != null){
                 int[] diceChangeFace = player.forgeMyDice(this,facet);
