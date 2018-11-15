@@ -5,6 +5,14 @@ import com.github.l3pi.type.FacetType;
 import java.util.HashMap;
 import java.util.Set;
 
+/**
+ * A facet is the group between a type, and an application count.
+ * <p>
+ * As an example, (GOLD, 5) means 5 pieces of gold.
+ *
+ * @see com.github.l3pi.rule.FacetRule
+ * @see Operation
+ */
 public final class Facet {
     private final HashMap<FacetType, Integer> facetTypes;
 

@@ -9,6 +9,9 @@ import com.github.l3pi.type.ResourceType;
 
 import java.util.HashMap;
 
+/**
+ * Class made to build a basic game-entry player inventory
+ */
 public class InventoryFactory {
     private static InventoryFactory ourInstance = new InventoryFactory();
 
@@ -20,7 +23,7 @@ public class InventoryFactory {
     }
 
     public Inventory getInventory(Game game, Player player, int playerIndex) {
-        return new Inventory(game,player,getInitialDices(), getRessources(playerIndex));
+        return new Inventory(game, player, getInitialDices(), getRessources(playerIndex));
     }
 
     private Facet[][] getInitialDices() {

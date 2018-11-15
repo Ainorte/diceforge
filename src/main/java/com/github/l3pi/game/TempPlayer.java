@@ -2,6 +2,9 @@ package com.github.l3pi.game;
 
 import java.util.List;
 
+/**
+ * Data-class made to contain player-related state during a round (thrown dices, obtained facets, operations to apply, etc.)
+ */
 public final class TempPlayer {
     private final Player player;
     private final List<Facet> facets;

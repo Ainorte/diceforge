@@ -8,16 +8,17 @@ import java.util.Random;
 
 public class RandomBot extends Player {
     private Random gen;
+
     public RandomBot(String name) {
         super(name);
         gen = new Random();
     }
 
     @Override
-    public Facet chooseDiceFacet(Game game){
-        List<Facet> purchasableFacets = game.getSanctuaryDice().getPurchasableInventory(game.getInventory(this).getResource(ResourceType.GOLD));
-        if(purchasableFacets.size() > 0) {
-            if(purchasableFacets.size() == 1){
+    public Facet chooseDiceFacet(Game game) {
+        List<Facet> purchasableFacets = game.getDiceSanctuary().getPurchasableInventory(game.getInventory(this).getResource(ResourceType.GOLD));
+        if (purchasableFacets.size() > 0) {
+            if (purchasableFacets.size() == 1) {
                 return purchasableFacets.get(0);
             }
             return purchasableFacets.get(this.gen.nextInt(purchasableFacets.size() - 1));

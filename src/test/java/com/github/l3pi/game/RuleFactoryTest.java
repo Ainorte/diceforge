@@ -22,7 +22,7 @@ public class RuleFactoryTest {
 
     @Test
     public void getRules() {
-        HashMap<FacetType, FacetRule> facetRules = set.getFacetRule();
+        HashMap<FacetType, FacetRule> facetRules = set.getFacetRules();
         Set<FacetType> facets = facetRules.keySet();
 
         assertTrue(facets.contains(FacetType.GOLD));
