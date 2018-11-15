@@ -53,4 +53,9 @@ public class Card {
     public boolean isCardPurshable(int money){
         return this.price <= money;
     }
+
+    @Override
+    public String toString() {
+        return locationType.toString();
+    }
 }
