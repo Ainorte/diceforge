@@ -90,7 +90,7 @@ public class Game {
         return cardSanctuary;
     }
 
-    private Set<Player> getPlayers() {
+    public Set<Player> getPlayers() {
         return players.keySet();
     }
 
@@ -99,6 +99,9 @@ public class Game {
     }
 
     List<Player> getBestPlayer() {
+        if (players.size() == 0) {
+            return new ArrayList<>();
+        }
         int max = players.values()
             .stream()
             .max(Comparator.comparingInt(inventory -> inventory.getResource(ResourceType.GLORY)))
