@@ -18,7 +18,7 @@ public class Inventory {
     private final List<Facet> faceHistory;
     private final Player player;
     private final Game game;
-    private int extension;
+    private int extension = 0;
 
     public Inventory(Game game, Player player, Facet[][] dices, HashMap<ResourceType, Integer> resources) {
         this.dices = dices;
@@ -73,6 +73,10 @@ public class Inventory {
 
     public List<Facet> getFaceHistory() {
         return faceHistory;
+    }
+
+    public void addExtension(){
+        extension++;
     }
 
 

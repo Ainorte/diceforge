@@ -16,10 +16,12 @@ public class Game {
     private TreeMap<Player, Inventory> players;
     private FacetRuleManager facetRuleManager;
     private DiceSanctuary diceSanctuary;
+    private CardSanctuary cardSanctuary;
 
     public Game(List<Player> players, RuleSet ruleSet) {
         this.players = new TreeMap<>();
         this.diceSanctuary = new DiceSanctuary();
+        this.cardSanctuary = new CardSanctuary();
 
         for (int i = 0; i < players.size(); i++) {
             this.players.put(players.get(i), InventoryFactory.getInstance().getInventory(this, players.get(i), i));
@@ -38,13 +40,8 @@ public class Game {
     private void round(Player player) {
 
         divineBlessing();
-        Facet facet = player.chooseDiceFacet(this);
-        if (facet != null) {
-            facet = this.diceSanctuary.buyFacet(facet);
-            log(player.getName() + " a acheté " + facet + " pour " + this.diceSanctuary.getPriceForFacet(facet));
-            int[] diceChangeFace = player.forgeMyDice(this, facet);
-            this.getInventory(player).forge(facet, diceChangeFace[0], diceChangeFace[1]);
-        }
+        action(player);
+
     }
 
     private void divineBlessing() {
@@ -63,9 +60,34 @@ public class Game {
         }
     }
 
+    private void action(Player player){
+        if(player.chooseAction(this) == 0) {
+            Facet facet = player.chooseDiceFacet(this);
+            if (facet != null) {
+                facet = this.diceSanctuary.buyFacet(facet);
+                log(player.getName() + " a acheté " + facet + " pour " + this.diceSanctuary.getPriceForFacet(facet));
+                int[] diceChangeFace = player.forgeMyDice(this, facet);
+                this.getInventory(player).forge(facet, diceChangeFace[0], diceChangeFace[1]);
+            }
+        }
+        else{
+            Card card = player.chooseCard(this);
+            if (card != null) {
+                card = this.cardSanctuary.buyCard(card);
+                //TODO card.executeOperation(player);
+                //TODO player.moove(card.getLocationType());
+                log(player.getName() + " a effectué le haut fait " + card);
+            }
+        }
+    }
+
 
     public DiceSanctuary getDiceSanctuary() {
         return diceSanctuary;
+    }
+
+    public CardSanctuary getCardSanctuary() {
+        return cardSanctuary;
     }
 
     private Set<Player> getPlayers() {

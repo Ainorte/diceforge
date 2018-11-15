@@ -1,6 +1,7 @@
 package com.github.l3pi.bot;
 
 import com.github.l3pi.game.*;
+import com.github.l3pi.type.CardLocationType;
 import com.github.l3pi.type.ResourceType;
 
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Random;
 
 public class RandomBot extends Player {
     private Random gen;
+    private CardLocationType location = null;
 
     public RandomBot(String name) {
         super(name);
@@ -25,6 +27,29 @@ public class RandomBot extends Player {
         }
         return null;
     }
+
+    @Override
+    public Card chooseCard(Game game){
+        List<Card> purchasableCards = game.getCardSanctuary().getPurchasableCard(game.getInventory(this));
+        if (purchasableCards.size() > 0) {
+            if (purchasableCards.size() == 1) {
+                return purchasableCards.get(0);
+            }
+            return purchasableCards.get(this.gen.nextInt(purchasableCards.size() - 1));
+        }
+        return null;
+    }
+
+    @Override
+    public int chooseAction(Game game){
+        return this.gen.nextInt(2);
+    }
+
+    @Override
+    public void moove(CardLocationType location){
+        this.location = location;
+    }
+
 
     @Override
     public int[] forgeMyDice(Game game,Facet facet) {

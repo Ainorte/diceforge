@@ -1,5 +1,7 @@
 package com.github.l3pi.game;
 
+import com.github.l3pi.type.CardLocationType;
+
 /**
  * Class tasked with handling "what a player is", including his behaviour.
  * <p>
@@ -22,6 +24,12 @@ public abstract class Player implements Comparable<Player> {
     }
 
     public abstract Facet chooseDiceFacet(Game game);
+
+    public abstract Card chooseCard(Game game);
+
+    public abstract int chooseAction(Game game);
+
+    public abstract void moove(CardLocationType location);
 
     public abstract int[] forgeMyDice(Game game,Facet facet);
 
