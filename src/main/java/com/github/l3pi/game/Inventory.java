@@ -12,6 +12,7 @@ public class Inventory {
     private final List<Facet> faceHistory;
     private final Player player;
     private final Game game;
+    private int extension;
 
     public Inventory(Game game, Player player, Facet[][] dices, HashMap<ResourceType, Integer> resources) {
         this.dices = dices;
@@ -22,6 +23,19 @@ public class Inventory {
         this.player = player;
         this.game = game;
     }
+
+     public int getMaxRessources(ResourceType resourceType){
+        switch (resourceType){
+            case GLORY:
+                return Integer.MAX_VALUE;
+            case GOLD :
+                return 12 + (4 * extension);
+            case LUNAR: case SOLAR:
+                return  6 + (3 * extension);
+            default:
+                return 0;
+        }
+     }
 
     public List<Facet> throwDice() {  // == Faveur Majeur
         List<Facet> facets = new ArrayList<Facet>();
@@ -63,7 +77,14 @@ public class Inventory {
     }
 
     public void addResources(ResourceType resourceType, int value) {
-        resources.merge(resourceType, value, Integer::sum);
+        int currentValue = resources.get(resourceType);
+        int max = this.getMaxRessources(resourceType);
+        if((currentValue + value) >=0 && (currentValue + value) < max){
+            resources.merge(resourceType, value, Integer::sum);
+        }
+        else{
+            resources.merge(resourceType, max - currentValue , Integer::sum);
+        }
     }
 
     @Override

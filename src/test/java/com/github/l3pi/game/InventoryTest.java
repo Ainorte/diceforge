@@ -1,5 +1,6 @@
 package com.github.l3pi.game;
 
+
 import com.github.l3pi.bot.RandomBot;
 import com.github.l3pi.factory.InventoryFactory;
 import com.github.l3pi.rule.RuleSet;
