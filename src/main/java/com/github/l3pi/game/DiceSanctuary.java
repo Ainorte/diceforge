@@ -12,6 +12,38 @@ import java.util.stream.Collectors;
  * Class made to provide a shop service to the game, managing its own inventory.
  */
 public class DiceSanctuary {
+    /**
+     * Data class made to be tied with the Sanctuary, to allow
+     * storing of every sanctuary-related metadata associated with a given item.
+     *
+     * @see DiceSanctuary
+     */
+    private static class Item {
+
+        private int count;
+        private int price;
+
+        Item(int c, int p) {
+            this.count = c;
+            this.price = p;
+        }
+
+        void decreaseCount() {
+            this.count -= 1;
+        }
+
+        boolean isItemPurchable(int goldCount) {
+            return this.price <= goldCount;
+        }
+
+        int getCount() {
+            return count;
+        }
+
+        int getPrice() {
+            return price;
+        }
+    }
 
     private HashMap<Facet, Item> diceSanctuary = new HashMap<>();
 
@@ -71,7 +103,7 @@ public class DiceSanctuary {
         }
     }
 
-    HashMap<Facet, Item> getDiceSanctuary() {
-        return diceSanctuary;
+    int getPriceForFacet(Facet facet) {
+        return diceSanctuary.containsKey(facet) ? diceSanctuary.get(facet).getPrice() : 0;
     }
 }

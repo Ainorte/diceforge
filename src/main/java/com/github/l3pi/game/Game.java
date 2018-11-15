@@ -42,8 +42,7 @@ public class Game {
         Facet facet = player.chooseDiceFacet(this);
         this.diceSanctuary.buyFacet(this.getInventory(player), facet);
         if (facet != null) {
-            log(player.getName() + " à acheté " + facet + " pour " + this.diceSanctuary.getDiceSanctuary().get(facet).getPrice());
-
+            log(player.getName() + " a acheté " + facet + " pour " + this.diceSanctuary.getPriceForFacet(facet));
         }
     }
 
@@ -52,7 +51,7 @@ public class Game {
         List<TempPlayer> tempPlayers = new ArrayList<>();
         for (Player player : getPlayers()) {
             tempPlayers.add(new TempPlayer(player, players.get(player).throwDice()));
-            log(player.getName() + " à lancé " + Arrays.toString(players.get(player).getFaceUp()));
+            log(player.getName() + " a lancé " + Arrays.toString(players.get(player).getFaceUp()));
         }
 
         for (TempPlayer tempPlayer : tempPlayers) {
