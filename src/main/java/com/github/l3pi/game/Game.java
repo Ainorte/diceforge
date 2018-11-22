@@ -114,6 +114,11 @@ public class Game {
             .map(Map.Entry::getKey)
             .collect(Collectors.toList());
     }
+
+
+
+
+
     //TODO P2 : GAME STATE HISTORY
 
     private String toString(Player player) {
