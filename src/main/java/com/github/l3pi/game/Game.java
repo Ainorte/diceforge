@@ -7,7 +7,7 @@ import com.github.l3pi.type.ResourceType;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.github.l3pi.sys.LogDAO.log;
+import static com.github.l3pi.sys.Log.log;
 
 /**
  * Game instance

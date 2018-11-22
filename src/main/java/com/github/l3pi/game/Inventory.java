@@ -2,7 +2,7 @@ package com.github.l3pi.game;
 
 import com.github.l3pi.type.ResourceType;
 
-import static com.github.l3pi.sys.LogDAO.log;
+import static com.github.l3pi.sys.Log.log;
 
 import java.util.*;
 

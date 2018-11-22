@@ -3,15 +3,13 @@ package com.github.l3pi;
 import com.github.l3pi.bot.RandomBot;
 import com.github.l3pi.game.GameManager;
 import com.github.l3pi.game.Player;
-import com.github.l3pi.sys.LogDAO;
-import com.github.l3pi.sys.log.Logger;
-import com.github.l3pi.sys.log.StringLogger;
+import com.github.l3pi.sys.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.github.l3pi.sys.LogDAO.log;
+import static com.github.l3pi.sys.Log.log;
 
 /**
  * Hello world!
@@ -23,9 +21,7 @@ public class App {
             System.exit(1);
         }
 
-        LogDAO.initialize(new ArrayList<Logger>() {{
-            add(new StringLogger());
-        }}, LogDAO.LogOutputPolicy.ON_LOG);
+        Log.enableLog();
 
         // TODO will be used later when introducing multiple games.
         int runCount = Integer.parseInt(args[0]),

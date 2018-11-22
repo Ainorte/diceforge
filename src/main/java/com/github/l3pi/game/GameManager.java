@@ -4,7 +4,7 @@ import com.github.l3pi.factory.RuleFactory;
 
 import java.util.List;
 
-import static com.github.l3pi.sys.LogDAO.log;
+import static com.github.l3pi.sys.Log.log;
 
 /**
  * Class tasked with handling a game lifecycle, including rounds.
