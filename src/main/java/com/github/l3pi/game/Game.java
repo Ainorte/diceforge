@@ -1,8 +1,8 @@
 package com.github.l3pi.game;
 
 import com.github.l3pi.factory.InventoryFactory;
-import com.github.l3pi.rule.RuleSet;
 import com.github.l3pi.type.ResourceType;
+import com.github.l3pi.utilities.Tuple;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -14,11 +14,10 @@ import static com.github.l3pi.sys.Log.log;
  */
 public class Game {
     private TreeMap<Player, Inventory> players;
-    private FacetRuleManager facetRuleManager;
     private DiceSanctuary diceSanctuary;
     private CardSanctuary cardSanctuary;
 
-    public Game(List<Player> players, RuleSet ruleSet) {
+    public Game(List<Player> players) {
         this.players = new TreeMap<>();
         this.diceSanctuary = new DiceSanctuary();
         this.cardSanctuary = new CardSanctuary();
@@ -26,8 +25,6 @@ public class Game {
         for (int i = 0; i < players.size(); i++) {
             this.players.put(players.get(i), InventoryFactory.getInstance().getInventory(this, players.get(i), i));
         }
-
-        this.facetRuleManager = new FacetRuleManager(ruleSet);
     }
 
     void round() {
@@ -46,17 +43,22 @@ public class Game {
 
     private void divineBlessing() {
 
-        List<TempPlayer> tempPlayers = new ArrayList<>();
+        TreeMap<Player, List<Tuple<Integer, Operation>>> operations = new TreeMap<>();
         for (Player player : getPlayers()) {
-            tempPlayers.add(new TempPlayer(player, players.get(player).throwDice()));
-            log(player.getName() + " a lancé " + Arrays.toString(players.get(player).getFaceUp()));
-        }
+            List<Facet> facetUp = getInventory(player).throwDices();
 
-        for (TempPlayer tempPlayer : tempPlayers) {
-            tempPlayer.setOperations(facetRuleManager.resolve(tempPlayer.getFacets()));
+            log(player.getName() + " a lancé " + facetUp);
+
+            List<Tuple<Integer,Operation>> ops = new ArrayList<>();
+            for(Facet facet : facetUp){
+                ops.addAll(facet.getOperations());
+            }
+            operations.put(player,ops);
         }
-        for (TempPlayer tempPlayer : tempPlayers) {
-            tempPlayer.getOperations().forEach(operation -> operation.apply(this, tempPlayer));
+        for (Map.Entry<Player, List<Tuple<Integer, Operation>>> playerOps: operations.entrySet()) {
+            for(Tuple<Integer,Operation> ops : playerOps.getValue()){
+                ops.getY().apply(this,playerOps.getKey());
+            }
         }
     }
 

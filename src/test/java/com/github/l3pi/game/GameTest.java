@@ -27,22 +27,4 @@ public class GameTest {
         assertEquals(1, g.getPlayers().size());
         assertEquals(1, g.getBestPlayer().size());
     }
-
-    @Test(expected = NullPointerException.class)
-    public void testForNoRuleSet() {
-        Game g = new Game(new ArrayList<Player>() {{
-            add(new RandomBot("Meow"));
-        }}, null);
-
-        g.round();
-    }
-
-    @Test
-    public void testForEmptyRuleSet() {
-        Game g = new Game(new ArrayList<Player>() {{
-            add(new RandomBot("Meow"));
-        }}, new RuleSet(new HashMap<>()));
-
-        g.round();
-    }
 }

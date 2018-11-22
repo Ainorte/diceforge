@@ -2,32 +2,24 @@ package com.github.l3pi.game;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.*;
-import static com.github.l3pi.sys.LogDAO.log;
+import java.util.Collections;
 
 public class Dice {
 
-    private List<Facet> DiceFacet;
-    private Random random;
+    private List<Facet> facets;
 
-    Dice(List<Facet> facets){
-        this.DiceFacet = facets;
-
+    public Dice(List<Facet> facets){
+        assert (facets.size() == 6);
+        this.facets = new ArrayList<>(facets);
     }
 
-    public Facet throwDice() {  // == Faveur Majeur
-        Facet facet;
-        int randIndex = random.nextInt(DiceFacet.size());
-
-        facet = this.DiceFacet.get(randIndex);
-        Collections.shuffle(this.DiceFacet);
-
-        return facet;
+    public Facet throwDice() {
+        Collections.shuffle(this.facets);
+        return getFaceUp();
     }
 
     public Facet getFaceUp(){
-        return this.DiceFacet.get(0);
+        return facets.get(0);
     }
 
 

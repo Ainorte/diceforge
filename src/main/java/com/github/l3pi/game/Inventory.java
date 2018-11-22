@@ -2,32 +2,76 @@ package com.github.l3pi.game;
 
 import com.github.l3pi.type.ResourceType;
 
-import static com.github.l3pi.sys.Log.log;
-
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Class tasked with storing a player's inventory (every associated chunk of data), including, but not limited to,
  * resources, dices.
  */
 public class Inventory {
-    private final Facet[][] dices;
+    private final List<Facet> faceInventory;
     private final HashMap<ResourceType, Integer> resources;
-    private final Random random;
-    private final Facet[] faceUp;
-    private final List<Facet> faceHistory;
-    private final Player player;
-    private final Game game;
-    private int extension = 0;
+    private List<Dice> dices;
+    private int extension;
 
-    public Inventory(Game game, Player player, Facet[][] dices, HashMap<ResourceType, Integer> resources) {
-        this.dices = dices;
-        this.resources = resources;
-        this.random = new Random();
-        this.faceUp = new Facet[]{dices[0][0], dices[1][0]};
-        this.faceHistory = new ArrayList<Facet>();
-        this.player = player;
-        this.game = game;
+    public Inventory(int gold) {
+        ArrayList dice1 = new ArrayList<>() {{
+            add(new Facet("1 Gold", 1, ((Game game, Player player) -> {
+                game.getInventory(player).addResources(ResourceType.GOLD, 1);
+            })));
+            add(new Facet("1 Gold", 1, ((Game game, Player player) -> {
+                game.getInventory(player).addResources(ResourceType.GOLD, 1);
+            })));
+            add(new Facet("1 Gold", 1, ((Game game, Player player) -> {
+                game.getInventory(player).addResources(ResourceType.GOLD, 1);
+            })));
+            add(new Facet("1 Gold", 1, ((Game game, Player player) -> {
+                game.getInventory(player).addResources(ResourceType.GOLD, 1);
+            })));
+            add(new Facet("1 Gold", 1, ((Game game, Player player) -> {
+                game.getInventory(player).addResources(ResourceType.GOLD, 1);
+            })));
+            add(new Facet("1 Solar", 1, ((Game game, Player player) -> {
+                game.getInventory(player).addResources(ResourceType.SOLAR, 1);
+            })));
+        }};
+
+        ArrayList dice2 = new ArrayList<>() {{
+            add(new Facet("1 Gold", 1, ((Game game, Player player) -> {
+                game.getInventory(player).addResources(ResourceType.GOLD, 1);
+            })));
+            add(new Facet("1 Gold", 1, ((Game game, Player player) -> {
+                game.getInventory(player).addResources(ResourceType.GOLD, 1);
+            })));
+            add(new Facet("1 Gold", 1, ((Game game, Player player) -> {
+                game.getInventory(player).addResources(ResourceType.GOLD, 1);
+            })));
+            add(new Facet("1 Gold", 1, ((Game game, Player player) -> {
+                game.getInventory(player).addResources(ResourceType.GOLD, 1);
+            })));
+            add(new Facet("1 Lunar", 1, ((Game game, Player player) -> {
+                game.getInventory(player).addResources(ResourceType.LUNAR, 1);
+            })));
+            add(new Facet("2 Glory", 1, ((Game game, Player player) -> {
+                game.getInventory(player).addResources(ResourceType.GLORY, 2);
+            })));
+        }};
+
+        this.dices = new ArrayList<Dice>(){{
+            add(new Dice(dice1));
+            add(new Dice(dice2));
+        }};
+
+        this.resources = new HashMap<ResourceType,Integer>(){{
+            put(ResourceType.GOLD, gold);
+            put(ResourceType.LUNAR, 0);
+            put(ResourceType.SOLAR, 0);
+            put(ResourceType.GLORY, 0);
+        }};
+
+        this.faceInventory = new ArrayList<Facet>();
+        this.extension = 0;
     }
 
      public int getMaxRessources(ResourceType resourceType){
@@ -43,20 +87,13 @@ public class Inventory {
         }
      }
 
-    public List<Facet> throwDice() {  // == Faveur Majeur
-        List<Facet> facets = new ArrayList<Facet>();
-        for (int i = 0; i < dices.length; i++) {
-            int randIndex = random.nextInt(dices[i].length);
-            facets.add(dices[i][randIndex]);
-            faceUp[i] = dices[i][randIndex];
-        }
-
-        log(this.player + " a acheté " + facets);
-        return facets;
+    public List<Facet> throwDices() {  // == Faveur Majeur
+        return dices.stream().map(Dice::throwDice).collect(Collectors.toList());
     }
+
     public void forge(Facet facetToForge,int choosenDice,int choosenFacet){
         if (facetToForge != null) {
-            faceHistory.add(dices[choosenDice][choosenFacet]);
+            faceInventory.add(dices[choosenDice][choosenFacet]);
             dices[choosenDice][choosenFacet] = facetToForge;
             faceUp[choosenDice] = dices[choosenDice][choosenFacet];
         }
@@ -71,8 +108,8 @@ public class Inventory {
         return Arrays.copyOf(faceUp, faceUp.length);
     }
 
-    public List<Facet> getFaceHistory() {
-        return faceHistory;
+    public List<Facet> getFaceInventory() {
+        return faceInventory;
     }
 
     public void addExtension(){

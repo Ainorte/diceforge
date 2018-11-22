@@ -3,7 +3,6 @@ package com.github.l3pi.game;
 
 import com.github.l3pi.bot.RandomBot;
 import com.github.l3pi.factory.InventoryFactory;
-import com.github.l3pi.rule.RuleSet;
 import com.github.l3pi.type.FacetType;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,7 +53,7 @@ public class InventoryTest {
     @Test
     public void inventoryHistory() {
         this.forge();
-        List<Facet> hist = inventory.getFaceHistory();
+        List<Facet> hist = inventory.getFaceInventory();
         assertEquals(1, hist.size());
     }
 

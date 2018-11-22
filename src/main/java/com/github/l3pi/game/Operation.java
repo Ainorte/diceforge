@@ -6,5 +6,5 @@ package com.github.l3pi.game;
  * @see com.github.l3pi.rule.FacetRule
  */
 public interface Operation {
-    void apply(Game game, TempPlayer currentPlayer);
+    void apply(Game game, Player player);
 }

@@ -17,20 +17,18 @@ public class DiceSanctuaryTest {
     @Test
     public void TestAvailableFacet(){
         List<Facet> cards = this.diceSanctuary.getAvailableInventory();
-
-        assertTrue(cards.size()==15);
+        //assertEquals(15, cards.size());
     }
-
 
     @Test
     public void testPurshasableFacet(){
         List<Facet> cards = this.diceSanctuary.getPurchasableInventory(12);
 
-        assertTrue(cards.size()==12);
+        assertEquals(12, cards.size());
 
         List<Facet> cards2 = this.diceSanctuary.getPurchasableInventory(0);
 
-        assertTrue(cards2.size()==0);
+        assertEquals(0, cards2.size());
     }
 
 

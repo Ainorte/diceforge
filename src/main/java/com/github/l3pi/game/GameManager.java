@@ -1,7 +1,5 @@
 package com.github.l3pi.game;
 
-import com.github.l3pi.factory.RuleFactory;
-
 import java.util.List;
 
 import static com.github.l3pi.sys.Log.log;

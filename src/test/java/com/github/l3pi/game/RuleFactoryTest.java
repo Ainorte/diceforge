@@ -1,6 +1,5 @@
 package com.github.l3pi.game;
 
-import com.github.l3pi.factory.RuleFactory;
 import com.github.l3pi.rule.FacetRule;
 import com.github.l3pi.rule.RuleSet;
 import com.github.l3pi.type.FacetType;
