@@ -22,8 +22,8 @@ public class Game {
         this.diceSanctuary = new DiceSanctuary();
         this.cardSanctuary = new CardSanctuary();
 
-        for (int i = 0; i < players.size(); i++) {
-            this.players.put(players.get(i), new Inventory(1));
+        for (int i =0; i < players.size(); i++) {
+            this.players.put(players.get(i), new Inventory(3 - i));
         }
     }
 
