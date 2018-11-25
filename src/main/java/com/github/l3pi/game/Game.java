@@ -1,6 +1,6 @@
 package com.github.l3pi.game;
 
-import com.github.l3pi.factory.InventoryFactory;
+
 import com.github.l3pi.type.ResourceType;
 import com.github.l3pi.utilities.Tuple;
 
@@ -23,7 +23,7 @@ public class Game {
         this.cardSanctuary = new CardSanctuary();
 
         for (int i = 0; i < players.size(); i++) {
-            this.players.put(players.get(i), InventoryFactory.getInstance().getInventory(this, players.get(i), i));
+            this.players.put(players.get(i), new Inventory(1));
         }
     }
 
