@@ -37,7 +37,10 @@ public class Game {
     private void round(Player player) {
 
         divineBlessing();
+        System.out.println();
         action(player);
+        System.out.println();
+        System.out.println();
 
     }
 
@@ -67,7 +70,7 @@ public class Game {
             Facet facet = player.chooseDiceFacet(this);
             if (facet != null) {
                 facet = this.diceSanctuary.buyFacet(facet);
-                log(player.getName() + " a acheté " + facet + " pour " + this.diceSanctuary.getPriceForFacet(facet));
+                log(player.getName() + " a acheté la face de dés " + facet + " pour " + this.diceSanctuary.getPriceForFacet(facet));
                 int[] diceChangeFace = player.forgeMyDice(this, facet);
                 this.getInventory(player).forge(facet, diceChangeFace[0], diceChangeFace[1]);
             }
@@ -78,7 +81,7 @@ public class Game {
                 card = this.cardSanctuary.buyCard(card);
                 //TODO card.executeOperation(player);
                 //TODO player.moove(card.getLocationType());
-                log(player.getName() + " a effectué le haut fait " + card);
+                log(player.getName() + " a acheté la carte " + card);
             }
         }
     }
