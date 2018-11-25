@@ -15,28 +15,28 @@ public class CardSanctuary {
 
     CardSanctuary(){
         cardSanctuary = new HashMap<>();
-        this.cardSanctuary.put(new Card(1, ResourceType.LUNAR,CardLocationType.LUNAR1,(Game game, Inventory inventory)->{},true,false),4);
-        this.cardSanctuary.put(new Card(1,ResourceType.LUNAR,CardLocationType.LUNAR1,(Game game, Inventory inventory)->{},false,false),4);
+        this.cardSanctuary.put(new Card(1, ResourceType.LUNAR,CardLocationType.LUNAR1,(Game game, Player player)->{},true,false),4);
+        this.cardSanctuary.put(new Card(1,ResourceType.LUNAR,CardLocationType.LUNAR1,(Game game, Player player)->{},false,false),4);
 
-        this.cardSanctuary.put(new Card(3,ResourceType.LUNAR,CardLocationType.LUNAR2,(Game game, Inventory inventory)->{},true,false),4);
-        this.cardSanctuary.put(new Card(2,ResourceType.LUNAR,CardLocationType.LUNAR2,(Game game, Inventory inventory)->{},false,false),4);
+        this.cardSanctuary.put(new Card(3,ResourceType.LUNAR,CardLocationType.LUNAR2,(Game game, Player player)->{},true,false),4);
+        this.cardSanctuary.put(new Card(2,ResourceType.LUNAR,CardLocationType.LUNAR2,(Game game, Player player)->{},false,false),4);
 
-        this.cardSanctuary.put(new Card(4,ResourceType.LUNAR,CardLocationType.LUNAR3,(Game game, Inventory inventory)->{},true,false),4);
-        this.cardSanctuary.put(new Card(5,ResourceType.LUNAR,CardLocationType.LUNAR3,(Game game, Inventory inventory)->{},false,false),4);
+        this.cardSanctuary.put(new Card(4,ResourceType.LUNAR,CardLocationType.LUNAR3,(Game game, Player player)->{},true,false),4);
+        this.cardSanctuary.put(new Card(5,ResourceType.LUNAR,CardLocationType.LUNAR3,(Game game, Player player)->{},false,false),4);
 
-        this.cardSanctuary.put(new Card(6,ResourceType.LUNAR,CardLocationType.MIDDLE,(Game game, Inventory inventory)->{},true,false),4);
-        this.cardSanctuary.put(new Card(5,new ArrayList<ResourceType>(){{add(ResourceType.LUNAR);add(ResourceType.SOLAR);}},CardLocationType.MIDDLE,(Game game, Inventory inventory)->{},false,true),4);
-        this.cardSanctuary.put(new Card(6,ResourceType.SOLAR,CardLocationType.MIDDLE,(Game game, Inventory inventory)->{},false,false),4);
+        this.cardSanctuary.put(new Card(6,ResourceType.LUNAR,CardLocationType.MIDDLE,(Game game, Player player)->{},true,false),4);
+        this.cardSanctuary.put(new Card(5,new ArrayList<ResourceType>(){{add(ResourceType.LUNAR);add(ResourceType.SOLAR);}},CardLocationType.MIDDLE,(Game game, Player player)->{},false,true),4);
+        this.cardSanctuary.put(new Card(6,ResourceType.SOLAR,CardLocationType.MIDDLE,(Game game, Player player)->{},false,false),4);
 
 
-        this.cardSanctuary.put(new Card(1,ResourceType.SOLAR,CardLocationType.SOLAR1,(Game game, Inventory inventory)->{},true,false),4);
-        this.cardSanctuary.put(new Card(1,ResourceType.SOLAR,CardLocationType.SOLAR1,(Game game, Inventory inventory)->{},false,false),4);
+        this.cardSanctuary.put(new Card(1,ResourceType.SOLAR,CardLocationType.SOLAR1,(Game game, Player player)->{},true,false),4);
+        this.cardSanctuary.put(new Card(1,ResourceType.SOLAR,CardLocationType.SOLAR1,(Game game, Player player)->{},false,false),4);
 
-        this.cardSanctuary.put(new Card(3,ResourceType.SOLAR,CardLocationType.SOLAR2,(Game game, Inventory inventory)->{},true,false),4);
-        this.cardSanctuary.put(new Card(2,ResourceType.SOLAR,CardLocationType.SOLAR2,(Game game, Inventory inventory)->{},false,false),4);
+        this.cardSanctuary.put(new Card(3,ResourceType.SOLAR,CardLocationType.SOLAR2,(Game game,Player player)->{},true,false),4);
+        this.cardSanctuary.put(new Card(2,ResourceType.SOLAR,CardLocationType.SOLAR2,(Game game, Player player)->{},false,false),4);
 
-        this.cardSanctuary.put(new Card(4,ResourceType.SOLAR,CardLocationType.SOLAR3,(Game game, Inventory inventory)->{},true,false),4);
-        this.cardSanctuary.put(new Card(5,ResourceType.SOLAR,CardLocationType.SOLAR3,(Game game, Inventory inventory)->{},false,false),4);
+        this.cardSanctuary.put(new Card(4,ResourceType.SOLAR,CardLocationType.SOLAR3,(Game game, Player player)->{},true,false),4);
+        this.cardSanctuary.put(new Card(5,ResourceType.SOLAR,CardLocationType.SOLAR3,(Game game, Player player)->{},false,false),4);
     }
 
 

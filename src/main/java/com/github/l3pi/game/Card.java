@@ -9,13 +9,13 @@ import java.util.List;
 public class Card {
     private int price;
     private CardLocationType locationType;
-    private OperationCard operation;
+    private Operation operation;
     private boolean isRight;
     private boolean isMiddle;
     private List<ResourceType> resourceType;
 
 
-    Card(int p,List<ResourceType> resourceType, CardLocationType location,OperationCard operation,boolean isRight,boolean isMiddle) {
+    Card(int p,List<ResourceType> resourceType, CardLocationType location,Operation operation,boolean isRight,boolean isMiddle) {
         this.price = p;
         this.resourceType = resourceType;
         this.locationType = location;
@@ -25,7 +25,7 @@ public class Card {
 
     }
 
-    Card(int p,ResourceType resourceType, CardLocationType location,OperationCard operation,boolean isRight,boolean isMiddle) {
+    Card(int p,ResourceType resourceType, CardLocationType location,Operation operation,boolean isRight,boolean isMiddle) {
         this(p,new ArrayList<ResourceType>(){{add(resourceType);}},location,operation,isRight,isMiddle);
     }
 
@@ -42,7 +42,7 @@ public class Card {
         return locationType;
     }
 
-    public OperationCard getOperation() {
+    public Operation getOperation() {
         return this.operation;
     }
 

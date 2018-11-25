@@ -23,4 +23,16 @@ public class Dice {
     }
 
 
+    public void addFace(Facet facetToForge,int choosenFacet){
+        this.facets.set(choosenFacet,facetToForge);
+    }
+
+
+    @Override
+    public String toString() {
+        return facets.toString();
+    }
 }
+
+
+

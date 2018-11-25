@@ -16,7 +16,7 @@ public class Inventory {
     private int extension;
 
     public Inventory(int gold) {
-        ArrayList dice1 = new ArrayList<>() {{
+        ArrayList dice1 = new ArrayList<Facet>() {{
             add(new Facet("1 Gold", 1, ((Game game, Player player) -> {
                 game.getInventory(player).addResources(ResourceType.GOLD, 1);
             })));
@@ -37,7 +37,7 @@ public class Inventory {
             })));
         }};
 
-        ArrayList dice2 = new ArrayList<>() {{
+        ArrayList dice2 = new ArrayList<Facet>() {{
             add(new Facet("1 Gold", 1, ((Game game, Player player) -> {
                 game.getInventory(player).addResources(ResourceType.GOLD, 1);
             })));
@@ -93,19 +93,19 @@ public class Inventory {
 
     public void forge(Facet facetToForge,int choosenDice,int choosenFacet){
         if (facetToForge != null) {
-            faceInventory.add(dices[choosenDice][choosenFacet]);
-            dices[choosenDice][choosenFacet] = facetToForge;
-            faceUp[choosenDice] = dices[choosenDice][choosenFacet];
+            Dice dice = this.dices.get(choosenDice);
+            dice.addFace(facetToForge,choosenFacet);
+            this.dices.set(choosenDice,dice);
         }
     }
 
 
-    public Facet[][] getDices() {
+    public List<Dice> getDices() {
         return dices;
     }
 
     public Facet[] getFaceUp() {
-        return Arrays.copyOf(faceUp, faceUp.length);
+        return new Facet[]{this.dices.get(0).getFaceUp(),this.dices.get(1).getFaceUp()};
     }
 
     public List<Facet> getFaceInventory() {
@@ -134,6 +134,6 @@ public class Inventory {
 
     @Override
     public String toString() {
-        return String.format("Dices : %s,\nRessouces : %s", Arrays.deepToString(dices), resources);
+        return String.format("Dices : %s,\nRessouces : %s", this.dices.toString(), resources);
     }
 }
