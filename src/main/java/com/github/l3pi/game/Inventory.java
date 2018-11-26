@@ -141,6 +141,6 @@ public class Inventory {
 
     @Override
     public String toString() {
-        return String.format("Dices : %s,\nRessouces : %s", this.dices.toString(), resources);
+        return String.format("Dices : %s,\nRessouces : %s\nCards : %s", this.dices.toString(), resources,cards);
     }
 }
