@@ -14,6 +14,7 @@ public class Inventory {
     private final HashMap<ResourceType, Integer> resources;
     private List<Dice> dices;
     private int extension;
+    private List<Card> cards;
 
     public Inventory(int gold) {
         ArrayList dice1 = new ArrayList<Facet>() {{
@@ -72,6 +73,8 @@ public class Inventory {
 
         this.faceInventory = new ArrayList<Facet>();
         this.extension = 0;
+        this.cards = new ArrayList<Card>() {
+        };
     }
 
      public int getMaxRessources(ResourceType resourceType){
@@ -130,6 +133,10 @@ public class Inventory {
         else{
             resources.merge(resourceType, max - currentValue , Integer::sum);
         }
+    }
+
+    public void addCard(Card card){
+        this.cards.add(card);
     }
 
     @Override

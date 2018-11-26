@@ -79,9 +79,12 @@ public class Game {
             Card card = player.chooseCard(this);
             if (card != null) {
                 card = this.cardSanctuary.buyCard(card);
+                Inventory inventory = this.players.get(player);
+                inventory.addCard(card);
+                this.players.put(player,inventory);
                 //TODO card.executeOperation(player);
                 //TODO player.moove(card.getLocationType());
-                log(player.getName() + " a acheté la carte " + card);
+                log(player.getName() + " a acheté la carte " + card +" le joueur se situe sur "+ card.getLocationType() + card.isMiddle() + card.isRight() + " du plateau");
             }
         }
     }
