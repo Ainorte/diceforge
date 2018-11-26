@@ -54,6 +54,8 @@ public class Card {
         return this.price <= money;
     }
 
+    public boolean isMiddle() {return this.isMiddle;}
+
     @Override
     public String toString() {
         return locationType.toString();
