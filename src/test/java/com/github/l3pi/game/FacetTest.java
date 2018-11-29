@@ -10,11 +10,11 @@ import java.util.List;
 
 public class FacetTest {
 
-    /*private Facet facet;
+    private Facet facet;
 
     @Before
     public void setUp(){
-        this.facet = new Facet("1 Gold", 1, ((Game game, Player player) -> {
+        this.facet = new Facet("1 Gold", ((Game game, Player player) -> {
             game.getInventory(player).addResources(ResourceType.GOLD, 1);
         }));
 
@@ -24,7 +24,7 @@ public class FacetTest {
     public void testMethod(){
         assertTrue(facet.getName() == "1 Gold");
 
-        List<Tuple<Integer, Operation>> op = this.facet.getOperation();
+        Operation op = this.facet.getOperation();
         assertEquals(op,this.facet.getOperation());
-    }*/
+    }
 }
