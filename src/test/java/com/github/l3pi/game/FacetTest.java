@@ -10,7 +10,7 @@ import java.util.List;
 
 public class FacetTest {
 
-    private Facet facet;
+    /*private Facet facet;
 
     @Before
     public void setUp(){
@@ -26,5 +26,5 @@ public class FacetTest {
 
         List<Tuple<Integer, Operation>> op = this.facet.getOperation();
         assertEquals(op,this.facet.getOperation());
-    }
+    }*/
 }
