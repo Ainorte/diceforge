@@ -55,12 +55,15 @@ public class CardSanctuary {
 
         this.cardSanctuary.put(new Card(5,ResourceType.LUNAR,CardLocationType.LUNAR3,
             (Game game, Player player)->{
-            player.forgeMyDice(game,new Facet("x3",
+            Inventory inventory = game.getInventory(player);
+            Facet facetToForge = new Facet("x3",
                 (Game facetGame, Player facetPlayer)->{
-                facetGame.getInventory(facetPlayer).getFaceUp().stream().
-                    filter(facet -> !(facet.getName().equals("x3"))).
-                    forEach(facet -> facet.getOperation().apply(facetGame,facetPlayer));
-            }));
+                    facetGame.getInventory(facetPlayer).getFaceUp().stream().
+                        filter(facet -> !(facet.getName().equals("x3"))).
+                        forEach(facet -> facet.getOperation().apply(facetGame,facetPlayer));
+                });
+            int[] diceChangeFace = player.forgeMyDice(game, facetToForge);
+            inventory.forge(facetToForge,diceChangeFace[0],diceChangeFace[1]);
         },"Le Casque d'invisibilité"),4);
 
 
