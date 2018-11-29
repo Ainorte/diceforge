@@ -40,9 +40,11 @@ public class InventoryTest {
 
         // test for forge
 
-        Facet f = new Facet("3 GOLD", 2, ((Game game, Player player) -> {
+        Facet f = new Facet("3 GOLD", ((Game game, Player player) -> {
             game.getInventory(player).addResources(ResourceType.GOLD, 3);
         }));
+
+
 
         this.inventory.forge(f, 0, 2);
 
