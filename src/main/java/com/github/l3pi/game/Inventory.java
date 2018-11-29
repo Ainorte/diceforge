@@ -100,6 +100,9 @@ public class Inventory {
         this.hammerGold = 0;
     }
 
+
+
+
      public int getMaxRessources(ResourceType resourceType){
         switch (resourceType){
             case GLORY:

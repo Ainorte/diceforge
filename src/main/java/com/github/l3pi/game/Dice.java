@@ -27,6 +27,9 @@ public class Dice {
         this.facets.set(choosenFacet,facetToForge);
     }
 
+    public Facet getFacet(int i){
+        return this.facets.get(i);
+    }
 
     @Override
     public String toString() {

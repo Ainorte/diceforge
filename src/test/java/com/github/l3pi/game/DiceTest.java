@@ -39,6 +39,7 @@ public class DiceTest {
 
         this.dice.addFace(facet2,0);
         assertEquals(facet2 , this.dice.getFaceUp());
+        assertTrue(this.dice.getFaceUp() == this.dice.getFacet(0));
     }
 
 }
