@@ -37,7 +37,7 @@ public abstract class Player implements Comparable<Player> {
 
     public abstract int[] forgeMyDice(Game game,Facet facet);
 
-    public abstract Tuple<Integer,Integer> chooseGoldRepartion(Inventory inventory, int gold);
+    //public abstract Tuple<Integer,Integer> chooseGoldRepartion(Inventory inventory, int gold);
 
     @Override
     public String toString() {
