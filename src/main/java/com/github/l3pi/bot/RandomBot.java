@@ -3,6 +3,7 @@ package com.github.l3pi.bot;
 import com.github.l3pi.game.*;
 import com.github.l3pi.type.CardLocationType;
 import com.github.l3pi.type.ResourceType;
+import com.github.l3pi.utilities.Tuple;
 
 import java.util.List;
 import java.util.Random;
@@ -58,6 +59,13 @@ public class RandomBot extends Player {
     public int[] forgeMyDice(Game game,Facet facet) {
 
         return new int[]{this.gen.nextInt(1),this.gen.nextInt(5)};
+    }
+
+    @Override
+    public Tuple<Integer, Integer> chooseGoldRepartion(Inventory inventory, int gold) {
+        int random = gen.nextInt(2);
+        //TODO : MAKE repartition
+        return new Tuple<>(0,0);
     }
 
 }

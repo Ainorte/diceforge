@@ -151,6 +151,9 @@ public class Inventory {
     }
 
     public void addResources(ResourceType resourceType, int value) {
+        if(resourceType.equals(ResourceType.GOLD)) {
+
+        }
         int currentValue = resources.get(resourceType);
         int max = this.getMaxRessources(resourceType);
         if((currentValue + value) >=0 && (currentValue + value) < max){
@@ -180,9 +183,35 @@ public class Inventory {
      *@return nb of GOLRY win
      */
     public int addGoldHammer(int gold){
-        int old = getHammerGold();
+        int glory = 0;
+        while (gold > 0){
+            int tmp = (gold > 30 ? 30 : gold) - getHammerGold();
+            gold -= tmp;
+            glory += addGoldHammerOneCard(tmp);
+        }
+        addResources(ResourceType.GLORY,glory);
+        return glory;
+    }
+
+    private int addGoldHammerOneCard(int gold){
+        if(getActiveHammerCardCount() == 0){
+            return 0;
+        }
+        int glory = 0;
+        int oldGold = getHammerGold();
         hammerGold+= gold;
-        return 0;
+
+        if(oldGold < 15 && oldGold + gold > 15){
+            glory += 10;
+        }
+        if(oldGold + gold == 30){
+            glory += 15;
+        }
+        return glory;
+    }
+
+    public void addHammerCard(){
+        hammerCard++;
     }
 
     @Override

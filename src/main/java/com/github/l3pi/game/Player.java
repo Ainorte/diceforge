@@ -1,6 +1,7 @@
 package com.github.l3pi.game;
 
 import com.github.l3pi.type.CardLocationType;
+import com.github.l3pi.utilities.Tuple;
 
 import java.util.List;
 
@@ -36,6 +37,8 @@ public abstract class Player implements Comparable<Player> {
     public abstract int chooseDice(List<Dice> dices);
 
     public abstract int[] forgeMyDice(Game game,Facet facet);
+
+    public abstract Tuple<Integer,Integer> chooseGoldRepartion(Inventory inventory, int gold);
 
     @Override
     public String toString() {
