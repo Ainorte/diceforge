@@ -11,10 +11,18 @@ import java.util.stream.Collectors;
  */
 public class Inventory {
     private final List<Facet> faceInventory;
+
     private final HashMap<ResourceType, Integer> resources;
+
     private List<Dice> dices;
+
     private int extension;
+
     private List<Card> cards;
+
+    private int hammerGold;
+
+    private int hammerCard;
 
     public Inventory(int gold) {
         ArrayList dice1 = new ArrayList<Facet>() {{
@@ -87,6 +95,9 @@ public class Inventory {
         this.extension = 0;
         this.cards = new ArrayList<Card>() {
         };
+
+        this.hammerCard = 0;
+        this.hammerGold = 0;
     }
 
      public int getMaxRessources(ResourceType resourceType){
@@ -119,12 +130,12 @@ public class Inventory {
         return new ArrayList<>(dices);
     }
 
-    public Facet[] getFaceUp() {
-        return new Facet[]{this.dices.get(0).getFaceUp(),this.dices.get(1).getFaceUp()};
+    public List<Facet> getFaceUp() {
+        return dices.stream().map(Dice::getFaceUp).collect(Collectors.toList());
     }
 
     public List<Facet> getFaceInventory() {
-        return faceInventory;
+        return new ArrayList<>(faceInventory);
     }
 
     public void addExtension(){
@@ -155,6 +166,21 @@ public class Inventory {
      return new ArrayList<Card>(this.cards);
     }
 
+    public int getActiveHammerCardCount(){
+        return hammerCard - hammerGold/30;
+    }
+    public int getHammerGold(){
+        return hammerGold - ((hammerCard - getActiveHammerCardCount())*30);
+    }
+
+    /*
+     *@return nb of GOLRY win
+     */
+    public int addGoldHammer(int gold){
+        int old = getHammerGold();
+        hammerGold+= gold;
+        return 0;
+    }
 
     @Override
     public String toString() {
