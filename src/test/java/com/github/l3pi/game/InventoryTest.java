@@ -63,8 +63,6 @@ public class InventoryTest {
             assertTrue(facet instanceof Facet);
         }
 
-
-        
         this.inventory.addExtension();
 
         assertTrue(this.inventory.getMaxRessources(ResourceType.LUNAR ) == 6+3*2);
