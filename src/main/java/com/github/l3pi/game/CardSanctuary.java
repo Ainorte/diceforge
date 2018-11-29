@@ -39,7 +39,7 @@ public class CardSanctuary {
 
         this.cardSanctuary.put(new Card(2,ResourceType.LUNAR,CardLocationType.LUNAR2,
             (Game game, Player player)->{
-                game.getPlayers().stream().filter(player1 -> !player1.equals(player)).flatMap(player1 -> game.getInventory(player1).throwDices().stream()).forEach(facet -> {facet.getOperation().apply(this,player);});
+                game.getPlayers().stream().filter(player1 -> !player1.equals(player)).flatMap(player1 -> game.getInventory(player1).throwDices().stream()).forEach(facet -> {facet.getOperation().apply(game,player);});
         },"Les Satyres"),4);
 
         this.cardSanctuary.put(new Card(4,ResourceType.LUNAR,CardLocationType.LUNAR3,(Game game, Player player)->{},"Le Passeur"),4);
