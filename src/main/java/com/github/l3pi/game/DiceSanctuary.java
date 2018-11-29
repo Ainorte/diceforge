@@ -62,18 +62,18 @@ public class DiceSanctuary {
 
 
 
-        diceSanctuary.put(new Facet("1 GLORY 1 SOLAR",2,((Game game, Player player) -> {game.getInventory(player).addResources(ResourceType.GLORY, 1);
+        diceSanctuary.put(new Facet("1 GLORY + SOLAR",2,((Game game, Player player) -> {game.getInventory(player).addResources(ResourceType.GLORY, 1);
             game.getInventory(player).addResources(ResourceType.SOLAR, 1);})) ,new Item(1, 4));
 
 
-        diceSanctuary.put(new Facet("2 GOLD 1 LUNAR",2,((Game game, Player player) -> {game.getInventory(player).addResources(ResourceType.GOLD, 2);
+        diceSanctuary.put(new Facet("2 GOLD + 1 LUNAR",2,((Game game, Player player) -> {game.getInventory(player).addResources(ResourceType.GOLD, 2);
             game.getInventory(player).addResources(ResourceType.LUNAR, 1);})) ,new Item(1, 4));
 
 
-        diceSanctuary.put(new Facet("2 GLORY 2 LUNAR",2,((Game game, Player player) -> {game.getInventory(player).addResources(ResourceType.GLORY, 2);
+        diceSanctuary.put(new Facet("2 GLORY + LUNAR",2,((Game game, Player player) -> {game.getInventory(player).addResources(ResourceType.GLORY, 2);
             game.getInventory(player).addResources(ResourceType.LUNAR, 2);})) ,new Item(1, 12));
 
-        diceSanctuary.put(new Facet("1 GOLD 1 LUNAR 1 GLORY 1 SOLAR",2,((Game game, Player player) -> {game.getInventory(player).addResources(ResourceType.GOLD, 1);
+        diceSanctuary.put(new Facet("1 GOLD + LUNAR + GLORY + SOLAR",2,((Game game, Player player) -> {game.getInventory(player).addResources(ResourceType.GOLD, 1);
             game.getInventory(player).addResources(ResourceType.LUNAR, 1);
             game.getInventory(player).addResources(ResourceType.GLORY, 1);
             game.getInventory(player).addResources(ResourceType.SOLAR, 1);
