@@ -125,7 +125,20 @@ public class Game {
             .collect(Collectors.toList());
     }
 
-
+    public void addGold(Player player, int gold){
+        Inventory inventory = getInventory(player);
+        if (inventory.getActiveHammerCardCount() > 0 && inventory.getMaxRessources(ResourceType.GOLD) > inventory.getResource(ResourceType.GOLD)) {
+            Tuple<Integer, Integer> repartition = player.chooseGoldRepartion(inventory, gold);
+            if (repartition.getY() + repartition.getX() <= gold) {
+                inventory.addResources(ResourceType.GOLD, repartition.getX());
+                inventory.addGoldHammer(repartition.getY());
+            }
+        } else if (inventory.getMaxRessources(ResourceType.GOLD) <= inventory.getResource(ResourceType.GOLD)) {
+            inventory.addGoldHammer(gold);
+        } else {
+            inventory.addResources(ResourceType.GOLD, gold);
+        }
+    }
 
 
 
