@@ -13,7 +13,7 @@ public class DiceTest {
 
     @Before
     public void setUp(){
-        this.facet = new Facet("1 Gold", 1, ((Game game, Player player) -> {
+        this.facet = new Facet("1 Gold", ((Game game, Player player) -> {
             game.getInventory(player).addResources(ResourceType.GOLD, 1);
         }));
 
@@ -33,7 +33,7 @@ public class DiceTest {
     public void testMethod(){
         assertEquals(this.facet,this.dice.throwDice());
         assertEquals(this.facet,this.dice.getFaceUp());
-        Facet facet2 = new Facet("1 Gold", 1, ((Game game, Player player) -> {
+        Facet facet2 = new Facet("1 Gold", ((Game game, Player player) -> {
             game.getInventory(player).addResources(ResourceType.GOLD, 1);
         }));
 
