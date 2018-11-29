@@ -12,7 +12,10 @@ public class CardSanctuary {
 
     CardSanctuary(){
         cardSanctuary = new HashMap<>();
-        this.cardSanctuary.put(new Card(1, ResourceType.LUNAR,CardLocationType.LUNAR1,(Game game, Player player)->{},"Le Marteau du Forgeron"),4);
+        this.cardSanctuary.put(new Card(1, ResourceType.LUNAR,CardLocationType.LUNAR1,
+            (Game game, Player player)->{
+                game.getInventory(player).addHammerCard();
+            },"Le Marteau du Forgeron"),4);
 
         this.cardSanctuary.put(new Card(1,
             ResourceType.LUNAR,CardLocationType.LUNAR1,
@@ -50,7 +53,15 @@ public class CardSanctuary {
                 game.getInventory(player).addResources(ResourceType.GLORY,12);
             },"Le Passeur"),4);
 
-        this.cardSanctuary.put(new Card(5,ResourceType.LUNAR,CardLocationType.LUNAR3,(Game game, Player player)->{},"Le Casque d'invisibilité"),4);
+        this.cardSanctuary.put(new Card(5,ResourceType.LUNAR,CardLocationType.LUNAR3,
+            (Game game, Player player)->{
+            player.forgeMyDice(game,new Facet("x3",
+                (Game facetGame, Player facetPlayer)->{
+                facetGame.getInventory(facetPlayer).getFaceUp().stream().
+                    filter(facet -> !(facet.getName().equals("x3"))).
+                    forEach(facet -> facet.getOperation().apply(facetGame,facetPlayer));
+            }));
+        },"Le Casque d'invisibilité"),4);
 
 
         this.cardSanctuary.put(new Card(6,ResourceType.LUNAR,CardLocationType.MIDDLE,
