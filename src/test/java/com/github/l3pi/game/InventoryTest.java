@@ -52,9 +52,9 @@ public class InventoryTest {
 
         assertTrue((this.inventory.getDices().get(0) instanceof Dice) && (this.inventory.getDices().get(1) instanceof Dice));
 
-        assertTrue((this.inventory.getFaceUp()[0] instanceof Facet) && (this.inventory.getFaceUp()[1] instanceof Facet));
+        assertTrue((this.inventory.getFaceUp().get(0) instanceof Facet) && (this.inventory.getFaceUp().get(1) instanceof Facet));
 
-        assertTrue((this.inventory.getFaceUp()[0] == this.inventory.getDices().get(0).getFaceUp()) && (this.inventory.getFaceUp()[1] == this.inventory.getDices().get(1).getFaceUp()));
+        assertTrue((this.inventory.getFaceUp().get(0) == this.inventory.getDices().get(0).getFaceUp()) && (this.inventory.getFaceUp().get(1) == this.inventory.getDices().get(1).getFaceUp()));
 
         List<Facet> facetInventory = this.inventory.getFaceInventory();
 
