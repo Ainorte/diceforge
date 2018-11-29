@@ -19,6 +19,7 @@ public class RandomBot extends Player {
     @Override
     public Facet chooseDiceFacet(Game game) {
         List<Facet> purchasableFacets = game.getDiceSanctuary().getPurchasableInventory(game.getInventory(this).getResource(ResourceType.GOLD));
+
         if (purchasableFacets.size() > 0) {
             return purchasableFacets.get(this.gen.nextInt(purchasableFacets.size()));
         }
@@ -28,6 +29,7 @@ public class RandomBot extends Player {
     @Override
     public Card chooseCard(Game game){
         List<Card> purchasableCards = game.getCardSanctuary().getPurchasableCard(game.getInventory(this));
+        System.out.println("choix des cartes achetables :" + purchasableCards);
         if (purchasableCards.size() > 0) {
             return purchasableCards.get(this.gen.nextInt(purchasableCards.size()));
         }

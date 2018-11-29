@@ -26,13 +26,13 @@ public class CardSanctuaryTest {
 
     @Test
     public void testPurshasableCard(){
-        /*List<Card> cards = this.cardSanctuary.getPurchasableCard(12);
+        List<Card> cards = this.cardSanctuary.getPurchasableCard(new Inventory(100));
 
-        assertTrue(cards.size()==15);
+        for (Card card:
+             cards) {
+            assertTrue(card instanceof Card);
 
-        List<Card> cards2 = this.cardSanctuary.getPurchasableCard(0);
-
-        assertTrue(cards2.size()==0);*/
+        }
     }
 
 
