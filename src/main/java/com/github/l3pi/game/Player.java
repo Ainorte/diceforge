@@ -32,13 +32,12 @@ public abstract class Player implements Comparable<Player> {
 
     public abstract int chooseAction(Game game);
 
-    public abstract void move(CardLocationType location);
 
     public abstract int chooseDice(List<Dice> dices);
 
     public abstract int[] forgeMyDice(Game game,Facet facet);
 
-    public abstract Tuple<Integer,Integer> chooseGoldRepartion(Inventory inventory, int gold);
+    //public abstract Tuple<Integer,Integer> chooseGoldRepartion(Inventory inventory, int gold);
 
     @Override
     public String toString() {
