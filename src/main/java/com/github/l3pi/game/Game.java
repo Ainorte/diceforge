@@ -2,6 +2,7 @@ package com.github.l3pi.game;
 
 
 import com.github.l3pi.type.ResourceType;
+import com.github.l3pi.utilities.Tuple;
 
 import java.util.*;
 import java.util.stream.Collectors;
