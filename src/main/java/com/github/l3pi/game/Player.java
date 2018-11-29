@@ -32,7 +32,6 @@ public abstract class Player implements Comparable<Player> {
 
     public abstract int chooseAction(Game game);
 
-    public abstract void move(CardLocationType location);
 
     public abstract int chooseDice(List<Dice> dices);
 
