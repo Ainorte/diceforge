@@ -5,6 +5,8 @@ import com.github.l3pi.type.CardLocationType;
 import com.github.l3pi.type.ResourceType;
 import com.github.l3pi.utilities.Tuple;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -41,6 +43,18 @@ public class RandomBot extends Player {
     public int chooseAction(Game game){
         return this.gen.nextInt(2);
     }
+
+    @Override
+    public ResourceType chooseResource(List<ResourceType> resource){
+        Collections.shuffle(resource);
+        return  resource.get(0);
+    }
+
+    @Override
+    public boolean tradeGoldForGlory(Game game){
+       return gen.nextBoolean();
+    }
+
 
 
 

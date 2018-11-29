@@ -3,10 +3,7 @@ package com.github.l3pi.game;
 import com.github.l3pi.type.CardLocationType;
 import com.github.l3pi.type.ResourceType;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CardSanctuary {
@@ -88,7 +85,11 @@ public class CardSanctuary {
 
 
         this.cardSanctuary.put(new Card(1,ResourceType.SOLAR,CardLocationType.SOLAR1,(Game game, Player player)->{
-            //TODO
+            Inventory inventory = game.getInventory(player);
+            if(inventory.getResource(ResourceType.GOLD) > 2 && player.tradeGoldForGlory(game)) {
+                inventory.addResources(ResourceType.GOLD, -3);
+                inventory.addResources(ResourceType.GLORY, 4);
+            }
         },"L'Ancien",true),4);
 
         this.cardSanctuary.put(new Card(1,ResourceType.SOLAR,CardLocationType.SOLAR1,
@@ -97,9 +98,12 @@ public class CardSanctuary {
                 game.getInventory(player).addResources(ResourceType.LUNAR,3);
             },"Les Herbes Folles"),4);
 
-        this.cardSanctuary.put(new Card(3,ResourceType.SOLAR,CardLocationType.SOLAR2,(Game game,Player player)->{
+        this.cardSanctuary.put(new Card(3,ResourceType.SOLAR,CardLocationType.SOLAR2,
+            (Game game,Player player)->{
+            ResourceType choosenResource = player.chooseResource(new ArrayList<ResourceType>(Arrays.asList(ResourceType.GOLD,ResourceType.LUNAR,ResourceType.SOLAR)));
+            game.getInventory(player).addResources(choosenResource,1);
+            },"Les Ailes de la Gardienne",true),4);
 
-        },"Les Ailes de la Gardienne",true),4);
         this.cardSanctuary.put(new Card(2,ResourceType.SOLAR,CardLocationType.SOLAR2,(Game game, Player player)->{},"Le Minotaure"),4);
 
         this.cardSanctuary.put(new Card(4,ResourceType.SOLAR,CardLocationType.SOLAR3,

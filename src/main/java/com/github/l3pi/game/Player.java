@@ -1,6 +1,7 @@
 package com.github.l3pi.game;
 
 import com.github.l3pi.type.CardLocationType;
+import com.github.l3pi.type.ResourceType;
 import com.github.l3pi.utilities.Tuple;
 
 import java.util.List;
@@ -32,6 +33,9 @@ public abstract class Player implements Comparable<Player> {
 
     public abstract int chooseAction(Game game);
 
+    public abstract boolean tradeGoldForGlory(Game game);
+
+    public abstract ResourceType chooseResource(List<ResourceType> resources);
 
     public abstract int chooseDice(List<Dice> dices);
 
