@@ -4,7 +4,7 @@ import com.github.l3pi.utilities.Tuple;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.util.ArrayList;
+
 import java.util.List;
 
 
@@ -24,7 +24,7 @@ public class FacetTest {
     public void testMethod(){
         assertTrue(facet.getName() == "1 Gold");
 
-        List<Tuple<Integer, Operation>> op = this.facet.getOperations();
-        assertEquals(op,this.facet.getOperations());
+        List<Tuple<Integer, Operation>> op = this.facet.getOperation();
+        assertEquals(op,this.facet.getOperation());
     }
 }

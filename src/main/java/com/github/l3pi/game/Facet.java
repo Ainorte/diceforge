@@ -15,7 +15,7 @@ public final class Facet {
         this.operation = operation;
     }
 
-    public Operation getOperations() {
+    public Operation getOperation() {
         return operation;
     }
 

@@ -2,7 +2,6 @@ package com.github.l3pi.game;
 
 
 import com.github.l3pi.type.ResourceType;
-import com.github.l3pi.utilities.Tuple;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -53,23 +52,15 @@ public class Game {
     }
 
     private void divineBlessing() {
-
-        TreeMap<Player, List<Tuple<Integer, Operation>>> operations = new TreeMap<>();
         for (Player player : getPlayers()) {
             List<Facet> facetUp = getInventory(player).throwDices();
-
             log(player.getName() + " a lancé " + facetUp);
-
-            List<Tuple<Integer,Operation>> ops = new ArrayList<>();
-            for(Facet facet : facetUp){
-                ops.add(facet.getOperations());
-            }
-            operations.put(player,ops);
         }
-        for (Map.Entry<Player, List<Tuple<Integer, Operation>>> playerOps: operations.entrySet()) {
-            for(Tuple<Integer,Operation> ops : playerOps.getValue()){
-                ops.getY().apply(this,playerOps.getKey());
-            }
+        for (Player player : getPlayers()) {
+            getInventory(player)
+                .getFaceUp()
+                .forEach(facet -> {facet.getOperation().apply(this,player);});
+
         }
     }
 
