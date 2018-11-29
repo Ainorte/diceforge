@@ -84,7 +84,7 @@ public class Game {
                 this.players.put(player,inventory);
                 //TODO card.executeOperation(player);
                 //TODO player.moove(card.getLocationType());
-                log(player.getName() + " a acheté la carte " + card +" le joueur se situe sur "+ card.getLocationType() + card.isMiddle() + card.isRight() + " du plateau");
+                log(player.getName() + " a acheté la carte " + card +" et se situe sur "+ card.getLocationType()+" du plateau");
             }
         }
     }

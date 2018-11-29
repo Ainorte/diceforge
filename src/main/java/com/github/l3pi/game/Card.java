@@ -8,27 +8,35 @@ import java.util.List;
 
 public class Card {
     private int price;
-    private CardLocationType locationType;
-    private Operation operation;
-    private boolean isRight;
-    private boolean isMiddle;
     private List<ResourceType> resourceType;
 
+    private CardLocationType locationType;
+    private Operation operation;
 
-    Card(int p,List<ResourceType> resourceType, CardLocationType location,Operation operation,boolean isRight,boolean isMiddle) {
+    private String name;
+    private boolean recurrent;
+
+    public Card(int p,List<ResourceType> resourceType, CardLocationType location,Operation operation,String name,boolean recurrent) {
         this.price = p;
         this.resourceType = resourceType;
         this.locationType = location;
         this.operation = operation;
-        this.isRight = isRight;
-        this.isMiddle = isMiddle;
+        this.recurrent = recurrent;
+        this.name = name;
 
     }
 
-    Card(int p,ResourceType resourceType, CardLocationType location,Operation operation,boolean isRight,boolean isMiddle) {
-        this(p,new ArrayList<ResourceType>(){{add(resourceType);}},location,operation,isRight,isMiddle);
+    public Card(int p,ResourceType resourceType, CardLocationType location,Operation operation, String name) {
+        this(p,new ArrayList<ResourceType>(){{add(resourceType);}},location,operation,name,false);
     }
 
+    public Card(int p,ResourceType resourceType, CardLocationType location,Operation operation, String name,boolean recurrent) {
+        this(p,new ArrayList<ResourceType>(){{add(resourceType);}},location,operation,name,recurrent);
+    }
+
+    public boolean isRecurrent() {
+        return recurrent;
+    }
 
     public int getPrice() {
         return price;
@@ -46,18 +54,14 @@ public class Card {
         return this.operation;
     }
 
-    public boolean isRight(){
-        return this.isRight;
-    }
 
-    public boolean isCardPurshable(int money){
+    public boolean isCardPurchasable(int money){
         return this.price <= money;
     }
 
-    public boolean isMiddle() {return this.isMiddle;}
 
     @Override
     public String toString() {
-        return locationType.toString();
+        return name;
     }
 }
