@@ -18,43 +18,55 @@ public class Inventory {
 
     public Inventory(int gold) {
         ArrayList dice1 = new ArrayList<Facet>() {{
-            add(new Facet("1 GOLD", 1, ((Game game, Player player) -> {
+            add(new Facet("1 GOLD",
+                ((Game game, Player player) -> {
                 game.getInventory(player).addResources(ResourceType.GOLD, 1);
             })));
-            add(new Facet("1 GOLD", 1, ((Game game, Player player) -> {
+            add(new Facet("1 GOLD",
+                ((Game game, Player player) -> {
                 game.getInventory(player).addResources(ResourceType.GOLD, 1);
             })));
-            add(new Facet("1 GOLD", 1, ((Game game, Player player) -> {
+            add(new Facet("1 GOLD",
+                ((Game game, Player player) -> {
                 game.getInventory(player).addResources(ResourceType.GOLD, 1);
             })));
-            add(new Facet("1 GOLD", 1, ((Game game, Player player) -> {
+            add(new Facet("1 GOLD",
+                ((Game game, Player player) -> {
                 game.getInventory(player).addResources(ResourceType.GOLD, 1);
             })));
-            add(new Facet("1 GOLD", 1, ((Game game, Player player) -> {
+            add(new Facet("1 GOLD",
+                ((Game game, Player player) -> {
                 game.getInventory(player).addResources(ResourceType.GOLD, 1);
             })));
-            add(new Facet("1 SOLAR", 1, ((Game game, Player player) -> {
+            add(new Facet("1 SOLAR",
+                ((Game game, Player player) -> {
                 game.getInventory(player).addResources(ResourceType.SOLAR, 1);
             })));
         }};
 
         ArrayList dice2 = new ArrayList<Facet>() {{
-            add(new Facet("1 GOLD", 1, ((Game game, Player player) -> {
+            add(new Facet("1 GOLD",
+                ((Game game, Player player) -> {
                 game.getInventory(player).addResources(ResourceType.GOLD, 1);
             })));
-            add(new Facet("1 GOLD", 1, ((Game game, Player player) -> {
+            add(new Facet("1 GOLD",
+                ((Game game, Player player) -> {
                 game.getInventory(player).addResources(ResourceType.GOLD, 1);
             })));
-            add(new Facet("1 GOLD", 1, ((Game game, Player player) -> {
+            add(new Facet("1 GOLD",
+                ((Game game, Player player) -> {
                 game.getInventory(player).addResources(ResourceType.GOLD, 1);
             })));
-            add(new Facet("1 GOLD", 1, ((Game game, Player player) -> {
+            add(new Facet("1 GOLD",
+                ((Game game, Player player) -> {
                 game.getInventory(player).addResources(ResourceType.GOLD, 1);
             })));
-            add(new Facet("1 LUNAR", 1, ((Game game, Player player) -> {
+            add(new Facet("1 LUNAR",
+                ((Game game, Player player) -> {
                 game.getInventory(player).addResources(ResourceType.LUNAR, 1);
             })));
-            add(new Facet("2 GLORY", 1, ((Game game, Player player) -> {
+            add(new Facet("2 GLORY", 
+                ((Game game, Player player) -> {
                 game.getInventory(player).addResources(ResourceType.GLORY, 2);
             })));
         }};
@@ -104,7 +116,7 @@ public class Inventory {
 
 
     public List<Dice> getDices() {
-        return dices;
+        return new ArrayList<>(dices);
     }
 
     public Facet[] getFaceUp() {
