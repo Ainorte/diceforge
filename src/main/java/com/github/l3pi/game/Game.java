@@ -71,17 +71,21 @@ public class Game {
             Facet facet = player.chooseDiceFacet(this);
             if (facet != null) {
                 facet = this.diceSanctuary.buyFacet(facet);
-                log(player.getName() + " a acheté la face de dés " + facet + " pour " + this.diceSanctuary.getPriceForFacet(facet)+ "Or");
+                log(player.getName() + " a acheté la face de dés " + facet + " pour " + this.diceSanctuary.getPriceForFacet(facet)+ " Or");
                 int[] diceChangeFace = player.forgeMyDice(this, facet);
                 this.getInventory(player).forge(facet, diceChangeFace[0], diceChangeFace[1]);
             }
         }
         else{
-            Card card = player.chooseCard(this);
+            final Card card = player.chooseCard(this);
             if (card != null) {
-                card = this.cardSanctuary.buyCard(card);
+                this.cardSanctuary.buyCard(card);
                 Inventory inventory = this.players.get(player);
                 inventory.addCard(card);
+                card.getResourceType().forEach(resource -> {
+                    inventory.addResources(resource,-card.getPrice());
+                });
+
                 this.players.put(player,inventory);
                 if(!card.isRecurrent()){
                     card.getOperation().apply(this,player);

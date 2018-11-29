@@ -60,7 +60,11 @@ public class CardSanctuary {
                 (Game facetGame, Player facetPlayer)->{
                     facetGame.getInventory(facetPlayer).getFaceUp().stream().
                         filter(facet -> !(facet.getName().equals("x3"))).
-                        forEach(facet -> facet.getOperation().apply(facetGame,facetPlayer));
+                        forEach(facet -> {
+                            facet.getOperation().apply(facetGame,facetPlayer);
+                            facet.getOperation().apply(facetGame,facetPlayer);
+                        });
+
                 });
             int[] diceChangeFace = player.forgeMyDice(game, facetToForge);
             inventory.forge(facetToForge,diceChangeFace[0],diceChangeFace[1]);
