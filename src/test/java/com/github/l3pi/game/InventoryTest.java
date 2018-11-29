@@ -70,7 +70,7 @@ public class InventoryTest {
         assertTrue(this.inventory.getMaxRessources(ResourceType.LUNAR ) == 6+3*2);
 
         assertTrue(this.inventory.getResource(ResourceType.LUNAR) == 0);
-        assertTrue(this.inventory.getResource(ResourceType.GOLD) == 100);
+        assertTrue(this.inventory.getResource(ResourceType.GOLD) == 12);
         assertTrue(this.inventory.getResource(ResourceType.SOLAR) == 0);
         assertTrue(this.inventory.getResource(ResourceType.GLORY) == 0);
 
@@ -81,7 +81,8 @@ public class InventoryTest {
         this.inventory.addResources(ResourceType.GLORY,10);
 
         assertTrue(this.inventory.getResource(ResourceType.LUNAR) == 10);
-        assertTrue(this.inventory.getResource(ResourceType.GOLD) == 110);
+        assertTrue(this.inventory.getResource(ResourceType.GOLD) == 20);
+        assertTrue(this.inventory.getResource(ResourceType.GOLD) == 20);
         assertTrue(this.inventory.getResource(ResourceType.SOLAR) == 10);
         assertTrue(this.inventory.getResource(ResourceType.GLORY) == 10);
 

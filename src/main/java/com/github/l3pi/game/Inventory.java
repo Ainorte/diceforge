@@ -85,7 +85,7 @@ public class Inventory {
         }};
 
         this.resources = new HashMap<ResourceType,Integer>(){{
-            put(ResourceType.GOLD, gold);
+            put(ResourceType.GOLD, 0);
             put(ResourceType.LUNAR, 0);
             put(ResourceType.SOLAR, 0);
             put(ResourceType.GLORY, 0);
@@ -95,6 +95,8 @@ public class Inventory {
         this.extension = 0;
         this.cards = new ArrayList<Card>() {
         };
+
+        addResources(ResourceType.GOLD,gold);
 
         this.hammerCard = 0;
         this.hammerGold = 0;
@@ -151,9 +153,6 @@ public class Inventory {
     }
 
     public void addResources(ResourceType resourceType, int value) {
-        if(resourceType.equals(ResourceType.GOLD)) {
-
-        }
         int currentValue = resources.get(resourceType);
         int max = this.getMaxRessources(resourceType);
         if((currentValue + value) >=0 && (currentValue + value) < max){
