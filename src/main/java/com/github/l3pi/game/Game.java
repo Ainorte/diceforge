@@ -62,7 +62,7 @@ public class Game {
 
             List<Tuple<Integer,Operation>> ops = new ArrayList<>();
             for(Facet facet : facetUp){
-                ops.addAll(facet.getOperations());
+                ops.add(facet.getOperations());
             }
             operations.put(player,ops);
         }

@@ -16,9 +16,27 @@ public class CardSanctuary {
     CardSanctuary(){
         cardSanctuary = new HashMap<>();
         this.cardSanctuary.put(new Card(1, ResourceType.LUNAR,CardLocationType.LUNAR1,(Game game, Player player)->{},"Le Marteau du Forgeron"),4);
-        this.cardSanctuary.put(new Card(1,ResourceType.LUNAR,CardLocationType.LUNAR1,(Game game, Player player)->{},"Le Coffre du Forgeron"),4);
 
-        this.cardSanctuary.put(new Card(3,ResourceType.LUNAR,CardLocationType.LUNAR2,(Game game, Player player)->{},"Les Sabots d'Argent",true),4);
+        this.cardSanctuary.put(new Card(1,
+            ResourceType.LUNAR,CardLocationType.LUNAR1,
+            (Game game, Player player)->{
+            game.getInventory(player).addExtension();
+            },"Le Coffre du Forgeron"),4);
+
+
+        this.cardSanctuary.put(new Card(3,
+            ResourceType.LUNAR,CardLocationType.LUNAR2,
+            (Game game, Player player)->{
+            //Pas d'effet immediat;
+                game.getInventory(player)
+                    .getDices()
+                    .get(player.chooseDice(game.getInventory(player).getDices()))
+                    .throwDice()
+                    .getOperations().
+                    apply(game,player);
+            },"Les Sabots d'Argent",true),4);
+
+
         this.cardSanctuary.put(new Card(2,ResourceType.LUNAR,CardLocationType.LUNAR2,(Game game, Player player)->{},"Les Satyres"),4);
 
         this.cardSanctuary.put(new Card(4,ResourceType.LUNAR,CardLocationType.LUNAR3,(Game game, Player player)->{},"Le Passeur"),4);

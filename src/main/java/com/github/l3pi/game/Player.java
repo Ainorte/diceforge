@@ -2,6 +2,8 @@ package com.github.l3pi.game;
 
 import com.github.l3pi.type.CardLocationType;
 
+import java.util.List;
+
 /**
  * Class tasked with handling "what a player is", including his behaviour.
  * <p>
@@ -29,7 +31,9 @@ public abstract class Player implements Comparable<Player> {
 
     public abstract int chooseAction(Game game);
 
-    public abstract void moove(CardLocationType location);
+    public abstract void move(CardLocationType location);
+
+    public abstract int chooseDice(List<Dice> dices);
 
     public abstract int[] forgeMyDice(Game game,Facet facet);
 

@@ -20,10 +20,7 @@ public class RandomBot extends Player {
     public Facet chooseDiceFacet(Game game) {
         List<Facet> purchasableFacets = game.getDiceSanctuary().getPurchasableInventory(game.getInventory(this).getResource(ResourceType.GOLD));
         if (purchasableFacets.size() > 0) {
-            if (purchasableFacets.size() == 1) {
-                return purchasableFacets.get(0);
-            }
-            return purchasableFacets.get(this.gen.nextInt(purchasableFacets.size() - 1));
+            return purchasableFacets.get(this.gen.nextInt(purchasableFacets.size()));
         }
         return null;
     }
@@ -32,10 +29,7 @@ public class RandomBot extends Player {
     public Card chooseCard(Game game){
         List<Card> purchasableCards = game.getCardSanctuary().getPurchasableCard(game.getInventory(this));
         if (purchasableCards.size() > 0) {
-            if (purchasableCards.size() == 1) {
-                return purchasableCards.get(0);
-            }
-            return purchasableCards.get(this.gen.nextInt(purchasableCards.size() - 1));
+            return purchasableCards.get(this.gen.nextInt(purchasableCards.size()));
         }
         return null;
     }
@@ -46,9 +40,16 @@ public class RandomBot extends Player {
     }
 
     @Override
-    public void moove(CardLocationType location){
+    public void move(CardLocationType location){
         this.location = location;
     }
+
+    @Override
+    public int chooseDice(List<Dice> dices){
+        return this.gen.nextInt(dices.size());
+    };
+
+
 
 
     @Override
