@@ -28,12 +28,15 @@ public class CardSanctuary {
             ResourceType.LUNAR,CardLocationType.LUNAR2,
             (Game game, Player player)->{
             //Pas d'effet immediat;
-                game.getInventory(player)
-                    .getDices()
-                    .get(player.chooseDice(game.getInventory(player).getDices()))
-                    .throwDice()
-                    .getOperation().
-                    apply(game,player);
+                Inventory inventory = game.getInventory(player);
+                List<Dice> dices = inventory.getDices();
+                int choosenDice = player.chooseDice(dices);
+                Facet faceUp = dices.get(choosenDice).throwDice();
+
+                if(!(faceUp.getName().equals("x3"))){
+                    faceUp.getOperation().apply(game, player);
+                }
+
             },"Les Sabots d'Argent",true),4);
 
 
@@ -97,7 +100,11 @@ public class CardSanctuary {
             Dice choosenDice = playerDices.get(player.chooseDice(playerDices));
             for(int i = 0 ; i < 4 ; i++) {
                 choosenDice.throwDice();
-                choosenDice.getFaceUp().getOperation().apply(game, player);
+                Facet faceUp = choosenDice.getFaceUp();
+                if(faceUp.getName().equals("x3")) {
+                    continue;
+                }
+                faceUp.getOperation().apply(game, player);
             }
             },"L'Enigme"),4);
 

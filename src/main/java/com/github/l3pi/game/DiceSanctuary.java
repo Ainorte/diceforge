@@ -1,6 +1,5 @@
 package com.github.l3pi.game;
 
-import com.github.l3pi.type.FacetType;
 import com.github.l3pi.type.ResourceType;
 
 import java.util.HashMap;
