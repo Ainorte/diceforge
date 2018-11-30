@@ -129,7 +129,10 @@ public class CardSanctuary {
             game.getInventory(player).addResources(choosenResource,1);
             },"Les Ailes de la Gardienne",true),4);
 
-        this.cardSanctuary.put(new Card(2,ResourceType.SOLAR,CardLocationType.SOLAR2,(Game game, Player player)->{},"Le Minotaure"),4);
+        this.cardSanctuary.put(new Card(2,ResourceType.SOLAR,CardLocationType.SOLAR2,
+            (Game game, Player player)->{
+            //TODO
+            },"Le Minotaure"),4);
 
         this.cardSanctuary.put(new Card(4,ResourceType.SOLAR,CardLocationType.SOLAR3,
             (Game game, Player player)->{
@@ -137,7 +140,10 @@ public class CardSanctuary {
                 game.getInventory(player).addResources(ResourceType.GLORY,14);
             },"La Meduse"),4);
         
-        this.cardSanctuary.put(new Card(5,ResourceType.SOLAR,CardLocationType.SOLAR3,(Game game, Player player)->{},"Le Miroir Abyssal"),4);
+        this.cardSanctuary.put(new Card(5,ResourceType.SOLAR,CardLocationType.SOLAR3,
+            (Game game, Player player)->{
+            //TODO
+            },"Le Miroir Abyssal"),4);
     }
 
 

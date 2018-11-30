@@ -36,6 +36,9 @@ public class Game {
 
     private void round(Player player) {
 
+        if(getPlayers().size() == 2){
+            divineBlessing();
+        }
         divineBlessing();
         System.out.println();
         recurrentAction(player);
