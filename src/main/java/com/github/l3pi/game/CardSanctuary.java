@@ -8,7 +8,14 @@ import java.util.stream.Collectors;
 
 public class CardSanctuary {
 
+     /** c'est la classe qui représente un sanctuaire des cartes
+      *
+    @param cardSanctuary c'est le hashmap qui associe une carte a son nombre de carte sur un emplacement du sanctuaire
+
+      chaque object carte est identifié par son hash et initialisé au debut tous a 4 nombre d'examplaire
+     */
     private HashMap<Card,Integer> cardSanctuary;
+
 
     CardSanctuary(){
         cardSanctuary = new HashMap<>();
@@ -147,11 +154,23 @@ public class CardSanctuary {
     }
 
 
+    /**
+     * return une liste de carte qui sont encore en stock dans le sanctuaire
+     *
+     * */
+
     public List<Card> getAvailableCard() {
         return cardSanctuary.entrySet().stream().filter(entry -> entry.getValue() > 0)
             .map(Map.Entry::getKey)
             .collect(Collectors.toList());
     }
+
+    /**
+     * return une liste de carte qui sont achetable depuis un inventaire d'un autre joueur
+     *
+     * @param inventory c'est l'inventaire d'un joueur .
+     *
+     * */
 
     public List<Card> getPurchasableCard(Inventory inventory) {
         return cardSanctuary.entrySet().stream().filter(entry -> (entry.getValue() > 0
@@ -161,6 +180,15 @@ public class CardSanctuary {
             .map(Map.Entry::getKey)
             .collect(Collectors.toList());
     }
+
+    /**
+     * retourne null si on ne peux plus acheter ou on a pas donné de carte a acheté
+     * et met a jour le stock des cartes
+     *
+     * @param card c'est la carte séléctionné pour achat dans le sanctuaire
+     *
+     * */
+
 
     Card buyCard(Card card) {
         if (card != null) {

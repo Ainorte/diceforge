@@ -1,6 +1,10 @@
 package com.github.l3pi.utilities;
 
 public class Tuple<X, Y> {
+    /**représente un type tuple dans java utilisé dans Game.java
+     *
+     * */
+
     private final X x;
     private final Y y;
 
