@@ -11,7 +11,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class RandomBotTest {
-/*
+
     private Player bot;
     private Game game;
     @Before
@@ -92,6 +92,6 @@ public class RandomBotTest {
                 add(new Dice(dice2));
             }};
         assertTrue((t.contains(this.bot.chooseDice(dices))));
-    }*/
+    }
 
 }

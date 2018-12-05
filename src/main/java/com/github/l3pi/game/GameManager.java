@@ -8,12 +8,21 @@ import static com.github.l3pi.sys.Log.log;
  * Class tasked with handling a game lifecycle, including rounds.
  */
 public class GameManager {
+    /** Cette classe prend une liste de player et l'instancie a game , et fait tourner la partie
+     *
+     * @param players la liste des joueurs pour cette partie ,
+     *                Voir App qui execute le jeu en entier
+     *
+     * */
     private List<Player> players;
 
     public GameManager(List<Player> players) {
         this.players = players;
     }
 
+    /** Tourne une partie de jeu et renvoie le gagnant
+     *
+     * */
     public List<Player> run() {
         Game game = new Game(players);
         log(game.toString());
