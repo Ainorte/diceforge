@@ -116,7 +116,7 @@ public class Inventory {
       *
       * */
 
-    public List<Facet> throwDices() {  // == Faveur Majeur
+    List<Facet> throwDices() {  // == Faveur Majeur
         return dices.stream().map(Dice::throwDice).collect(Collectors.toList());
     }
 
@@ -124,7 +124,7 @@ public class Inventory {
      *
      * */
 
-    public void forge(Facet facetToForge,int choosenDice,int choosenFacet){
+    void forge(Facet facetToForge,int choosenDice,int choosenFacet){
         if (facetToForge != null) {
             Dice dice = this.dices.get(choosenDice);
             dice.addFace(facetToForge,choosenFacet);
@@ -156,7 +156,7 @@ public class Inventory {
      * incrémente les extention de ressources
      * */
 
-    public void addExtension(){
+    void addExtension(){
         extension++;
     }
     /**getResource
@@ -175,7 +175,7 @@ public class Inventory {
      *
      * */
 
-    public void addResources(ResourceType resourceType, int value) {
+    void addResources(ResourceType resourceType, int value) {
         int currentValue = resources.get(resourceType);
         int max = this.getMaxRessources(resourceType);
         if((currentValue + value) >=0 && (currentValue + value) < max){
@@ -188,7 +188,7 @@ public class Inventory {
     /**Ajouer une carte dans l'inventaire
      * */
 
-    public void addCard(Card card){
+    void addCard(Card card){
         this.cards.add(card);
     }
     /**Retourne toute les carte disponible dans l'inventaire
@@ -208,7 +208,7 @@ public class Inventory {
     /*
      *@return nb of GOLRY win
      */
-    public int addGoldHammer(int gold){
+    int addGoldHammer(int gold){
         int glory = 0;
         while (gold > 0){
             int tmp = (gold > 30 - getHammerGold() ? 30 - getHammerGold() : gold);
@@ -236,7 +236,7 @@ public class Inventory {
         return glory;
     }
 
-    public void addHammerCard(){
+    void addHammerCard(){
         hammerCard++;
     }
 

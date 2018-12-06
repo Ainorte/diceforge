@@ -204,11 +204,11 @@ public class CardSanctuary {
         return null;
     }
 
-    CardLocationType getPlayerLocation(Player player){
+    public CardLocationType getPlayerLocation(Player player){
         return locations.get(player);
     }
 
-    Player getPlayerOnLocation(CardLocationType location){
+    public Player getPlayerOnLocation(CardLocationType location){
         if(locations.containsValue(location)){
             return locations
                 .entrySet()

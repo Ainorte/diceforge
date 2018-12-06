@@ -1,6 +1,5 @@
 package com.github.l3pi.game;
 
-
 import com.github.l3pi.sys.Log;
 import com.github.l3pi.type.ResourceType;
 import com.github.l3pi.utilities.Tuple;
@@ -8,7 +7,6 @@ import com.github.l3pi.utilities.Tuple;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.github.l3pi.sys.Log;
 import static com.github.l3pi.sys.Log.log;
 
 /**
@@ -44,7 +42,7 @@ public class Game {
         }
     }
 
-    public void increaseRound(){
+    void increaseRound(){
         this.actualRound++;
     }
 
@@ -60,7 +58,6 @@ public class Game {
         for (Player player : this.getPlayers()) {
             round(player);
         }
-
     }
 
     /**Applique un tour de jeu et gere l'ordre des actions pendant un tour
@@ -78,7 +75,6 @@ public class Game {
         action(player);
         log();
         log();
-
     }
 
     private void recurrentAction(Player player) {
@@ -105,7 +101,6 @@ public class Game {
             getInventory(player)
                 .getFaceUp()
                 .forEach(facet -> facet.getOperation().apply(this, player));
-
         }
     }
 
@@ -155,7 +150,7 @@ public class Game {
     }
 
 
-    public Set<Player> getPlayers() {
+    Set<Player> getPlayers() {
         return players.keySet();
     }
 
@@ -195,7 +190,7 @@ public class Game {
      * @param gold le nombre de gold
      * */
 
-    public void addGold(Player player, int gold){
+    void addGold(Player player, int gold){
         Inventory inventory = getInventory(player);
         if (inventory.getActiveHammerCardCount() > 0 && inventory.getMaxRessources(ResourceType.GOLD) > inventory.getResource(ResourceType.GOLD)) {
             Tuple<Integer, Integer> repartition = player.chooseGoldRepartion(inventory, gold);
