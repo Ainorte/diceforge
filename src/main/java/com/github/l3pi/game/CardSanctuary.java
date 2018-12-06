@@ -173,7 +173,30 @@ public class CardSanctuary {
 
         this.cardSanctuary.put(new Card(2,ResourceType.SOLAR,CardLocationType.SOLAR2,
             (Game game, Player player)->{
-            //TODO
+                //L'adversaire perd des ressources
+                game.getPlayers()
+                    .stream().filter(player1 -> !player1.equals(player))
+                    .flatMap(player1 ->
+                        {   Inventory inventory = game.getInventory(player1);
+                            int oldGold = inventory.getResource(ResourceType.GOLD);
+                            int oldGlory = inventory.getResource(ResourceType.GLORY);
+                            int oldSolar = inventory.getResource(ResourceType.SOLAR);
+                            int oldLunar = inventory.getResource(ResourceType.LUNAR);
+                            inventory.throwDices().stream()
+                                .forEach(facet ->
+                                {facet.getOperation().apply(game,player1);}
+                                );
+                            int newGold = inventory.getResource(ResourceType.GOLD);
+                            int newGlory = inventory.getResource(ResourceType.GLORY);
+                            int newSolar = inventory.getResource(ResourceType.SOLAR);
+                            int newLunar = inventory.getResource(ResourceType.LUNAR);
+
+                            inventory.addResources(ResourceType.GOLD,-2*(newGold - oldGold));
+                            inventory.addResources(ResourceType.GLORY,-2*(newGlory - oldGlory));
+                            inventory.addResources(ResourceType.SOLAR,-2*(newSolar - oldSolar));
+                            inventory.addResources(ResourceType.LUNAR,-2*(newLunar - oldLunar));
+                        return null;}
+                        );
             },"Le Minotaure",
             false,
             "Les adversaire de %s perdent lance les dés et perdent les ressource au lieu de les gagner"),4);
