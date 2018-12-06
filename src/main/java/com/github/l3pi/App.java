@@ -4,6 +4,7 @@ import com.github.l3pi.bot.RandomBot;
 import com.github.l3pi.game.GameManager;
 import com.github.l3pi.game.Player;
 import com.github.l3pi.sys.Log;
+import com.github.l3pi.sys.VictoryCounter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,8 @@ import static com.github.l3pi.sys.Log.log;
  * Hello world!
  */
 public class App {
+    private static VictoryCounter counter;
+
     public static void main(String[] args) {
         if (args.length != 2) {
             System.err.println("Usage: <run-count> <player-count(>=2)>");
@@ -33,6 +36,8 @@ public class App {
             Log.enableLog();
         }
 
+        initializeCounter(playerCount);
+
         log(Log.State.SYS, String.format("Le programme va lancer %d parties à %d joueurs", runCount, playerCount));
 
         int currentRun = 1;
@@ -41,6 +46,24 @@ public class App {
 
             run(playerCount);
         } while (++currentRun <= runCount);
+
+        log(Log.State.SYS, counter.toString());
+    }
+
+    private static void initializeCounter(int playerCount) {
+        List<String> names = new ArrayList<>();
+
+        switch (playerCount) {
+            case 4:
+                names.add("player3");
+                names.add("player4");
+            case 2:
+            default:
+                names.add("player1");
+                names.add("player2");
+        }
+
+        counter = new VictoryCounter(names);
     }
 
     private static void run(int playerCount) {
@@ -57,6 +80,8 @@ public class App {
         }
         GameManager gameManager = new GameManager(players);
         List<Player> winners = gameManager.run();
+
+        counter.addVictoryFor(winners.stream().map(Player::getName).collect(Collectors.toList()));
 
         String b = (winners.size() == 1 ? "Le gagnant est: " : "Les gagnants sont ") +
             winners.stream().map(Player::getName).collect(Collectors.joining(", ")) +
