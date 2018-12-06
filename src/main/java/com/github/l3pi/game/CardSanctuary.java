@@ -28,7 +28,7 @@ public class CardSanctuary {
             },
             "Le Marteau du Forgeron",
             false,
-            "%s a reçu la carte marteau du forgeron"),4);
+            "%s a retourne Le Marteau du Forgeron et peut y ajouter de l'or"),4);
 
         this.cardSanctuary.put(new Card(1,
             ResourceType.LUNAR,CardLocationType.LUNAR1,

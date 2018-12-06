@@ -139,7 +139,7 @@ public class Game {
                     card.getOperation().apply(this,player);
                 }
                 cardSanctuary.move(card.getLocationType(), player);
-                log(Log.State.ACTION, card.displayEffect(player) + " en achetant la carte" + card +" et se situe sur la case " + card.getLocationType() + " du plateau");
+                log(Log.State.ACTION, card.displayEffect(player) + " en achetant la carte " + card +" et se situe sur la case " + card.getLocationType() + " du plateau");
             }
         }
     }
