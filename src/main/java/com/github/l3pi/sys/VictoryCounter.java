@@ -1,8 +1,6 @@
 package com.github.l3pi.sys;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class VictoryCounter {
@@ -24,9 +22,18 @@ public class VictoryCounter {
     }
 
     public void addVictoryFor(String player) {
-        scores.replace(player, scores.get(player) + 1);
+        if (scores.containsKey(player)) {
+            scores.replace(player, scores.get(player) + 1);
+        }
     }
 
+    public int getVictoryCountFor(String player) {
+        return scores.getOrDefault(player, 0);
+    }
+
+    public int getPlayCount() {
+        return playCounter;
+    }
 
     @Override
     public String toString() {
