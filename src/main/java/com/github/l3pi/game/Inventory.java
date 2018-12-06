@@ -175,7 +175,7 @@ public class Inventory {
      *
      * */
 
-    void addResources(ResourceType resourceType, int value) {
+    public void addResources(ResourceType resourceType, int value) {
         int currentValue = resources.get(resourceType);
         int max = this.getMaxRessources(resourceType);
         if((currentValue + value) >=0 && (currentValue + value) < max){

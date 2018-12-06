@@ -150,7 +150,7 @@ public class Game {
     }
 
 
-    Set<Player> getPlayers() {
+    public Set<Player> getPlayers() {
         return players.keySet();
     }
 

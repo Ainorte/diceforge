@@ -11,16 +11,17 @@ public class IntelligentBot extends Player{
     private Random gen;
     private CardLocationType location = null;
     private int maxRound;
-    private HashMap<String,Double> facetCoefficient;
+    private HashMap<String,Double> facetCoefficient = new HashMap<>();
 
     /** Cette classe représente un bot qui effectue les actions avec décision
      * @param name le nom du bot
      *
      * */
-    public IntelligentBot(String name,int maxRound) {
+    public IntelligentBot(String name) {
         super(name);
         gen = new Random();
-        this.maxRound = maxRound;
+        this.maxRound = 9;
+
         this.facetCoefficient.put("1 GOLD",(double)maxRound*1);
         this.facetCoefficient.put("3 GOLD",(double)maxRound*3);
         this.facetCoefficient.put("4 GOLD",(double)maxRound*4);
@@ -53,7 +54,7 @@ public class IntelligentBot extends Player{
         for(Dice dice: mydices){
             for(int i= 0;i<6;i++){
                 for(Facet facet:purchasableFacets){
-                    if(this.facetCoefficient.get(dice.getFacet(i).getName()) < this.facetCoefficient.get(facet)){
+                    if(this.facetCoefficient.get(dice.getFacet(i).getName()) < this.facetCoefficient.get(facet.getName())){
                         return facet;
                     }
                 }
@@ -87,7 +88,9 @@ public class IntelligentBot extends Player{
         cardCoefficient.put("Le Miroir Abyssal",(double)(4+4*3));
 
         List<Card> purchasableCards = game.getCardSanctuary().getPurchasableCard(game.getInventory(this));
-
+        if(purchasableCards.size() == 0){
+            return null;
+        }
 
         Card BestCard = purchasableCards.get(0);
         int coef = 0 ;
