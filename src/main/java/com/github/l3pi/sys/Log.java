@@ -44,4 +44,15 @@ public class Log {
     }
     public static void log(String m) { log(State.INFO, m); }
     public static void log() { log(""); }
+
+    public static void describeColourCodes() {
+        final boolean was_enabled = IS_ENABLED;
+        enableLog();
+        log(State.INFO, "Charte de couleurs");
+        log("\t- Jaune: Informations système, état d'exécution des parties");
+        log("\t- Rouge: Informations de détail d'avancement d'une partie");
+        log("\t- Vert: Informations concernant une action effectuée par un joueur");
+        log("\t- Bleu: Informations d'état du jeu");
+        IS_ENABLED = was_enabled;
+    }
 }

@@ -21,6 +21,8 @@ public class App {
             System.exit(1);
         }
 
+        Log.describeColourCodes();
+
         int runCount = Integer.parseInt(args[0]),
             playerCount = Integer.parseInt(args[1]);
 
