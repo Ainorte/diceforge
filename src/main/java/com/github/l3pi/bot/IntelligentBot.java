@@ -89,7 +89,7 @@ public class IntelligentBot extends Player{
         cardCoefficient.put("La Meduse",(double)(4+4*3));
         cardCoefficient.put("Le Miroir Abyssal",(double)(4+4*3));
 
-        List<Card> purchasableCards = game.get().getPurchasableCard(game.getInventory(this));
+        List<Card> purchasableCards = game.getCardSanctuary().getPurchasableCard(game.getInventory(this));
         System.out.println("choix des cartes achetables :" + purchasableCards);
 
         Card BestCard;
