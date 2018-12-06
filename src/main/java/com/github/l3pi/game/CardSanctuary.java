@@ -63,6 +63,7 @@ public class CardSanctuary {
                 game.getInventory(player).addResources(ResourceType.GLORY,12);
             },"Le Passeur"),4);
 
+
         this.cardSanctuary.put(new Card(5,ResourceType.LUNAR,CardLocationType.LUNAR3,
             (Game game, Player player)->{
             Inventory inventory = game.getInventory(player);
@@ -126,7 +127,7 @@ public class CardSanctuary {
 
         this.cardSanctuary.put(new Card(1,ResourceType.SOLAR,CardLocationType.SOLAR1,
             (Game game, Player player)->{
-                game.getInventory(player).addResources(ResourceType.GOLD,3);
+                game.addGold(player,3);
                 game.getInventory(player).addResources(ResourceType.LUNAR,3);
             },"Les Herbes Folles"),4);
 
