@@ -48,6 +48,9 @@ public class Card {
         this(p,new ArrayList<ResourceType>(){{add(resourceType);}},location,operation,name,recurrent);
     }
 
+    public String getName() {
+        return name;
+    }
 
     public boolean isRecurrent() {
         return recurrent;

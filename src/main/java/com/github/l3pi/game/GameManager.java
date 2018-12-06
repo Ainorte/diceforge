@@ -31,6 +31,7 @@ public class GameManager {
         for (int round = 1; round <= 9; round++) {
             log(Log.State.LOG, String.format("\n==========Round %d==========\n", round));
             game.round();
+            game.increaseRound();
             log(game.toString());
             log(Log.State.LOG, String.format("\n========End Round %d========\n", round));
         }
