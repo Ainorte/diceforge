@@ -40,7 +40,7 @@ public class App {
             log(Log.State.SYS, String.format("Partie %d/%d", currentRun, runCount));
 
             run(playerCount);
-        } while(currentRun++ <= runCount);
+        } while (++currentRun <= runCount);
     }
 
     private static void run(int playerCount) {
@@ -58,7 +58,7 @@ public class App {
         GameManager gameManager = new GameManager(players);
         List<Player> winners = gameManager.run();
 
-        String b = (winners.size() == 1 ? "the winner is : " : "the winners are : ") +
+        String b = (winners.size() == 1 ? "Le gagnant est: " : "Les gagnants sont ") +
             winners.stream().map(Player::getName).collect(Collectors.joining(", ")) +
             "\n";
         log(Log.State.SYS, b);
