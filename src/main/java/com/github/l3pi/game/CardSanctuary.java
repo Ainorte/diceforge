@@ -25,13 +25,19 @@ public class CardSanctuary {
         this.cardSanctuary.put(new Card(1, ResourceType.LUNAR,CardLocationType.LUNAR1,
             (Game game, Player player)->{
                 game.getInventory(player).addHammerCard();
-            },"Le Marteau du Forgeron",false,"%s recois la carte marteau du forgeron"),4);
+            },
+            "Le Marteau du Forgeron",
+            false,
+            "%s a reçu la carte marteau du forgeron"),4);
 
         this.cardSanctuary.put(new Card(1,
             ResourceType.LUNAR,CardLocationType.LUNAR1,
             (Game game, Player player)->{
             game.getInventory(player).addExtension();
-            },"Le Coffre du Forgeron",false,"%s recois une extension d'inventaire"),4);
+            },
+            "Le Coffre du Forgeron",
+            false,
+            "%s a reçu une extension d'inventaire"),4);
 
 
         this.cardSanctuary.put(new Card(3,
@@ -47,7 +53,10 @@ public class CardSanctuary {
                     faceUp.getOperation().apply(game, player);
                 }
 
-            },"Les Sabots d'Argent",true, "%s recois une faveur mineure au début de ses tours"),4);
+            },
+            "Les Sabots d'Argent",
+            true,
+            "%s reçevra une faveur mineure au début de ses tours"),4);
 
 
         this.cardSanctuary.put(new Card(2,ResourceType.LUNAR,CardLocationType.LUNAR2,
@@ -60,7 +69,7 @@ public class CardSanctuary {
                                 {facet.getOperation().apply(game,player);});
             },
             "Les Satyres",
-            "%s applique l'effet des dés de son adversaire"),4);
+            "%s gagné les ressources d'un lancé de dés de son adversaire"),4);
 
         this.cardSanctuary.put(new Card(4,ResourceType.LUNAR,CardLocationType.LUNAR3,
             (Game game, Player player)->{
@@ -88,7 +97,7 @@ public class CardSanctuary {
             inventory.forge(facetToForge,diceChangeFace[0],diceChangeFace[1]);
         },
             "Le Casque d'invisibilité",
-            "%s a recu la face de dé x3 et l'a forgé"),4);
+            "%s a reçu la face de dé x3 et l'a forgé"),4);
 
 
         this.cardSanctuary.put(new Card(6,ResourceType.LUNAR,CardLocationType.MIDDLE,
@@ -112,7 +121,10 @@ public class CardSanctuary {
             (Game game, Player player)->{
                 //Pas d'effet cette garde ne donne que 26 Gloire
                 game.getInventory(player).addResources(ResourceType.GLORY,26);
-            },"L'hydre",false,"%s recois 26 gloire"),4);
+            },
+            "L'hydre",
+            false,
+            "%s a reçu 26 gloire"),4);
 
         this.cardSanctuary.put(new Card(6,ResourceType.SOLAR,CardLocationType.MIDDLE,(Game game, Player player)->{
             List<Dice> playerDices = game.getInventory(player).getDices();
@@ -127,7 +139,7 @@ public class CardSanctuary {
             }
             },
             "L'Enigme",
-            "%s recois 4 faveur mineur"),4);
+            "%s a reçu 4 faveur mineur"),4);
 
 
         this.cardSanctuary.put(new Card(1,ResourceType.SOLAR,CardLocationType.SOLAR1,(Game game, Player player)->{
@@ -136,37 +148,50 @@ public class CardSanctuary {
                 inventory.addResources(ResourceType.GOLD, -3);
                 inventory.addResources(ResourceType.GLORY, 4);
             }
-        },"L'Ancien",
+        },
+            "L'Ancien",
             true,
-            "%s gagne la possibilité de changer 3 Or en 4 Gloire au début de ses prochain tours"),4);
+            "%s a gagné la possibilité de changer 3 Or en 4 Gloire au début de ses prochain tours"),4);
 
         this.cardSanctuary.put(new Card(1,ResourceType.SOLAR,CardLocationType.SOLAR1,
             (Game game, Player player)->{
                 game.addGold(player,3);
                 game.getInventory(player).addResources(ResourceType.LUNAR,3);
-            },"Les Herbes Folles",false,"%s gange 3 Or et 3 Lunaire"),4);
+            },
+            "Les Herbes Folles",
+            false,
+            "%s a gagné 3 Or et 3 Lunaire"),4);
 
         this.cardSanctuary.put(new Card(3,ResourceType.SOLAR,CardLocationType.SOLAR2,
             (Game game,Player player)->{
             ResourceType choosenResource = player.chooseResource(new ArrayList<ResourceType>(Arrays.asList(ResourceType.GOLD,ResourceType.LUNAR,ResourceType.SOLAR)));
             game.getInventory(player).addResources(choosenResource,1);
-            },"Les Ailes de la Gardienne",true,"%s recois 1 Or ou 1 Solaire ou 1 Lunaire au début de ses prochain tours"),4);
+            },
+            "Les Ailes de la Gardienne",
+            true,
+            "%s reçevra 1 Or ou 1 Solaire ou 1 Lunaire au début de ses prochain tours"),4);
 
         this.cardSanctuary.put(new Card(2,ResourceType.SOLAR,CardLocationType.SOLAR2,
             (Game game, Player player)->{
             //TODO
-            },"Le Minotaure",false,"%s Les adversaire de %s perdent lance les dés et perdent les ressource au lieu de les gagner"),4);
+            },"Le Minotaure",
+            false,
+            "Les adversaire de %s perdent lance les dés et perdent les ressource au lieu de les gagner"),4);
 
         this.cardSanctuary.put(new Card(4,ResourceType.SOLAR,CardLocationType.SOLAR3,
             (Game game, Player player)->{
                 //Pas d'effet cette garde ne donne que 14 Gloire
                 game.getInventory(player).addResources(ResourceType.GLORY,14);
-            },"La Meduse","%s gagne 14 Gloire"),4);
+            },
+            "La Meduse",
+            "%s a gagné 14 Gloire"),4);
         
         this.cardSanctuary.put(new Card(5,ResourceType.SOLAR,CardLocationType.SOLAR3,
             (Game game, Player player)->{
             //TODO
-            },"Le Miroir Abyssal","%s recois la face de dés du Miroir Abyssal et la forge"),4);
+            },
+            "Le Miroir Abyssal",
+            "%s a reçu la face de dés du Miroir Abyssal et la forge"),4);
     }
 
 
