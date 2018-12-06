@@ -1,23 +1,23 @@
 package com.github.l3pi.sys;
 
 public class Log {
-    private static class Colour {
-        static final String RESET = "\u001B[0m";
-        static final String BLACK = "\u001B[30m";
-        static final String RED = "\u001B[31m";
-        static final String GREEN = "\u001B[32m";
-        static final String YELLOW = "\u001B[33m";
-        static final String BLUE = "\u001B[34m";
-        static final String PURPLE = "\u001B[35m";
-        static final String CYAN = "\u001B[36m";
-        static final String WHITE = "\u001B[37m";
+    public static class Colour {
+        public static final String RESET = "\u001B[0m";
+        public static final String BLACK = "\u001B[30m";
+        public static final String RED = "\u001B[31m";
+        public static final String GREEN = "\u001B[32m";
+        public static final String YELLOW = "\u001B[33m";
+        public static final String BLUE = "\u001B[34m";
+        public static final String PURPLE = "\u001B[35m";
+        public static final String CYAN = "\u001B[36m";
+        public static final String WHITE = "\u001B[37m";
 
-        static String fmt(String colour, String msg) {
+        public static String fmt(String colour, String msg) {
             return colour + msg + RESET;
         }
     }
 
-    public enum State { INFO, ACTION, STATUS }
+    public enum State { INFO, ACTION, STATUS, LOG }
 
     private static boolean IS_ENABLED = false;
     public static void enableLog() { IS_ENABLED = true; }
@@ -25,6 +25,9 @@ public class Log {
         String colour = Colour.WHITE;
 
         switch (s) {
+            case LOG:
+                colour = Colour.RED;
+                break;
             case ACTION:
                 colour = Colour.GREEN;
                 break;

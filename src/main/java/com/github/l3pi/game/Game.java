@@ -7,6 +7,7 @@ import com.github.l3pi.utilities.Tuple;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.github.l3pi.sys.Log;
 import static com.github.l3pi.sys.Log.log;
 
 /**
@@ -57,7 +58,7 @@ public class Game {
      */
 
     private void round(Player player) {
-        log("Tour de jeu de " + player);
+        log(Log.State.STATUS, "Tour de jeu de " + player);
 
         if (getPlayers().size() == 2) {
             divineBlessing();
@@ -72,7 +73,7 @@ public class Game {
     }
 
     private void recurrentAction(Player player) {
-        log("Application des cartes récurrentes de " + player);
+        log(Log.State.STATUS, "Application des cartes récurrentes de " + player);
         getInventory(player)
             .getCards().stream()
             .filter(Card::isRecurrent)
@@ -85,18 +86,16 @@ public class Game {
      * l'action qui permet de lancer le dé des joueurs l'un aprés l'autre
      */
     private void divineBlessing() {
-        log("Faveur divine lancée pour les joueurs");
+        log(Log.State.STATUS, "Faveur divine lancée pour les joueurs");
         for (Player player : getPlayers()) {
             List<Facet> facetUp = getInventory(player).throwDices();
-            log(player.getName() + " a lancé " + facetUp);
+            log(Log.State.ACTION, player.getName() + " a lancé " + facetUp);
 
         }
         for (Player player : getPlayers()) {
             getInventory(player)
                 .getFaceUp()
-                .forEach(facet -> {
-                    facet.getOperation().apply(this, player);
-                });
+                .forEach(facet -> facet.getOperation().apply(this, player));
 
         }
         log("\n");
@@ -109,13 +108,13 @@ public class Game {
      * @param player le player qui effectue l'action
      */
     private void action(Player player) {
-        log(player + " joue");
+        log(Log.State.LOG, player + " joue");
 
         if (player.chooseAction(this) == 0) {
             Facet facet = player.chooseDiceFacet(this);
             if (facet != null) {
                 facet = this.diceSanctuary.buyFacet(facet);
-                log(player.getName() + " a acheté la face de dés " + facet + " pour " + this.diceSanctuary.getPriceForFacet(facet) + " Or");
+                log(Log.State.ACTION, player.getName() + " a acheté la face de dés " + facet + " pour " + this.diceSanctuary.getPriceForFacet(facet) + " Or");
                 int[] diceChangeFace = player.forgeMyDice(this, facet);
                 this.getInventory(player).forge(facet, diceChangeFace[0], diceChangeFace[1]);
             }
@@ -134,7 +133,7 @@ public class Game {
                     card.getOperation().apply(this, player);
                 }
                 //TODO player.move(card.getLocationType());
-                log(player.getName() + " a acheté la carte " + card + " et se situe sur la case " + card.getLocationType() + " du plateau");
+                log(Log.State.ACTION, player.getName() + " a acheté la carte " + card + " et se situe sur la case " + card.getLocationType() + " du plateau");
             }
         }
     }
@@ -216,7 +215,7 @@ public class Game {
     @Override
     public String toString() {
         return getPlayers().stream().map(this::toString).collect(Collectors.joining("\n"))
-            + "\nÉtat du sanctuaire de dés\n" + diceSanctuary
-            + "\n\nÉtat du sanctuaire de cartes\n" + cardSanctuary;
+            + "\n" + Log.Colour.fmt(Log.Colour.BLUE, "État du sanctuaire de dés") + "\n" + diceSanctuary
+            + "\n" + Log.Colour.fmt(Log.Colour.BLUE, "État du sanctuaire de cartes") + "\n" + cardSanctuary;
     }
 }
