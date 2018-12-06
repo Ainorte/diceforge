@@ -33,6 +33,10 @@ public class Game {
      *
      * */
     public Game(List<Player> players) {
+        init(players);
+    }
+
+    public void init(List<Player> players) {
         this.players = new TreeMap<>();
         this.diceSanctuary = new DiceSanctuary();
         this.cardSanctuary = new CardSanctuary(players);
@@ -77,7 +81,7 @@ public class Game {
         log();
     }
 
-    private void recurrentAction(Player player) {
+    void recurrentAction(Player player) {
         log(Log.State.STATUS, "Application des cartes récurrentes de " + player);
         getInventory(player)
             .getCards().stream()
@@ -90,7 +94,7 @@ public class Game {
     /** l'action qui permet de lancer le dé des joueurs l'un aprés l'autre
      *
      * */
-    private void divineBlessing() {
+    void divineBlessing() {
         log(Log.State.STATUS, "Faveur divine lancée pour les joueurs");
         for (Player player : getPlayers()) {
             List<Facet> facetUp = getInventory(player).throwDices();
@@ -108,7 +112,7 @@ public class Game {
      * par exemple le joueur peut decider d'acheter une carte ou de forger une face de dé
      * @param player le player qui effectue l'action
      */
-    private void action(Player player) {
+    void action(Player player) {
         log(Log.State.LOG, player + " joue");
 
         if(player.chooseAction(this) == 0) {
@@ -152,6 +156,12 @@ public class Game {
 
     public Set<Player> getPlayers() {
         return players.keySet();
+    }
+
+    public Player getPlayer(String name) {
+        return players.keySet().stream()
+            .filter(t -> t.getName().equals(name))
+            .findFirst().orElse(null);
     }
 
     /** prend un player en parametre et retourne l'inventaire associé au joueur
