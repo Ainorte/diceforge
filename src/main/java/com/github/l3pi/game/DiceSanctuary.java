@@ -52,7 +52,7 @@ public class DiceSanctuary {
 
     private HashMap<Facet, Item> diceSanctuary = new HashMap<>();
 
-    DiceSanctuary() {
+    public DiceSanctuary() {
         diceSanctuary.put(new Facet("3 GOLD",
             ((Game game, Player player) -> game.addGold(player,3))),
             new Item(4, 2));
@@ -155,7 +155,7 @@ public class DiceSanctuary {
      * @param facet  la face de dés séléctionné
      * */
 
-    int getPriceForFacet(Facet facet) {
+    public int getPriceForFacet(Facet facet) {
         return diceSanctuary.containsKey(facet) ? diceSanctuary.get(facet).getPrice() : 0;
     }
 

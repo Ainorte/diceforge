@@ -7,6 +7,13 @@ Usage:
 ./game.jar <run-count> <player-count>
 ```
 
+## Charte de couleurs
+
+- Jaune: Informations système, état d'exécution des parties
+- Rouge: Informations de détail d'avancement d'une partie
+- Vert: Informations concernant une action effectuée par un joueur
+- Bleu: Informations d'état du jeu
+
 ## How to work
 
 > Note that you firstly need to build the code,

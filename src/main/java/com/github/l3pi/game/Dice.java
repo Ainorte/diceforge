@@ -22,7 +22,7 @@ public class Dice {
      *
      * */
 
-    public Facet throwDice() {
+    Facet throwDice() {
         Collections.shuffle(this.facets);
         return getFaceUp();
     }
@@ -40,7 +40,7 @@ public class Dice {
      * @param facetToForge c'est la face a forger dans le dé
      * */
 
-    public void addFace(Facet facetToForge,int choosenFacet){
+    void addFace(Facet facetToForge,int choosenFacet){
         this.facets.set(choosenFacet,facetToForge);
     }
     /** Selectionne une face de dé

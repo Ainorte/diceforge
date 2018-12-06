@@ -1,5 +1,7 @@
 package com.github.l3pi.game;
 
+import com.github.l3pi.sys.Log;
+
 import java.util.List;
 
 import static com.github.l3pi.sys.Log.log;
@@ -27,10 +29,11 @@ public class GameManager {
         Game game = new Game(players);
         log(game.toString());
         for (int round = 1; round <= 9; round++) {
-            log(String.format("==========Round %d==========\n", round));
+            log(Log.State.LOG, String.format("\n==========Round %d==========\n", round));
             game.round();
+            game.increaseRound();
             log(game.toString());
-            log(String.format("\n========End Round %d========\n", round));
+            log(Log.State.LOG, String.format("\n========End Round %d========\n", round));
         }
         return game.getBestPlayer();
     }
