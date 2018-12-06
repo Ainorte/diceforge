@@ -72,11 +72,11 @@ public class Game {
             divineBlessing();
         }
         divineBlessing();
-        System.out.println();
+        log();
         recurrentAction(player);
         action(player);
-        System.out.println();
-        System.out.println();
+        log();
+        log();
 
     }
 

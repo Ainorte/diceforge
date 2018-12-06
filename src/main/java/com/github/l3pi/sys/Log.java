@@ -17,7 +17,7 @@ public class Log {
         }
     }
 
-    public enum State { INFO, ACTION, STATUS, LOG }
+    public enum State { INFO, ACTION, STATUS, LOG, SYS }
 
     private static boolean IS_ENABLED = false;
     public static void enableLog() { IS_ENABLED = true; }
@@ -25,6 +25,9 @@ public class Log {
         String colour = Colour.WHITE;
 
         switch (s) {
+            case SYS:
+                colour = Colour.YELLOW + "[SYS] ";
+                break;
             case LOG:
                 colour = Colour.RED;
                 break;
@@ -35,7 +38,7 @@ public class Log {
                 colour = Colour.BLUE;
         }
 
-        if (IS_ENABLED) {
+        if (s.equals(State.SYS) || IS_ENABLED) {
             System.out.println(Colour.fmt(colour, m));
         }
     }

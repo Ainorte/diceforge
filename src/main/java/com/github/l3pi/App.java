@@ -21,13 +21,29 @@ public class App {
             System.exit(1);
         }
 
-        Log.enableLog();
-
         // TODO will be used later when introducing multiple games.
         int runCount = Integer.parseInt(args[0]),
             playerCount = Integer.parseInt(args[1]);
 
-        List<Player> players = new ArrayList<Player>();
+        runCount = runCount >= 1 ? runCount : 1;
+
+        if (runCount == 1) {
+            // Single run
+            Log.enableLog();
+        }
+
+        log(Log.State.SYS, String.format("Le programme va lancer %d parties", runCount));
+
+        int currentRun = 1;
+        do {
+            log(Log.State.SYS, String.format("Partie %d/%d", currentRun, runCount));
+
+            run();
+        } while(currentRun++ <= runCount);
+    }
+
+    private static void run() {
+        List<Player> players = new ArrayList<>();
         players.add(new RandomBot("player1"));
         players.add(new RandomBot("player2"));
         GameManager gameManager = new GameManager(players);
@@ -36,6 +52,6 @@ public class App {
         String b = (winners.size() == 1 ? "the winner is : " : "the winners are : ") +
             winners.stream().map(Player::getName).collect(Collectors.joining(", ")) +
             "\n";
-        log(b);
+        log(Log.State.SYS, b);
     }
 }
