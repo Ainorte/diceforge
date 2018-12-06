@@ -16,6 +16,11 @@ public class DiceSanctuary {
      * storing of every sanctuary-related metadata associated with a given item.
      *
      * @see DiceSanctuary
+     *
+     * la classe locale Item permet de garder l'information de la face restantes dans le sanctuaire et son prix
+     * @param diceSanctuary c'est le hashmap qui associe une face de dé avec sa classe Item
+     *
+     *
      */
     private static class Item {
 
@@ -116,17 +121,31 @@ public class DiceSanctuary {
 
     }
 
+
+    /**getAvailableInventory retourne les face de dé restante dans le sanctuaire
+     *
+     * */
     public List<Facet> getAvailableInventory() {
         return diceSanctuary.entrySet().stream().filter(entry -> entry.getValue().getCount() > 0)
             .map(Map.Entry::getKey)
             .collect(Collectors.toList());
     }
 
+    /**getPurchasableInventory retourne une liste de face de dé achetable avec un prix donné en argument
+     * @param gold le potentiel pouvoir d'achat
+     * */
+
     public List<Facet> getPurchasableInventory(int gold) {
         return diceSanctuary.entrySet().stream().filter(entry -> (entry.getValue().getCount() > 0 && entry.getValue().isItemPurchable(gold)))
             .map(Map.Entry::getKey)
             .collect(Collectors.toList());
     }
+
+    /**buyFacet retourne la face de dés acheté dans le sanctuaire
+     * @param facet  la face de dés séléctionné pour l'achat dans le sanctuaire
+     *
+     * */
+
 
     Facet buyFacet(Facet facet) {
         if (facet != null) {
@@ -138,6 +157,10 @@ public class DiceSanctuary {
         }
         return null;
     }
+
+    /** Retourne le prix d'une face dans le sanctuaire
+     * @param facet  la face de dés séléctionné
+     * */
 
     int getPriceForFacet(Facet facet) {
         return diceSanctuary.containsKey(facet) ? diceSanctuary.get(facet).getPrice() : 0;

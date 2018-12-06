@@ -13,10 +13,24 @@ import static com.github.l3pi.sys.Log.log;
  * Game instance
  */
 public class Game {
+    /**
+     * la classe Game gere tout ce qui est interaction du jeu pour chaque tour, pour faire un jeu complet voir GameManager
+     * qui executer le nombre de tours correspondant aux nombres de joueurs
+     *
+     * la variable players est une map ordonnée de la classe player qui associe son inventaire
+     * la variable diceSanctuary est la variable qui représente le sanctuaire des dés
+     * la variable cardSanctuary est la variable qui représente le sanctuaire des cartes
+     *
+     * */
+
     private TreeMap<Player, Inventory> players;
     private DiceSanctuary diceSanctuary;
     private CardSanctuary cardSanctuary;
 
+    /** On instancie Game avec une liste de joueurs
+     * @param players  a liste de joueurs pour cette partie
+     *
+     * */
     public Game(List<Player> players) {
         this.players = new TreeMap<>();
         this.diceSanctuary = new DiceSanctuary();
@@ -27,12 +41,18 @@ public class Game {
         }
     }
 
+    /** applique un tour de jeu
+     * */
+
     void round() {
         for (Player player : this.getPlayers()) {
             round(player);
         }
 
     }
+
+    /**Applique un tour de jeu et gere l'ordre des actions pendant un tour
+     * */
 
     private void round(Player player) {
 
@@ -55,6 +75,9 @@ public class Game {
         .forEach(card -> {card.getOperation().apply(this,player);});
     }
 
+    /** l'action qui permet de lancer le dé des joueurs l'un aprés l'autre
+     *
+     * */
     private void divineBlessing() {
         for (Player player : getPlayers()) {
             List<Facet> facetUp = getInventory(player).throwDices();
@@ -70,6 +93,10 @@ public class Game {
         log("\n");
     }
 
+    /** cette fonction applique une action en fonction du choix du joueur
+     * par exemple le joueur peut decider d'acheter une carte ou de forger une face de dé
+     * @param player le player qui effectue l'action
+     * */
     private void action(Player player){
 
         if(player.chooseAction(this) == 0) {
@@ -102,6 +129,7 @@ public class Game {
     }
 
 
+
     public DiceSanctuary getDiceSanctuary() {
         return diceSanctuary;
     }
@@ -110,13 +138,24 @@ public class Game {
         return cardSanctuary;
     }
 
+
     public Set<Player> getPlayers() {
         return players.keySet();
     }
 
+    /** prend un player en parametre et retourne l'inventaire associé au joueur
+     *
+     * */
+
     public Inventory getInventory(Player player) {
         return players.get(player);
     }
+
+    /** cette fonction renvoie les gagnants
+     *
+     * @return une liste contenant les gagnants
+     *
+     * */
 
     List<Player> getBestPlayer() {
         if (players.size() == 0) {
@@ -134,6 +173,11 @@ public class Game {
             .map(Map.Entry::getKey)
             .collect(Collectors.toList());
     }
+
+    /** Function pour Hammergold , permet de rajouter du gold sur la carte de deplacement de cette carte
+     * @param player le joueur qui effectue l'action
+     * @param gold le nombre de gold
+     * */
 
     public void addGold(Player player, int gold){
         Inventory inventory = getInventory(player);

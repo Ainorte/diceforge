@@ -10,6 +10,17 @@ import java.util.stream.Collectors;
  * resources, dices.
  */
 public class Inventory {
+
+    /** Cette classe représente une inventaire d'un joueur
+     *
+     * resources c'est le hashmap qui associe un type de ressource et son nombre que posséde le joueur
+     * dices c'est une liste de 2 dés
+     * extension pour indiqué combien est étendue les capacité de l'inventaire
+     * cards c'est la liste des cartes que posséde de le joueur
+     *
+     * @param gold on initialise un inventaire avec ses golds
+     * */
+
     private final List<Facet> faceInventory;
 
     private final HashMap<ResourceType, Integer> resources;
@@ -103,7 +114,11 @@ public class Inventory {
     }
 
 
-
+     /**getMaxRessources retourne le max possible de place dans l'inventaire pour une ressoure donné , si
+      * une ressource a étendue son maximum de capacité
+      *
+      * @param resourceType  c'est le type de ressource
+      * */
 
      public int getMaxRessources(ResourceType resourceType){
         switch (resourceType){
@@ -118,9 +133,18 @@ public class Inventory {
         }
      }
 
+     /** retourne une liste de 2 face qui correspond aux 2 lancé de dé , sont les face du lancé de dé
+      *
+      *
+      * */
+
     public List<Facet> throwDices() {  // == Faveur Majeur
         return dices.stream().map(Dice::throwDice).collect(Collectors.toList());
     }
+
+    /** forge modifié le dé de l'inventaire , fait appel aux méthode de la classe dé et face de dé
+     *
+     * */
 
     public void forge(Facet facetToForge,int choosenDice,int choosenFacet){
         if (facetToForge != null) {
@@ -129,28 +153,49 @@ public class Inventory {
             this.dices.set(choosenDice,dice);
         }
     }
-
+    /** getDices retourne une liste de 2 element correspondant aux dés
+     *
+     * */
 
     public List<Dice> getDices() {
         return new ArrayList<>(dices);
     }
 
+    /** retourne les face en haut du dé , visible au joueur pour les 2 dé
+     *
+     * */
+
     public List<Facet> getFaceUp() {
         return dices.stream().map(Dice::getFaceUp).collect(Collectors.toList());
     }
 
+
+
     public List<Facet> getFaceInventory() {
         return new ArrayList<>(faceInventory);
     }
+    /**
+     * incrémente les extention de ressources
+     * */
 
     public void addExtension(){
         extension++;
     }
-
+    /**getResource
+     * retourne le nombre de ressour que le joueur posséde pour un type de ressource donné en argument
+     * @param resourceType  le type de ressource que le joueur veut savoir combien il posséde
+     *
+     * */
 
     public int getResource(ResourceType resourceType) {
         return resources.get(resourceType);
     }
+
+    /** ajoute une valeur de ressource existante dans l'inventaire du joueur
+     * @param resourceType  le type de ressource
+     * @param value  le nombre de ressource a ajouter
+     *
+     * */
 
     public void addResources(ResourceType resourceType, int value) {
         int currentValue = resources.get(resourceType);
@@ -162,10 +207,14 @@ public class Inventory {
             resources.merge(resourceType, max - currentValue , Integer::sum);
         }
     }
+    /**Ajouer une carte dans l'inventaire
+     * */
 
     public void addCard(Card card){
         this.cards.add(card);
     }
+    /**Retourne toute les carte disponible dans l'inventaire
+     * */
 
     public List<Card> getCards(){
      return new ArrayList<Card>(this.cards);
