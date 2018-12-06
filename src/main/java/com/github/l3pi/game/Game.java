@@ -59,6 +59,7 @@ public class Game {
         for (Player player : getPlayers()) {
             List<Facet> facetUp = getInventory(player).throwDices();
             log(player.getName() + " a lancé " + facetUp);
+
         }
         for (Player player : getPlayers()) {
             getInventory(player)
@@ -66,6 +67,7 @@ public class Game {
                 .forEach(facet -> {facet.getOperation().apply(this,player);});
 
         }
+        log("\n");
     }
 
     private void action(Player player){

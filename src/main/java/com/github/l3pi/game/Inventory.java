@@ -203,7 +203,7 @@ public class Inventory {
         if(oldGold < 15 && oldGold + gold > 15){
             glory += 10;
         }
-        if(oldGold + gold == 30){
+        if(oldGold + gold >= 30){
             glory += 15;
         }
         return glory;
