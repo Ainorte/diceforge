@@ -129,8 +129,18 @@ public class RandomBot extends Player {
 
     @Override
     public Tuple<Integer, Integer> chooseGoldRepartion(Inventory inventory, int gold) {
-        //TODO : Implement Balance
-        return new Tuple<>(0,0);
-    }
+        int inv = inventory.getMaxRessources(ResourceType.GOLD) - inventory.getResource(ResourceType.GOLD);
+        int hammer = (30 - inventory.getHammerGold()) + (inventory.getActiveHammerCardCount()-1)*30;
 
+        if(gen.nextInt(2) == 0){
+            int i = gold <= inv ? gold : inv;
+            int h = gold - i <= hammer ? gold - i : hammer;
+            return new Tuple<>(i,h);
+        }
+        else {
+            int h = gold <= hammer ? gold : hammer;
+            int i = gold - h <= inv ? gold - h : inv;
+            return new Tuple<>(i,h);
+        }
+    }
 }
