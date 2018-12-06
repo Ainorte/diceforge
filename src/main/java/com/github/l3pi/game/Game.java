@@ -219,7 +219,7 @@ public class Game {
     @Override
     public String toString() {
         return getPlayers().stream().map(player -> player + "\n" + getInventory(player) + "\n\tLocalisation :\t" + cardSanctuary.getPlayerLocation(player)).collect(Collectors.joining("\n"))
-            + "\n" + Log.Colour.fmt(Log.Colour.BLUE, "État du sanctuaire de dés") + "\n" + diceSanctuary
-            + "\n" + Log.Colour.fmt(Log.Colour.BLUE, "État du sanctuaire de cartes") + "\n" + cardSanctuary;
+            + "\n" + Log.State.fmt(Log.State.STATUS, "État du sanctuaire de dés") + "\n" + diceSanctuary
+            + "\n" + Log.State.fmt(Log.State.STATUS, "État du sanctuaire de cartes") + "\n" + cardSanctuary;
     }
 }

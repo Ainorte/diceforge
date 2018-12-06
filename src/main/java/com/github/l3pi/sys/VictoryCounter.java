@@ -1,7 +1,6 @@
 package com.github.l3pi.sys;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class VictoryCounter {
     private int playCounter;
@@ -21,25 +20,58 @@ public class VictoryCounter {
         }
     }
 
-    public void addVictoryFor(String player) {
+    private void addVictoryFor(String player) {
         if (scores.containsKey(player)) {
             scores.replace(player, scores.get(player) + 1);
         }
     }
 
-    public int getVictoryCountFor(String player) {
+    int getVictoryCountFor(String player) {
         return scores.getOrDefault(player, 0);
     }
 
-    public int getPlayCount() {
+    int getPlayCount() {
         return playCounter;
+    }
+
+    private double getTotalWinCount() {
+        return scores.values().stream().mapToInt(i -> i).sum();
+    }
+
+    private double getWinPercentageFor(String player) {
+        double percentage = 0.;
+
+        if (scores.containsKey(player)) {
+            percentage = (scores.get(player) / getTotalWinCount()) * 100.;
+        }
+
+        return percentage;
+    }
+
+    private String getStats() {
+        final StringBuilder b = new StringBuilder();
+
+        final int totalWinCount = (int) getTotalWinCount();
+        b.append(String.format("Il y a eu %d parties\n", playCounter));
+        b.append(String.format("Il y a eu un total commun de %d victoire%s\n", totalWinCount, totalWinCount != 1 ? "s" : ""));
+        b.append(Log.State.fmt(Log.State.STATUS, "Nombre de victoires\n"));
+        scores.forEach(
+            (player, score) ->
+                b
+                    .append("\t- ")
+                    .append(player)
+                    .append(": ")
+                    .append(score)
+                    .append(" (")
+                    .append(String.format("%3.2f", getWinPercentageFor(player)))
+                    .append("%)\n")
+        );
+
+        return b.toString();
     }
 
     @Override
     public String toString() {
-        return String.format("%d parties ont été lancées, le nombre de victoire par joueur sont:\n", playCounter)
-            + scores.entrySet().stream()
-                .map(e -> String.format("\t- %s a gagné %d fois", e.getKey(), e.getValue()))
-                .collect(Collectors.joining("\n"));
+        return getStats();
     }
 }
