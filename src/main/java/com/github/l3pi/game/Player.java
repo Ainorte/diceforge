@@ -50,7 +50,7 @@ public abstract class Player implements Comparable<Player> {
      *
      * */
 
-    public abstract Facet chooseDiceFacet(Game game);
+    public abstract Facet chooseDiceFacet(List<Facet> facetList);
 
     public abstract Card chooseCard(Game game);
 

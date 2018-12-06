@@ -34,11 +34,9 @@ public class RandomBot extends Player {
      * */
 
     @Override
-    public Facet chooseDiceFacet(Game game) {
-        List<Facet> purchasableFacets = game.getDiceSanctuary().getPurchasableInventory(game.getInventory(this).getResource(ResourceType.GOLD));
-
-        if (purchasableFacets.size() > 0) {
-            return purchasableFacets.get(this.gen.nextInt(purchasableFacets.size()));
+    public Facet chooseDiceFacet(List<Facet> facetList) {
+        if (facetList.size() > 0) {
+            return facetList.get(this.gen.nextInt(facetList.size()));
         }
         return null;
     }

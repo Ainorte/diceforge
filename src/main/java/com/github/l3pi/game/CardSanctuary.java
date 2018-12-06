@@ -211,7 +211,23 @@ public class CardSanctuary {
         
         this.cardSanctuary.put(new Card(5,ResourceType.SOLAR,CardLocationType.SOLAR3,
             (Game game, Player player)->{
-            //TODO
+                Inventory inventory = game.getInventory(player);
+                Facet facetToForge = new Facet("Miroir",
+                    (Game facetGame, Player facetPlayer)->{
+                        game.getPlayers()
+                            .stream().filter(player1 -> !player1.equals(player))
+                            .flatMap(player1 -> {
+                                List<Facet> oppFaceUp = game.getInventory(player1).getFaceUp();
+                                Facet facet = player.chooseDiceFacet(oppFaceUp);
+                                facet.getOperation().apply(game,player);
+                                return null;
+                            }
+                            )
+;
+
+                    });
+                int[] diceChangeFace = player.forgeMyDice(game, facetToForge);
+                inventory.forge(facetToForge,diceChangeFace[0],diceChangeFace[1]);
             },
             "Le Miroir Abyssal",
             "%s a reçu la face de dés du Miroir Abyssal et la forge"),4);
