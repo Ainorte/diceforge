@@ -21,7 +21,6 @@ public class App {
             System.exit(1);
         }
 
-        // TODO will be used later when introducing multiple games.
         int runCount = Integer.parseInt(args[0]),
             playerCount = Integer.parseInt(args[1]);
 
