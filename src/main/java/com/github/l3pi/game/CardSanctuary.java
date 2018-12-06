@@ -15,9 +15,12 @@ public class CardSanctuary {
       chaque object carte est identifié par son hash et initialisé au debut tous a 4 nombre d'examplaire
      */
     private HashMap<Card,Integer> cardSanctuary;
+    private HashMap<Player,CardLocationType> locations;
 
+    CardSanctuary(List<Player> players){
+        locations = new HashMap<>();
+        players.forEach(player -> locations.put(player,CardLocationType.CENTER));
 
-    CardSanctuary(){
         cardSanctuary = new HashMap<>();
         this.cardSanctuary.put(new Card(1, ResourceType.LUNAR,CardLocationType.LUNAR1,
             (Game game, Player player)->{
@@ -199,6 +202,34 @@ public class CardSanctuary {
             }
         }
         return null;
+    }
+
+    CardLocationType getPlayerLocation(Player player){
+        return locations.get(player);
+    }
+
+    Player getPlayerOnLocation(CardLocationType location){
+        if(locations.containsValue(location)){
+            return locations
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().equals(location))
+                .collect(Collectors.toList())
+                .get(0)
+                .getKey();
+        }
+        return null;
+    }
+
+    void move(CardLocationType location, Player player){
+        Player old =  getPlayerOnLocation(location);
+        if(old == null){
+            locations.replace(player,location);
+        }
+        else if(!old.equals(player)){
+            locations.replace(old,CardLocationType.CENTER);
+            locations.replace(player,location);
+        }
     }
 
     @Override

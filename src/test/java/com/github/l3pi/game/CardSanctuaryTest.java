@@ -3,6 +3,7 @@ package com.github.l3pi.game;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class CardSanctuaryTest {
 
     @Before
     public void setUp() {
-        this.cardSanctuary = new CardSanctuary();}
+        this.cardSanctuary = new CardSanctuary(new ArrayList<>());}
 
     @Test
     public void TestAvailableCard(){

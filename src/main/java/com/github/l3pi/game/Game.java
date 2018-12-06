@@ -1,6 +1,7 @@
 package com.github.l3pi.game;
 
 
+import com.github.l3pi.sys.Log;
 import com.github.l3pi.type.ResourceType;
 import com.github.l3pi.utilities.Tuple;
 
@@ -36,7 +37,7 @@ public class Game {
     public Game(List<Player> players) {
         this.players = new TreeMap<>();
         this.diceSanctuary = new DiceSanctuary();
-        this.cardSanctuary = new CardSanctuary();
+        this.cardSanctuary = new CardSanctuary(players);
         this.actualRound = 0;
         for (int i =0; i < players.size(); i++) {
             this.players.put(players.get(i), new Inventory(3 - i));
@@ -138,12 +139,11 @@ public class Game {
                 if(!card.isRecurrent()){
                     card.getOperation().apply(this,player);
                 }
-                //TODO player.move(card.getLocationType());
+                cardSanctuary.move(card.getLocationType(), player);
                 log(Log.State.ACTION, player.getName() + " a acheté la carte " + card + " et se situe sur la case " + card.getLocationType() + " du plateau");
             }
         }
     }
-
 
 
     public DiceSanctuary getDiceSanctuary() {
@@ -202,11 +202,14 @@ public class Game {
             if (repartition.getY() + repartition.getX() <= gold) {
                 inventory.addResources(ResourceType.GOLD, repartition.getX());
                 inventory.addGoldHammer(repartition.getY());
+                log(Log.State.ACTION,player + " a mis " + repartition.getX() + " gold dans son inventaire et " + repartition.getY() + " gold dans son marteau");
             }
-        } else if (inventory.getMaxRessources(ResourceType.GOLD) <= inventory.getResource(ResourceType.GOLD)) {
+        } else if (inventory.getMaxRessources(ResourceType.GOLD) <= inventory.getResource(ResourceType.GOLD) && inventory.getActiveHammerCardCount() > 0) {
             inventory.addGoldHammer(gold);
+            log(Log.State.ACTION,player + " a mis " + gold + " gold dans son marteau");
         } else {
             inventory.addResources(ResourceType.GOLD, gold);
+            log(Log.State.ACTION,player + " a mis " + gold + " gold dans son inventaire");
         }
     }
 
@@ -220,7 +223,7 @@ public class Game {
 
     @Override
     public String toString() {
-        return getPlayers().stream().map(this::toString).collect(Collectors.joining("\n"))
+        return getPlayers().stream().map(player -> player + "\n" + getInventory(player) + "\n\tLocalisation :\t" + cardSanctuary.getPlayerLocation(player)).collect(Collectors.joining("\n"))
             + "\n" + Log.Colour.fmt(Log.Colour.BLUE, "État du sanctuaire de dés") + "\n" + diceSanctuary
             + "\n" + Log.Colour.fmt(Log.Colour.BLUE, "État du sanctuaire de cartes") + "\n" + cardSanctuary;
     }

@@ -211,7 +211,7 @@ public class Inventory {
     public int addGoldHammer(int gold){
         int glory = 0;
         while (gold > 0){
-            int tmp = (gold > 30 ? 30 : gold) - getHammerGold();
+            int tmp = (gold > 30 - getHammerGold() ? 30 - getHammerGold() : gold);
             gold -= tmp;
             glory += addGoldHammerOneCard(tmp);
         }
@@ -242,6 +242,6 @@ public class Inventory {
 
     @Override
     public String toString() {
-        return String.format("Dices :\t%s,\n\t\t%s,\nResources :\t%s\nCards :\t%s", this.dices.get(0).toString(),this.dices.get(1).toString(), resources,cards);
+        return String.format("\tDés :\t\t\t%s,\n\t\t\t\t\t%s,\n\tRessouces :\t\t%s\n\tCartes :\t\t%s", this.dices.get(0).toString(),this.dices.get(1).toString(), resources,cards);
     }
 }
