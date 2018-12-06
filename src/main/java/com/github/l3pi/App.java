@@ -59,8 +59,8 @@ public class App {
                 names.add("player4");
             case 2:
             default:
-                names.add("player1");
-                names.add("player2");
+                names.add(0, "player1");
+                names.add(1, "player2");
         }
 
         counter = new VictoryCounter(names);
