@@ -16,6 +16,8 @@ public class Card {
     private String name;
     private boolean recurrent;
 
+    String formattedEffect;
+
     /**
      Cette classe représente une carte dans le jeu
 
@@ -28,24 +30,30 @@ public class Card {
 
      */
 
-    public Card(int p,List<ResourceType> resourceType, CardLocationType location,Operation operation,String name,boolean recurrent) {
+    public Card(int p,List<ResourceType> resourceType, CardLocationType location,Operation operation,String name,boolean recurrent,String formattedEffect) {
         this.price = p;
         this.resourceType = resourceType;
         this.locationType = location;
         this.operation = operation;
         this.recurrent = recurrent;
         this.name = name;
+        this.formattedEffect = formattedEffect;
 
     }
 
 
     public Card(int p,ResourceType resourceType, CardLocationType location,Operation operation, String name) {
-        this(p,new ArrayList<ResourceType>(){{add(resourceType);}},location,operation,name,false);
+        this(p,new ArrayList<ResourceType>(){{add(resourceType);}},location,operation,name,false,"%s a effectué l'effet");
+    }
+
+    public Card(int p,ResourceType resourceType, CardLocationType location,Operation operation, String name,String formattedEffect) {
+        this(p,new ArrayList<ResourceType>(){{add(resourceType);}},location,operation,name,false,formattedEffect);
     }
 
 
-    public Card(int p,ResourceType resourceType, CardLocationType location,Operation operation, String name,boolean recurrent) {
-        this(p,new ArrayList<ResourceType>(){{add(resourceType);}},location,operation,name,recurrent);
+
+    public Card(int p,ResourceType resourceType, CardLocationType location,Operation operation, String name,boolean recurrent,String formattedEffect) {
+        this(p,new ArrayList<ResourceType>(){{add(resourceType);}},location,operation,name,recurrent,formattedEffect);
     }
 
 
@@ -71,7 +79,13 @@ public class Card {
 
 
     public boolean isCardPurchasable(int money){
+
         return this.price <= money;
+    }
+
+
+    public String displayEffect(Player player){
+        return String.format(this.formattedEffect,player);
     }
 
 
