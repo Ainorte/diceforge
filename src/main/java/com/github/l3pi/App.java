@@ -32,20 +32,28 @@ public class App {
             Log.enableLog();
         }
 
-        log(Log.State.SYS, String.format("Le programme va lancer %d parties", runCount));
+        log(Log.State.SYS, String.format("Le programme va lancer %d parties à %d joueurs", runCount, playerCount));
 
         int currentRun = 1;
         do {
             log(Log.State.SYS, String.format("Partie %d/%d", currentRun, runCount));
 
-            run();
+            run(playerCount);
         } while(currentRun++ <= runCount);
     }
 
-    private static void run() {
+    private static void run(int playerCount) {
         List<Player> players = new ArrayList<>();
-        players.add(new RandomBot("player1"));
-        players.add(new RandomBot("player2"));
+
+        switch (playerCount) {
+            case 4:
+                players.add(new RandomBot("player3"));
+                players.add(new RandomBot("player4"));
+            case 2:
+            default:
+                players.add(0, new RandomBot("player1"));
+                players.add(1, new RandomBot("player2"));
+        }
         GameManager gameManager = new GameManager(players);
         List<Player> winners = gameManager.run();
 
