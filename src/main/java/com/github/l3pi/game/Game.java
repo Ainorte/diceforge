@@ -25,6 +25,7 @@ public class Game {
     private TreeMap<Player, Inventory> players;
     private DiceSanctuary diceSanctuary;
     private CardSanctuary cardSanctuary;
+    private int actualRound; // count the round for intelligentBot
 
     /**
      * On instancie Game avec une liste de joueurs
@@ -35,15 +36,34 @@ public class Game {
         this.players = new TreeMap<>();
         this.diceSanctuary = new DiceSanctuary();
         this.cardSanctuary = new CardSanctuary();
+<<<<<<< Updated upstream
 
         for (int i = 0; i < players.size(); i++) {
+=======
+        this.actualRound = 0;
+        for (int i =0; i < players.size(); i++) {
+>>>>>>> Stashed changes
             this.players.put(players.get(i), new Inventory(3 - i));
         }
     }
 
+<<<<<<< Updated upstream
     /**
      * applique un tour de jeu
      */
+=======
+    public void increaseRound(){
+        this.actualRound++;
+    }
+
+    public int getActualRound(){
+        return this.actualRound;
+    }
+
+
+    /** applique un tour de jeu
+     * */
+>>>>>>> Stashed changes
 
     void round() {
         for (Player player : this.getPlayers()) {
