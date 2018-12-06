@@ -199,4 +199,11 @@ public class CardSanctuary {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return cardSanctuary.entrySet().stream()
+            .map(facet -> String.format("Nombre de cartes de type \"%s\" disponible: %s", facet.getKey(), facet.getValue()))
+            .collect(Collectors.joining("\n"));
+    }
 }

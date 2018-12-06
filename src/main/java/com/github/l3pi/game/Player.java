@@ -68,6 +68,7 @@ public abstract class Player implements Comparable<Player> {
 
     @Override
     public String toString() {
-        return String.format("Name : %s", name);
+
+        return getName() + " (" + getClass().getSimpleName() + ")";
     }
 }

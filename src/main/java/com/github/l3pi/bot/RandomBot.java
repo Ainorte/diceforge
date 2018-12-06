@@ -5,10 +5,11 @@ import com.github.l3pi.type.CardLocationType;
 import com.github.l3pi.type.ResourceType;
 import com.github.l3pi.utilities.Tuple;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
+import static com.github.l3pi.sys.Log.log;
 
 public class RandomBot extends Player {
     private Random gen;
@@ -53,7 +54,6 @@ public class RandomBot extends Player {
     @Override
     public Card chooseCard(Game game){
         List<Card> purchasableCards = game.getCardSanctuary().getPurchasableCard(game.getInventory(this));
-        System.out.println("choix des cartes achetables :" + purchasableCards);
         if (purchasableCards.size() > 0) {
             return purchasableCards.get(this.gen.nextInt(purchasableCards.size()));
         }

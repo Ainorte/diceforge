@@ -18,12 +18,8 @@ public class DiceSanctuary {
      * @see DiceSanctuary
      *
      * la classe locale Item permet de garder l'information de la face restantes dans le sanctuaire et son prix
-     * @param diceSanctuary c'est le hashmap qui associe une face de dé avec sa classe Item
-     *
-     *
      */
     private static class Item {
-
         private int count;
         private int price;
 
@@ -46,6 +42,11 @@ public class DiceSanctuary {
 
         int getPrice() {
             return price;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Prix: %s, Quantité disponible: %s", getPrice(), getCount());
         }
     }
 
@@ -166,7 +167,10 @@ public class DiceSanctuary {
         return diceSanctuary.containsKey(facet) ? diceSanctuary.get(facet).getPrice() : 0;
     }
 
-    public HashMap<Facet, Item> getDiceSanctuary() {
-        return diceSanctuary;
+    @Override
+    public String toString() {
+        return diceSanctuary.entrySet().stream()
+            .map(facet -> String.format("État de facette de dé \"%s\": %s", facet.getKey(), facet.getValue()))
+            .collect(Collectors.joining("\n"));
     }
 }
