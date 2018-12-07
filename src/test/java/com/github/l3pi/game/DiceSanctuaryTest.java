@@ -16,19 +16,19 @@ public class DiceSanctuaryTest {
 
     @Test
     public void TestAvailableFacet(){
-        List<Facet> cards = this.diceSanctuary.getAvailableInventory();
-        //assertEquals(15, cards.size());
+        List<Facet> facets = this.diceSanctuary.getAvailableInventory();
+        assertEquals(15, facets.size());
     }
 
     @Test
     public void testPurshasableFacet(){
-        List<Facet> cards = this.diceSanctuary.getPurchasableInventory(12);
+        List<Facet> facets = this.diceSanctuary.getPurchasableInventory(12);
 
-        assertEquals(12, cards.size());
+        assertEquals(15, facets.size());
 
-        List<Facet> cards2 = this.diceSanctuary.getPurchasableInventory(0);
+        List<Facet> facets2 = this.diceSanctuary.getPurchasableInventory(0);
 
-        assertEquals(0, cards2.size());
+        assertEquals(0, facets2.size());
     }
 
 
