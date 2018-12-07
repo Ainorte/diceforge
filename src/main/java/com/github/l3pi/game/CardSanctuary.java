@@ -213,7 +213,7 @@ public class CardSanctuary {
         this.cardSanctuary.put(new Card(5,ResourceType.SOLAR,CardLocationType.SOLAR3,
             (Game game, Player player)->{
                 Inventory inventory = game.getInventory(player);
-                Facet facetToForge = new Facet("Miroir",
+                Facet facetToForge = new Facet("MIRROR",
                     (Game facetGame, Player facetPlayer)->{
                         game.getPlayers()
                             .stream().filter(player1 -> !player1.equals(player))
