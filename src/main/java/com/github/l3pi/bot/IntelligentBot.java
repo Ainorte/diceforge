@@ -39,6 +39,10 @@ public class IntelligentBot extends RandomBot{
         this.facetCoefficient.put("1 GOLD / LUNAR / SOLAR",(double)maxRound*12);
         this.facetCoefficient.put("2 GOLD / LUNAR / SOLAR",(double)maxRound*10);
 
+        this.facetCoefficient.put("x3",(double)maxRound*4);
+        this.facetCoefficient.put("MIRROR",(double)maxRound*0);
+
+
 
 
     }
@@ -137,7 +141,10 @@ public class IntelligentBot extends RandomBot{
                         int c = 0;
                         for(Dice dice:dices){
                             for(int i =0;i<6;i++){
-                                c+= this.facetCoefficient.get(dice.getFacet(i).getName());
+                                c+= this.facetCoefficient
+                                    .get(
+                                    dice.getFacet(i)
+                                        .getName());
                             }
                             if(co < c){
                                 co = c;
