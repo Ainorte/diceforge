@@ -7,7 +7,7 @@ import com.github.l3pi.utilities.Tuple;
 
 import java.util.*;
 
-public class IntelligentBot extends Player{
+public class IntelligentBot extends RandomBot{
     private Random gen;
     private CardLocationType location = null;
     private int maxRound;
@@ -47,13 +47,13 @@ public class IntelligentBot extends Player{
      * */
 
     @Override
-    public Facet chooseDiceFacet(Game game) {
-        List<Facet> purchasableFacets = game.getDiceSanctuary().getPurchasableInventory(game.getInventory(this).getResource(ResourceType.GOLD));
+    public Facet chooseFacetToForge(List<Facet> facetList, Game game) {
+
 
         List<Dice> mydices = game.getInventory(this).getDices();
         for(Dice dice: mydices){
             for(int i= 0;i<6;i++){
-                for(Facet facet:purchasableFacets){
+                for(Facet facet:facetList){
                     if(this.facetCoefficient.get(dice.getFacet(i).getName()) < this.facetCoefficient.get(facet.getName())){
                         return facet;
                     }

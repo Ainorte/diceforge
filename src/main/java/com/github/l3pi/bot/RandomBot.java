@@ -34,7 +34,15 @@ public class RandomBot extends Player {
      * */
 
     @Override
-    public Facet chooseDiceFacet(List<Facet> facetList) {
+    public Facet chooseFacetToForge(List<Facet> facetList, Game game) {
+        if (facetList.size() > 0) {
+            return facetList.get(this.gen.nextInt(facetList.size()));
+        }
+        return null;
+    }
+
+    @Override
+    public Facet chooseFacetToApply(List<Facet> facetList, Game game) {
         if (facetList.size() > 0) {
             return facetList.get(this.gen.nextInt(facetList.size()));
         }

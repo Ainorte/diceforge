@@ -26,7 +26,7 @@ public class RandomBotTest {
 
     @Test
     public void testMethods(){
-        assertTrue(this.bot.chooseDiceFacet(this.game.getDiceSanctuary().getPurchasableInventory(this.game.getInventory(this.bot).getResource(ResourceType.GOLD))) instanceof Facet);
+        assertTrue(this.bot.chooseFacetToForge(this.game.getDiceSanctuary().getPurchasableInventory(this.game.getInventory(this.bot).getResource(ResourceType.GOLD)),this.game) instanceof Facet);
         assertTrue((this.bot.chooseCard(this.game) instanceof Card)||(this.bot.chooseCard(this.game)==null));
 
         List<Integer> t = new ArrayList<Integer>(){};

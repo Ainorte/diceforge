@@ -116,7 +116,7 @@ public class Game {
         log(Log.State.LOG, player + " joue");
 
         if(player.chooseAction(this) == 0) {
-            Facet facet = player.chooseDiceFacet(this.getDiceSanctuary().getPurchasableInventory(this.getInventory(player).getResource(ResourceType.GOLD)));
+            Facet facet = player.chooseFacetToForge(this.getDiceSanctuary().getPurchasableInventory(this.getInventory(player).getResource(ResourceType.GOLD)),this);
             if (facet != null) {
                 facet = this.diceSanctuary.buyFacet(facet);
                 log(Log.State.ACTION, player.getName() + " a acheté la face de dés " + facet + " pour " + this.diceSanctuary.getPriceForFacet(facet) + " Or");

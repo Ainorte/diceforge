@@ -41,7 +41,7 @@ public abstract class Player implements Comparable<Player> {
 
     /** ce sont les méthodes a implementer pour chaque instance de cette classe
      *
-     * chooseDiceFacet la facon de choisir une face de dé
+     * chooseFacetToForge la facon de choisir une face de dé
      * chooseCard la facon de choisir une carte
      * tradeGoldForGlory action pour echanger type de ressource
      * chooseResource choisir le type de ressource pour acheter , changer dans l'inventaire
@@ -50,7 +50,9 @@ public abstract class Player implements Comparable<Player> {
      *
      * */
 
-    public abstract Facet chooseDiceFacet(List<Facet> facetList);
+    public abstract Facet chooseFacetToForge(List<Facet> facetList, Game game);
+
+    public abstract Facet chooseFacetToApply(List<Facet> facetList, Game game);
 
     public abstract Card chooseCard(Game game);
 

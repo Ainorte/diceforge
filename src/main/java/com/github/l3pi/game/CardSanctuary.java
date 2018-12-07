@@ -218,7 +218,7 @@ public class CardSanctuary {
                             .stream().filter(player1 -> !player1.equals(player))
                             .flatMap(player1 -> {
                                 List<Facet> oppFaceUp = game.getInventory(player1).getFaceUp();
-                                Facet facet = player.chooseDiceFacet(oppFaceUp);
+                                Facet facet = player.chooseFacetToApply(oppFaceUp,game);
                                 facet.getOperation().apply(game,player);
                                 return null;
                             }
