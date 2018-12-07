@@ -24,7 +24,7 @@ public class DiceSanctuaryTest {
     public void testPurshasableFacet(){
         List<Facet> cards = this.diceSanctuary.getPurchasableInventory(12);
 
-        assertEquals(12, cards.size());
+        assertEquals(15, cards.size());
 
         List<Facet> cards2 = this.diceSanctuary.getPurchasableInventory(0);
 
