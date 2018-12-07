@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="1238.0" y="1155.0">com.github.l3pi.sys.Log</node>
+    <node x="1000.0" y="1155.0">com.github.l3pi.game.Dice</node>
+    <node x="544.0" y="1451.0">com.github.l3pi.game.Operation</node>
+    <node x="203.0" y="1451.0">com.github.l3pi.game.GameManager</node>
+    <node x="421.0" y="1451.0">com.github.l3pi.utilities.Tuple</node>
+    <node x="0.0" y="1451.0">com.github.l3pi.game.Facet</node>
+    <node x="0.0" y="124.5">com.github.l3pi.game.Player</node>
+    <node x="0.0" y="1155.0">com.github.l3pi.sys.VictoryCounter</node>
+    <node x="1392.0" y="0.0">com.github.l3pi.game.Card</node>
+    <node x="1089.0" y="0.0">com.github.l3pi.game.Game</node>
+    <node x="1497.0" y="1155.0">com.github.l3pi.App</node>
+    <node x="0.0" y="815.0">com.github.l3pi.bot.IntelligentBot</node>
+    <node x="569.0" y="11.0">java.io.Serializable</node>
+    <node x="305.0" y="1155.0">com.github.l3pi.game.CardSanctuary</node>
+    <node x="0.0" y="492.0">com.github.l3pi.bot.RandomBot</node>
+    <node x="427.75" y="102.0">java.lang.Enum</node>
+    <node x="573.0" y="569.5">com.github.l3pi.type.ResourceType</node>
+    <node x="154.0" y="0.0">java.lang.Comparable</node>
+    <node x="670.0" y="1155.0">com.github.l3pi.game.DiceSanctuary</node>
+    <node x="408.0" y="525.5">com.github.l3pi.type.CardLocationType</node>
+    <node x="740.0" y="0.0">com.github.l3pi.game.Inventory</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.github.l3pi.bot.RandomBot" target="com.github.l3pi.game.Player">
+      <point x="0.0" y="-136.5" />
+      <point x="0.0" y="147.5" />
+    </edge>
+    <edge source="com.github.l3pi.game.Player" target="java.lang.Comparable">
+      <point x="0.0" y="-147.5" />
+      <point x="-40.0" y="26.0" />
+    </edge>
+    <edge source="java.lang.Enum" target="java.lang.Comparable">
+      <point x="-64.75" y="-170.0" />
+      <point x="492.5" y="77.0" />
+      <point x="274.0" y="77.0" />
+      <point x="40.0" y="26.0" />
+    </edge>
+    <edge source="com.github.l3pi.type.CardLocationType" target="java.lang.Enum">
+      <point x="0.0" y="-103.0" />
+      <point x="480.5" y="467.0" />
+      <point x="492.5" y="467.0" />
+      <point x="-64.75" y="170.0" />
+    </edge>
+    <edge source="com.github.l3pi.type.ResourceType" target="java.lang.Enum">
+      <point x="0.0" y="-59.0" />
+      <point x="634.0" y="467.0" />
+      <point x="622.0" y="467.0" />
+      <point x="64.75" y="170.0" />
+    </edge>
+    <edge source="com.github.l3pi.bot.IntelligentBot" target="com.github.l3pi.bot.RandomBot">
+      <point x="0.0" y="-147.5" />
+      <point x="0.0" y="136.5" />
+    </edge>
+    <edge source="java.lang.Enum" target="java.io.Serializable">
+      <point x="64.75" y="-170.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5562998405103667" x="1319.2058486238534" y="1290.318520642202" />
+  <SelectedNodes>
+    <node>com.github.l3pi.sys.Log</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
