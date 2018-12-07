@@ -2,9 +2,7 @@ package com.github.l3pi.game;
 
 import com.github.l3pi.type.ResourceType;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -110,6 +108,27 @@ public class DiceSanctuary {
                 game.getInventory(player).addResources(ResourceType.GLORY, 1);
                 game.getInventory(player).addResources(ResourceType.SOLAR, 1); })),
             new Item(1, 12));
+
+        diceSanctuary.put(new Facet("1 GOLD + LUNAR + GLORY + SOLAR",
+                ((Game game, Player player) -> {
+                    game.addGold(player,1);
+                    game.getInventory(player).addResources(ResourceType.LUNAR, 1);
+                    game.getInventory(player).addResources(ResourceType.GLORY, 1);
+                    game.getInventory(player).addResources(ResourceType.SOLAR, 1); })),
+            new Item(1, 12));
+
+        diceSanctuary.put(new Facet("1 GOLD / LUNAR / SOLAR",
+                ((Game game, Player player) -> {
+                    ResourceType choosenResource = player.chooseResource(new ArrayList<ResourceType>(Arrays.asList(ResourceType.GOLD,ResourceType.LUNAR,ResourceType.SOLAR)));
+                    if(choosenResource == ResourceType.GOLD) {
+                        game.addGold(player, 1);
+                    }
+                    else {
+                        game.getInventory(player).addResources(choosenResource, 1);
+                    }
+                })),
+            new Item(1, 4));
+
 
 
     }
