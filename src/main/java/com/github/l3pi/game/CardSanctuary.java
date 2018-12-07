@@ -61,7 +61,8 @@ public class CardSanctuary {
 
         this.cardSanctuary.put(new Card(2,ResourceType.LUNAR,CardLocationType.LUNAR2,
             (Game game, Player player)->{
-                //Le joueur recois la combinaison de deux faces de ses adversaires (ici les deux des de son seul adversaire)
+                //Le joueur recois la combinaison de deux faces de ses adversaires
+                // (TODO ici les deux des de son seul adversaire, implem 4 joueur)
                 game.getPlayers()
                     .stream().filter(player1 -> !player1.equals(player))
                     .flatMap(player1 -> game.getInventory(player1).throwDices().stream())
