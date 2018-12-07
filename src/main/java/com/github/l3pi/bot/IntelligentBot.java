@@ -296,7 +296,10 @@ public class IntelligentBot extends RandomBot{
 
             int tmp = 0;
             for(int i =0;i<6;i++){
-                tmp += this.facetCoefficient.get(dices.get(indice).getFacet(i));
+                tmp += this.facetCoefficient
+                    .get(dices.get(indice)
+                        .getFacet(i)
+                            .getName());
             }
             if(dcoef>tmp){
                 dcoef=tmp;
@@ -307,8 +310,8 @@ public class IntelligentBot extends RandomBot{
 
         Dice diceChoosen = dices.get(d);
         for(int i =0;i<6;i++) {
-            if(fcoef>this.facetCoefficient.get(diceChoosen.getFacet(i))){
-                fcoef = this.facetCoefficient.get(diceChoosen.getFacet(i));
+            if(fcoef>this.facetCoefficient.get(diceChoosen.getFacet(i).getName())){
+                fcoef = this.facetCoefficient.get(diceChoosen.getFacet(i).getName());
                 f = i;
             }
 
