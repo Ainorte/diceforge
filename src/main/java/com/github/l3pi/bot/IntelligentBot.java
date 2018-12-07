@@ -213,13 +213,13 @@ public class IntelligentBot extends RandomBot{
                 tmp = maxRound*5;
             }
             if(card.getName() == "Le Minotaure"){
-                //TODO
+                tmp =  10*3;
             }
             if(card.getName() == "La Meduse" ){
                 tmp = 14*3;
             }
             if(card.getName() == "Le Miroir Abyssal"){
-                //TODO
+                tmp = 35;
             }
 
             if(coef<tmp){
