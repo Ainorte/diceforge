@@ -1,5 +1,6 @@
 package com.github.l3pi;
 
+import com.github.l3pi.bot.IntelligentBot;
 import com.github.l3pi.bot.RandomBot;
 import com.github.l3pi.game.GameManager;
 import com.github.l3pi.game.Player;
@@ -75,7 +76,7 @@ public class App {
                 players.add(new RandomBot("player4"));
             case 2:
             default:
-                players.add(0, new RandomBot("player1"));
+                players.add(0, new IntelligentBot("player1")); //MODIFIER ICI
                 players.add(1, new RandomBot("player2"));
         }
         GameManager gameManager = new GameManager(players);
