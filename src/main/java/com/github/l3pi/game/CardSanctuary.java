@@ -123,7 +123,7 @@ public class CardSanctuary {
                 //Pas d'effet cette garde ne donne que 26 Gloire
                 game.getInventory(player).addResources(ResourceType.GLORY,26);
             },
-            "L'hydre",
+            "L'Hydre",
             false,
             "%s a reçu 26 gloire"),4);
 
