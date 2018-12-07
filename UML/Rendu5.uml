@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="1423.0" y="0.0">com.github.l3pi.sys.Log</node>
+    <node x="1123.5" y="236.0">com.github.l3pi.game.DiceSanctuary.Item</node>
+    <node x="1427.0" y="1074.0">com.github.l3pi.game.Dice</node>
+    <node x="1102.0" y="1459.0">com.github.l3pi.game.Operation</node>
+    <node x="658.0" y="1459.0">com.github.l3pi.game.GameManager</node>
+    <node x="927.0" y="1459.0">com.github.l3pi.utilities.Tuple</node>
+    <node x="0.0" y="1459.0">com.github.l3pi.game.Facet</node>
+    <node x="0.0" y="0.0">com.github.l3pi.game.Player</node>
+    <node x="563.0" y="1074.0">com.github.l3pi.sys.VictoryCounter</node>
+    <node x="1432.0" y="212.0">com.github.l3pi.sys.Log.State</node>
+    <node x="0.0" y="1074.0">com.github.l3pi.game.Card</node>
+    <node x="786.0" y="0.0">com.github.l3pi.game.Game</node>
+    <node x="243.0" y="1459.0">com.github.l3pi.App</node>
+    <node x="0.0" y="712.0">com.github.l3pi.bot.IntelligentBot</node>
+    <node x="870.0" y="1074.0">com.github.l3pi.game.CardSanctuary</node>
+    <node x="0.0" y="367.0">com.github.l3pi.bot.RandomBot</node>
+    <node x="491.0" y="1459.0">com.github.l3pi.type.ResourceType</node>
+    <node x="1091.0" y="0.0">com.github.l3pi.game.DiceSanctuary</node>
+    <node x="1237.0" y="1074.0">com.github.l3pi.type.CardLocationType</node>
+    <node x="435.0" y="0.0">com.github.l3pi.game.Inventory</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.github.l3pi.sys.Log.State" target="com.github.l3pi.sys.Log">
+      <point x="0.0" y="-92.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="com.github.l3pi.bot.RandomBot" target="com.github.l3pi.game.Player">
+      <point x="0.0" y="-147.5" />
+      <point x="0.0" y="158.5" />
+    </edge>
+    <edge source="com.github.l3pi.bot.IntelligentBot" target="com.github.l3pi.bot.RandomBot">
+      <point x="0.0" y="-158.5" />
+      <point x="0.0" y="147.5" />
+    </edge>
+    <edge source="com.github.l3pi.game.DiceSanctuary.Item" target="com.github.l3pi.game.DiceSanctuary">
+      <point x="0.0" y="-103.5" />
+      <point x="0.0" y="93.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5745481927710844" x="673.0" y="723.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
