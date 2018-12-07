@@ -35,6 +35,10 @@ public class IntelligentBot extends RandomBot{
         this.facetCoefficient.put("2 GOLD + 1 LUNAR",(double)maxRound*4);
         this.facetCoefficient.put("2 GLORY + LUNAR",(double)maxRound*12);
         this.facetCoefficient.put("1 GOLD + LUNAR + GLORY + SOLAR",(double)maxRound*12);
+        this.facetCoefficient.put("1 GOLD / LUNAR / SOLAR",(double)maxRound*12);
+        this.facetCoefficient.put("2 GOLD / LUNAR / SOLAR",(double)maxRound*10);
+
+
 
     }
 
