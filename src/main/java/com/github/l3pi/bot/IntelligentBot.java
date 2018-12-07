@@ -77,17 +77,25 @@ public class IntelligentBot extends RandomBot{
     public Card chooseCard(Game game){
         HashMap<String,Double> cardCoefficient = new HashMap<String, Double>(){};
 
+        cardCoefficient.put("Le Marteau du Forgeron",(double)12);
         cardCoefficient.put("Le Coffre du Forgeron",(double)12);
+
         cardCoefficient.put("Les Sabots d'Argent",(double)12);
         cardCoefficient.put("Les Satyres",(double)(6));
-        cardCoefficient.put("Le Casque d'invisibilité",(double)4);
+
+        cardCoefficient.put("Le Passeur",(double)5);
+        cardCoefficient.put("Le Casque d'invisibilité",(double)6);
+
         cardCoefficient.put("La Pince",(double)8);
-        cardCoefficient.put("L'hydre",(double)(4+4*3));
+        cardCoefficient.put("L'Hydre",(double)(4+4*3));
         cardCoefficient.put("L'Enigme",(double)(4+4*3));
+
         cardCoefficient.put("L'Ancien",(double)(4+4*3));
         cardCoefficient.put("Les Herbes Folles",(double)(4+4*3));
+
         cardCoefficient.put("Les Ailes de la Gardienne",(double)(4+4*3));
         cardCoefficient.put("Le Minotaure",(double)(4+4*3));
+
         cardCoefficient.put("La Meduse",(double)(4+4*3));
         cardCoefficient.put("Le Miroir Abyssal",(double)(4+4*3));
 
