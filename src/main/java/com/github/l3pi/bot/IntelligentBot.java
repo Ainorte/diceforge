@@ -132,7 +132,7 @@ public class IntelligentBot extends RandomBot{
                 int co = 0;
                 for(Player player:players){
 
-                    if(player.getName() != this.getName()){
+                    if(!player.getName().equals(this.getName())){
                         List<Dice> dices = game.getInventory(player).getDices();
                         int c = 0;
                         for(Dice dice:dices){
