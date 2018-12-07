@@ -129,6 +129,18 @@ public class DiceSanctuary {
                 })),
             new Item(1, 4));
 
+        diceSanctuary.put(new Facet("2 GOLD / LUNAR / SOLAR",
+                ((Game game, Player player) -> {
+                    ResourceType choosenResource = player.chooseResource(new ArrayList<ResourceType>(Arrays.asList(ResourceType.GOLD,ResourceType.LUNAR,ResourceType.SOLAR)));
+                    if(choosenResource == ResourceType.GOLD) {
+                        game.addGold(player, 2);
+                    }
+                    else {
+                        game.getInventory(player).addResources(choosenResource, 2);
+                    }
+                })),
+            new Item(1, 12));
+
 
 
     }
