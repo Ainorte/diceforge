@@ -1,199 +1,64 @@
 package com.github.l3pi.game;
 
-import com.github.l3pi.type.ResourceType;
+import com.github.l3pi.sys.Log;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
  * Class made to provide a shop service to the game, managing its own inventory.
  */
 public class DiceSanctuary {
+
+    private HashMap<Facet, Integer> diceSanctuary;
+
+    public DiceSanctuary(HashMap<Facet, Integer> diceSanctuary) {
+        this.diceSanctuary = new HashMap<>(diceSanctuary);
+    }
+
+
     /**
-     * Data class made to be tied with the Sanctuary, to allow
-     * storing of every sanctuary-related metadata associated with a given item.
-     *
-     * @see DiceSanctuary
-     *
-     * la classe locale Item permet de garder l'information de la face restantes dans le sanctuaire et son prix
+     * getAvailableFacets retourne les face de dé restante dans le sanctuaire
      */
-    private static class Item {
-        private int count;
-        private int price;
-
-        Item(int c, int p) {
-            this.count = c;
-            this.price = p;
-        }
-
-        void decreaseCount() {
-            this.count -= 1;
-        }
-
-        boolean isItemPurchable(int goldCount) {
-            return this.price <= goldCount;
-        }
-
-        int getCount() {
-            return count;
-        }
-
-        int getPrice() {
-            return price;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("Prix: %s, Quantité disponible: %s", getPrice(), getCount());
-        }
-    }
-
-    private HashMap<Facet, Item> diceSanctuary = new HashMap<>();
-
-    public DiceSanctuary() {
-        diceSanctuary.put(new Facet("3 GOLD",
-            ((Game game, Player player) -> game.addGold(player,3))),
-            new Item(4, 2));
-        diceSanctuary.put(new Facet("4 GOLD",
-            ((Game game, Player player) -> game.addGold(player,4))),
-            new Item(4, 3));
-        diceSanctuary.put(new Facet("6 GOLD",
-            ((Game game, Player player) -> game.addGold(player,6))),
-            new Item(1, 4));
-
-        diceSanctuary.put(new Facet("1 SOLAR",
-            ((Game game, Player player) -> game.getInventory(player).addResources(ResourceType.SOLAR, 1))),
-            new Item(4, 3));
-        diceSanctuary.put(new Facet("2 SOLAR",
-            ((Game game, Player player) -> game.getInventory(player).addResources(ResourceType.SOLAR, 2))),
-            new Item(4, 8));
-
-        diceSanctuary.put(new Facet("1 LUNAR",
-            ((Game game, Player player) -> game.getInventory(player).addResources(ResourceType.LUNAR, 1))),
-            new Item(4, 2));
-        diceSanctuary.put(new Facet("2 LUNAR",
-            ((Game game, Player player) -> game.getInventory(player).addResources(ResourceType.LUNAR, 2))),
-            new Item(4, 6));
-
-        diceSanctuary.put(new Facet("3 GLORY",
-            ((Game game, Player player) -> game.getInventory(player).addResources(ResourceType.GLORY, 3))),
-            new Item(4, 8));
-
-
-
-        diceSanctuary.put(new Facet("1 GLORY + SOLAR",
-            ((Game game, Player player) -> {
-                game.getInventory(player).addResources(ResourceType.GLORY, 1);
-                game.getInventory(player).addResources(ResourceType.SOLAR, 1);})),
-            new Item(1, 4));
-
-
-        diceSanctuary.put(new Facet("2 GOLD + 1 LUNAR",
-            ((Game game, Player player) -> {
-                game.addGold(player,2);
-                game.getInventory(player).addResources(ResourceType.LUNAR, 1);})),
-            new Item(1, 4));
-
-
-        diceSanctuary.put(new Facet("2 GLORY + LUNAR",
-            ((Game game, Player player) -> {
-                game.getInventory(player).addResources(ResourceType.GLORY, 2);
-                game.getInventory(player).addResources(ResourceType.LUNAR, 2);})),
-            new Item(1, 12));
-
-        diceSanctuary.put(new Facet("1 GOLD + LUNAR + GLORY + SOLAR",
-            ((Game game, Player player) -> {
-                game.addGold(player,1);
-                game.getInventory(player).addResources(ResourceType.LUNAR, 1);
-                game.getInventory(player).addResources(ResourceType.GLORY, 1);
-                game.getInventory(player).addResources(ResourceType.SOLAR, 1); })),
-            new Item(1, 12));
-
-        diceSanctuary.put(new Facet("1 GOLD + LUNAR + GLORY + SOLAR",
-                ((Game game, Player player) -> {
-                    game.addGold(player,1);
-                    game.getInventory(player).addResources(ResourceType.LUNAR, 1);
-                    game.getInventory(player).addResources(ResourceType.GLORY, 1);
-                    game.getInventory(player).addResources(ResourceType.SOLAR, 1); })),
-            new Item(1, 12));
-
-        diceSanctuary.put(new Facet("1 GOLD / LUNAR / SOLAR",
-                ((Game game, Player player) -> {
-                    ResourceType choosenResource = player.chooseResource(new ArrayList<ResourceType>(Arrays.asList(ResourceType.GOLD,ResourceType.LUNAR,ResourceType.SOLAR)));
-                    if(choosenResource == ResourceType.GOLD) {
-                        game.addGold(player, 1);
-                    }
-                    else {
-                        game.getInventory(player).addResources(choosenResource, 1);
-                    }
-                })),
-            new Item(1, 4));
-
-        diceSanctuary.put(new Facet("2 GOLD / LUNAR / SOLAR",
-                ((Game game, Player player) -> {
-                    ResourceType choosenResource = player.chooseResource(new ArrayList<ResourceType>(Arrays.asList(ResourceType.GOLD,ResourceType.LUNAR,ResourceType.SOLAR)));
-                    if(choosenResource == ResourceType.GOLD) {
-                        game.addGold(player, 2);
-                    }
-                    else {
-                        game.getInventory(player).addResources(choosenResource, 2);
-                    }
-                })),
-            new Item(1, 12));
-
-
-
-    }
-
-
-    /**getAvailableInventory retourne les face de dé restante dans le sanctuaire
-     *
-     * */
-    public List<Facet> getAvailableInventory() {
-        return diceSanctuary.entrySet().stream().filter(entry -> entry.getValue().getCount() > 0)
+    public List<Facet> getAvailableFacets() {
+        return diceSanctuary.entrySet().stream().filter(entry -> entry.getValue() > 0)
             .map(Map.Entry::getKey)
             .collect(Collectors.toList());
     }
 
-    /**getPurchasableInventory retourne une liste de face de dé achetable avec un prix donné en argument
+    /**
+     * getPurchasableFacets retourne une liste de face de dé achetable avec un prix donné en argument
+     *
      * @param gold le potentiel pouvoir d'achat
-     * */
+     */
 
-    public List<Facet> getPurchasableInventory(int gold) {
-        return diceSanctuary.entrySet().stream().filter(entry -> (entry.getValue().getCount() > 0 && entry.getValue().isItemPurchable(gold)))
+    public List<Facet> getPurchasableFacets(int gold) {
+        return diceSanctuary.entrySet().stream().filter(entry -> (entry.getValue()) > 0 && entry.getKey().getGoldCost() <= gold)
             .map(Map.Entry::getKey)
             .collect(Collectors.toList());
     }
 
-    /**buyFacet retourne la face de dés acheté dans le sanctuaire
-     * @param facet  la face de dés séléctionné pour l'achat dans le sanctuaire
+    /**
+     * buyFacet retourne la face de dés acheté dans le sanctuaire
      *
-     * */
+     * @param facet la face de dés séléctionné pour l'achat dans le sanctuaire
+     */
 
 
     Facet buyFacet(Facet facet) {
-        if (facet != null) {
-            if (diceSanctuary.get(facet).getCount() > 0) {
-                diceSanctuary.get(facet).decreaseCount();
-                return facet;
-            }
-
+        if (diceSanctuary.getOrDefault(facet, 0) > 0) {
+            diceSanctuary.merge(facet, 1, Math::subtractExact);
+            return facet;
         }
         return null;
     }
 
-    /** Retourne le prix d'une face dans le sanctuaire
-     * @param facet  la face de dés séléctionné
-     * */
-
-    public int getPriceForFacet(Facet facet) {
-        return diceSanctuary.containsKey(facet) ? diceSanctuary.get(facet).getPrice() : 0;
-    }
-
     @Override
     public String toString() {
-        return diceSanctuary.entrySet().stream()
-            .map(facet -> String.format("État de facette de dé \"%s\": %s", facet.getKey(), facet.getValue()))
-            .collect(Collectors.joining("\n"));
+        return Log.State.fmt(Log.State.GREEN, diceSanctuary.entrySet().stream()
+            .map(facet -> String.format("\tÉtat de facette de dé \"%s\": Prix: %s, Quantité disponible: %s", facet.getKey(), facet.getKey().getGoldCost(), facet.getValue()))
+            .collect(Collectors.joining("\n")));
     }
 }
