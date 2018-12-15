@@ -53,13 +53,15 @@ public class VictoryCounter {
 
         final int totalWinCount = (int) getTotalWinCount();
         b.append(String.format("Il y a eu %d parties\n", playCounter));
-        b.append(String.format("Il y a eu un total commun de %d victoire%s\n", totalWinCount, totalWinCount != 1 ? "s" : ""));
-        b.append(Log.State.fmt(Log.State.STATUS, "Nombre de victoires\n"));
+        b.append(String.format("Il y a eu un total cumulé de %d victoire%s\n", totalWinCount, totalWinCount != 1 ? "s" : ""));
+        b.append(Log.State.fmt(Log.State.BLUE, "Nombre de victoires\n"));
         scores.forEach(
             (player, score) ->
                 b
+                    .append(Log.State.GREEN)
                     .append("\t- ")
                     .append(player)
+                    .append(Log.State.GREEN)
                     .append(": ")
                     .append(score)
                     .append(" (")
@@ -67,6 +69,7 @@ public class VictoryCounter {
                     .append("%)\n")
         );
 
+        b.append(Log.State.RESET);
         return b.toString();
     }
 
