@@ -70,11 +70,13 @@ public class IntelligentBot extends Player {
         Dice dice1 = mydices.get(0);
         Dice dice2 = mydices.get(1);
 
+        List<Facet> facetGold = facetList.stream().filter(x -> x.getName().contains("GOLD")).collect(Collectors.toList());
+
         if (game.getRound() <= 3 &&
             (dice1.getFacets().stream().mapToInt(x -> this.facetCoefficient.get(x.getName())).sum() <= 9) &&
-            (dice1.getFacets().stream().filter(x -> x.getName().contains("GOLD")).count()) >= 5) {
+            (dice1.getFacets().stream().filter(x -> x.getName().contains("GOLD")).count()) >= 5 &&
+            facetGold.size()> 0) {
 
-            List<Facet> facetGold = facetList.stream().filter(x -> x.getName().contains("GOLD")).collect(Collectors.toList());
 
             int bestFacetcoef = this.facetCoefficient.get("1 GOLD");
             Facet f = facetGold.get(0);
