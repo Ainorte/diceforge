@@ -61,7 +61,8 @@ public class RandomBotTest {
 
     @Test
     public void chooseAction() {
-        assertTrue(bot.chooseAction(game) == 0 || bot.chooseAction(game) == 1);
+        int result = bot.chooseAction(game);
+        assertTrue(result == 0 || result == 1);
     }
 
     @Test
