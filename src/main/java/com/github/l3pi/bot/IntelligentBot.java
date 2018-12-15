@@ -6,44 +6,50 @@ import com.github.l3pi.type.ResourceType;
 import com.github.l3pi.utilities.Tuple;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
-public class IntelligentBot extends RandomBot{
+public class IntelligentBot extends Player{
     private Random gen;
     private CardLocationType location = null;
     private int maxRound;
-    private HashMap<String,Double> facetCoefficient = new HashMap<>();
+    private HashMap<String,Integer> facetCoefficient = new HashMap<>();
 
     /** Cette classe représente un bot qui effectue les actions avec décision
-     * @param name le nom du bot
+     * @param number le numero du bot
+     *
+     * Gloire == victoire
+     *             je commence dés un 5 a 7 or dés avec 1 lune
+     *             ensuite , or et victoire , victoire olei , victoire lune , grosse fasse victoire ,
+     *             l'autre dé x3 soleil , triple selection a double ressource
+     *
      *
      * */
-    public IntelligentBot(String name) {
-        super(name);
+    public IntelligentBot(int number) {
+        super(number);
         gen = new Random();
         this.maxRound = 9;
 
-        this.facetCoefficient.put("1 GOLD",(double)maxRound*1);
-        this.facetCoefficient.put("3 GOLD",(double)maxRound*3);
-        this.facetCoefficient.put("4 GOLD",(double)maxRound*4);
-        this.facetCoefficient.put("6 GOLD",(double)maxRound*6);
-        this.facetCoefficient.put("1 SOLAR",(double)maxRound*2.5);
-        this.facetCoefficient.put("2 SOLAR",(double)maxRound*7);
-        this.facetCoefficient.put("1 LUNAR",(double)maxRound*2);
-        this.facetCoefficient.put("2 LUNAR",(double)maxRound*5);
-        this.facetCoefficient.put("2 GLORY",(double)maxRound*5);
-        this.facetCoefficient.put("3 GLORY",(double)maxRound*7);
-        this.facetCoefficient.put("1 GLORY + SOLAR",(double)maxRound*4);
-        this.facetCoefficient.put("2 GOLD + 1 LUNAR",(double)maxRound*4);
-        this.facetCoefficient.put("2 GLORY + LUNAR",(double)maxRound*12);
-        this.facetCoefficient.put("1 GOLD + LUNAR + GLORY + SOLAR",(double)maxRound*12);
-        this.facetCoefficient.put("1 GOLD / LUNAR / SOLAR",(double)maxRound*12);
-        this.facetCoefficient.put("2 GOLD / LUNAR / SOLAR",(double)maxRound*10);
+        this.facetCoefficient.put("1 GOLD",1);
+        this.facetCoefficient.put("3 GOLD",3);
+        this.facetCoefficient.put("4 GOLD",4);
+        this.facetCoefficient.put("6 GOLD",6);
+        this.facetCoefficient.put("1 SOLAR",2);
+        this.facetCoefficient.put("2 SOLAR",4);
+        this.facetCoefficient.put("1 LUNAR",3);
+        this.facetCoefficient.put("2 LUNAR",6);
+        this.facetCoefficient.put("2 GLORY", 8);
+        this.facetCoefficient.put("3 GLORY",12);
+        this.facetCoefficient.put("4 GLORY", 16);
+        this.facetCoefficient.put("1 GLORY + SOLAR",6);
+        this.facetCoefficient.put("2 GOLD + 1 LUNAR",5);
+        this.facetCoefficient.put("2 GLORY + LUNAR",11);
+        this.facetCoefficient.put("1 GOLD + LUNAR + GLORY + SOLAR",11);
+        this.facetCoefficient.put("1 GOLD / LUNAR / SOLAR", 6);
+        this.facetCoefficient.put("2 GOLD / LUNAR / SOLAR", 7);
+        this.facetCoefficient.put("3 GOLD / 2 GLORY", 11);
 
-        this.facetCoefficient.put("x3",(double)maxRound*4);
-        this.facetCoefficient.put("MIRROR",(double)maxRound*0);
-
-
-
+        this.facetCoefficient.put("x3", 20);
+        this.facetCoefficient.put("MIRROR", 20);
 
     }
 
@@ -60,15 +66,79 @@ public class IntelligentBot extends RandomBot{
 
 
         List<Dice> mydices = game.getInventory(this).getDices();
-        for(Dice dice: mydices){
-            for(int i= 0;i<6;i++){
-                for(Facet facet:facetList){
-                    if(this.facetCoefficient.get(dice.getFacet(i).getName()) < this.facetCoefficient.get(facet.getName())){
-                        return facet;
-                    }
+        Dice dice1 = mydices.get(0);
+        Dice dice2 = mydices.get(1);
+
+        if(game.getRound() <= 3 &&
+            (dice1.getFacets().stream().mapToInt(x->this.facetCoefficient.get(x.getName())).sum() <= 9)&&
+            (dice1.getFacets().stream().filter(x->x.getName().contains("GOLD")).count())>=5)
+        {
+
+            List<Facet> facetGold = facetList.stream().filter(x->x.getName().contains("GOLD")).collect(Collectors.toList());
+
+            int bestFacetcoef = this.facetCoefficient.get("1 GOLD");
+            Facet f = facetGold.get(0);
+            for(Facet facet : facetGold){
+                if(bestFacetcoef<this.facetCoefficient.get(facet.getName())){
+                    bestFacetcoef = this.facetCoefficient.get(facet.getName());
+                    f = facet;
                 }
             }
+            return f;
+
+        } else if (game.getRound() >= 2 && (dice1.getFacets().stream().mapToInt(x -> this.facetCoefficient.get(x.getName())).sum() > 9)) {
+
+            for(Facet facet:facetList){
+                if (facet.getName().equals("1 GOLD + LUNAR + GLORY + SOLAR")) {
+                    return facet;
+                }
+            }
+
+            for (Facet facet : facetList) {
+                if (facet.getName().equals("3 GOLD / 2 GLORY")) {
+                    return facet;
+                }
+            }
+
+            for (Facet facet : facetList) {
+                if (facet.getName().equals("1 GLORY + SOLAR")) {
+                    return facet;
+                }
+            }
+            for (Facet facet : facetList) {
+                if (facet.getName().equals("2 GLORY + LUNAR")) {
+                    return facet;
+                }
+            }
+
+            for (Facet facet : facetList) {
+                if (facet.getName().equals("2 GOLD / LUNAR / SOLAR")) {
+                    return facet;
+                }
+            }
+
+            List<Facet> facetsGlory = facetList.stream()
+                .filter(x -> x.getName().contains("4 GLORY") || x.getName().contains("3 GLORY") || x.getName().contains("2 GLORY"))
+                .collect(Collectors.toList());
+
+            if (facetsGlory.size() != 0) {
+                int fcoef = 0;
+                Facet coucou = facetsGlory.get(0);
+                for (Facet facet : facetsGlory) {
+                    if (fcoef < this.facetCoefficient.get(facet.getName())) {
+                        fcoef = this.facetCoefficient.get(facet.getName());
+                        coucou = facet;
+                    }
+                }
+                return coucou;
+            }
+
         }
+        return null;
+    }
+
+    @Override
+    public Facet chooseFacetToApply(List<Facet> facetList, Game game) {
         return null;
     }
 
@@ -82,17 +152,17 @@ public class IntelligentBot extends RandomBot{
     public Card chooseCard(Game game){
         HashMap<String,Double> cardCoefficient = new HashMap<String, Double>(){};
 
-        cardCoefficient.put("Le Marteau du Forgeron",(double)12);
+        cardCoefficient.put("Le Marteau du Forgeron", (double) 12);
         cardCoefficient.put("Le Coffre du Forgeron",(double)12);
 
         cardCoefficient.put("Les Sabots d'Argent",(double)12);
         cardCoefficient.put("Les Satyres",(double)(6));
 
-        cardCoefficient.put("Le Passeur",(double)5);
-        cardCoefficient.put("Le Casque d'invisibilité",(double)6);
+        cardCoefficient.put("Le Passeur", (double) 5);
+        cardCoefficient.put("Le Casque d'invisibilité", (double) 6);
 
         cardCoefficient.put("La Pince",(double)8);
-        cardCoefficient.put("L'Hydre",(double)(4+4*3));
+        cardCoefficient.put("L'Hydre", (double) (4 + 4 * 3));
         cardCoefficient.put("L'Enigme",(double)(4+4*3));
 
         cardCoefficient.put("L'Ancien",(double)(4+4*3));
@@ -104,7 +174,7 @@ public class IntelligentBot extends RandomBot{
         cardCoefficient.put("La Meduse",(double)(4+4*3));
         cardCoefficient.put("Le Miroir Abyssal",(double)(4+4*3));
 
-        List<Card> purchasableCards = game.getCardSanctuary().getPurchasableCard(game.getInventory(this));
+        List<Card> purchasableCards = game.getCardSanctuary().getPurchasableCard(game.getInventory(this).getResources());
         if(purchasableCards.size() == 0){
             return null;
         }
@@ -113,10 +183,10 @@ public class IntelligentBot extends RandomBot{
         int coef = 0 ;
         for(Card card:purchasableCards){
             int tmp = 0;
-            if(card.getName() == "Le Coffre du Forgeron" ){
+            if (card.getName().equals("Le Coffre du Forgeron")) {
                 tmp = game.getInventory(this).getResource(ResourceType.GOLD)*20;
             }
-            if(card.getName() == "Les Sabots d'Argent"){
+            if (card.getName().equals("Les Sabots d'Argent")) {
                 List<Dice> dices = game.getInventory(this).getDices();
                 int diceCoef=0;
                 for(Dice dice:dices){
@@ -129,22 +199,22 @@ public class IntelligentBot extends RandomBot{
                     }
 
                 }
-                tmp = diceCoef*(this.maxRound-game.getActualRound());
+                tmp = diceCoef * (this.maxRound - game.getRound());
             }
-            if(card.getName() == "Les Satyres"){
-                Set<Player> players = game.getPlayers();
+            if (card.getName().equals("Les Satyres")) {
+                HashMap<Integer, Inventory> inventories = game.getInventories();
                 int co = 0;
-                for(Player player:players){
+                for (Map.Entry<Integer, Inventory> inventory : inventories.entrySet()) {
 
-                    if(!player.getName().equals(this.getName())){
-                        List<Dice> dices = game.getInventory(player).getDices();
+                    if (!inventory.getKey().equals(this.getId())) {
+                        List<Dice> dices = inventory.getValue().getDices();
                         int c = 0;
                         for(Dice dice:dices){
                             for(int i =0;i<6;i++){
-                                c+= this.facetCoefficient
+                                c += this.facetCoefficient
                                     .get(
-                                    dice.getFacet(i)
-                                        .getName());
+                                        dice.getFacet(i)
+                                            .getName());
                             }
                             if(co < c){
                                 co = c;
@@ -157,7 +227,7 @@ public class IntelligentBot extends RandomBot{
 
 
             }
-            if(card.getName() == "Le Casque d'invisibilité"){
+            if (card.getName().equals("Le Casque d'invisibilité")) {
                 List<Dice> dices = game.getInventory(this).getDices();
                 int c = 0;
                 for(Dice dice:dices){
@@ -170,12 +240,12 @@ public class IntelligentBot extends RandomBot{
 
                     if(c < co){
                         c = co;
-                }
+                    }
                 }
                 tmp = c;
 
             }
-            if(card.getName() == "La Pince"){
+            if (card.getName().equals("La Pince")) {
                 List<Dice> dices = game.getInventory(this).getDices();
                 int co = 0;
                 for(Dice dice:dices){
@@ -186,10 +256,10 @@ public class IntelligentBot extends RandomBot{
                 tmp = co;
 
             }
-            if(card.getName() == "L'hydre"){
+            if (card.getName().equals("L'hydre")) {
                 tmp = 26*3;
             }
-            if(card.getName() == "L'Enigme"){
+            if (card.getName().equals("L'Enigme")) {
                 List<Dice> dices = game.getInventory(this).getDices();
                 int co = 0;
                 for(Dice dice:dices){
@@ -203,23 +273,23 @@ public class IntelligentBot extends RandomBot{
                 }
                 tmp = co;
             }
-            if(card.getName() == "L'Ancien"){
-                tmp = 40;
+            if (card.getName().equals("L'Ancien")) {
+                tmp = this.maxRound*3;
             }
-            if(card.getName() == "Les Herbes Folles"){
+            if (card.getName().equals("Les Herbes Folles")) {
                 tmp = 21;
             }
-            if(card.getName() == "Les Ailes de la Gardienne"){
+            if (card.getName().equals("Les Ailes de la Gardienne")) {
                 tmp = maxRound*5;
             }
-            if(card.getName() == "Le Minotaure"){
-                tmp =  10;
+            if (card.getName().equals("Le Minotaure")) {
+                tmp = 10 * 3;
             }
-            if(card.getName() == "La Meduse" ){
+            if (card.getName().equals("La Meduse")) {
                 tmp = 14*3;
             }
-            if(card.getName() == "Le Miroir Abyssal"){
-                tmp = 20;
+            if (card.getName().equals("Le Miroir Abyssal")) {
+                tmp = 35;
             }
 
             if(coef<tmp){
@@ -239,7 +309,11 @@ public class IntelligentBot extends RandomBot{
 
     @Override
     public int chooseAction(Game game){
-        return this.gen.nextInt(2);
+        List<Card> cards = game.getCardSanctuary().getPurchasableCard(game.getInventory(this).getResources());
+        if(cards.size()>=8){
+            return 1;
+        }
+        return 0;
     }
 
     /** Cette fonction est utilisé par les effects de cartes et non directement par le bot lui meme
@@ -249,9 +323,8 @@ public class IntelligentBot extends RandomBot{
 
     @Override
     public ResourceType chooseResource(List<ResourceType> resource){
-
         Collections.shuffle(resource);
-        return  resource.get(0);
+        return resource.get(0);
     }
 
     /** Cette fonction est utilisé par les effects de cartes et non directement par le bot lui meme
@@ -276,7 +349,7 @@ public class IntelligentBot extends RandomBot{
     @Override
     public int chooseDice(List<Dice> dices){
         return this.gen.nextInt(dices.size());
-    };
+    }
 
     /** Cette fonction prend le tour en cours et une face de dé et choisis quel dé et quel face
      * forger la nouvelle face de dé acheté depuis le sanctuaire des dés
@@ -288,7 +361,7 @@ public class IntelligentBot extends RandomBot{
 
 
     @Override
-    public int[] forgeMyDice(Game game,Facet facet) {
+    public int[] forgeDice(Game game, Facet facet) {
         List<Dice> dices = game.getInventory(this).getDices();
         int d = 0;
         int dcoef = 999999999;
@@ -302,7 +375,7 @@ public class IntelligentBot extends RandomBot{
                 tmp += this.facetCoefficient
                     .get(dices.get(indice)
                         .getFacet(i)
-                            .getName());
+                        .getName());
             }
             if(dcoef>tmp){
                 dcoef=tmp;
@@ -332,19 +405,12 @@ public class IntelligentBot extends RandomBot{
 
     @Override
     public Tuple<Integer, Integer> chooseGoldRepartion(Inventory inventory, int gold) {
-        int inv = inventory.getMaxRessources(ResourceType.GOLD) - inventory.getResource(ResourceType.GOLD);
-        int hammer = (30 - inventory.getHammerGold()) + (inventory.getActiveHammerCardCount()-1)*30;
+        return new Tuple<>(0,0);
+    }
 
-        if(gen.nextInt(2) == 0){
-            int i = gold <= inv ? gold : inv;
-            int h = gold - i <= hammer ? gold - i : hammer;
-            return new Tuple<>(i,h);
-        }
-        else {
-            int h = gold <= hammer ? gold : hammer;
-            int i = gold - h <= inv ? gold - h : inv;
-            return new Tuple<>(i,h);
-        }
+    @Override
+    public boolean moreAction(Game game) {
+        return true;
     }
 
 }
