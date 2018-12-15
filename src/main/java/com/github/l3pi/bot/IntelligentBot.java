@@ -79,14 +79,7 @@ public class IntelligentBot extends Player {
 
 
             int bestFacetcoef = this.facetCoefficient.get("1 GOLD");
-            Facet f = facetGold.get(0);
-            for (Facet facet : facetGold) {
-                if (bestFacetcoef < this.facetCoefficient.get(facet.getName())) {
-                    bestFacetcoef = this.facetCoefficient.get(facet.getName());
-                    f = facet;
-                }
-            }
-            return f;
+            return getFacet(facetGold, bestFacetcoef);
 
         } else if (game.getRound() >= 2 && (dice1.getFacets().stream().mapToInt(x -> this.facetCoefficient.get(x.getName())).sum() > 9)) {
 
@@ -125,18 +118,22 @@ public class IntelligentBot extends Player {
 
             if (facetsGlory.size() != 0) {
                 int fcoef = 0;
-                Facet coucou = facetsGlory.get(0);
-                for (Facet facet : facetsGlory) {
-                    if (fcoef < this.facetCoefficient.get(facet.getName())) {
-                        fcoef = this.facetCoefficient.get(facet.getName());
-                        coucou = facet;
-                    }
-                }
-                return coucou;
+                return getFacet(facetsGlory, fcoef);
             }
 
         }
         return null;
+    }
+
+    private Facet getFacet(List<Facet> facetsGlory, int fcoef) {
+        Facet coucou = facetsGlory.get(0);
+        for (Facet facet : facetsGlory) {
+            if (fcoef < this.facetCoefficient.get(facet.getName())) {
+                fcoef = this.facetCoefficient.get(facet.getName());
+                coucou = facet;
+            }
+        }
+        return coucou;
     }
 
     @Override
