@@ -1,53 +1,66 @@
 package com.github.l3pi.sys;
 
+import com.github.l3pi.game.Player;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
+@RunWith(MockitoJUnitRunner.class)
 public class VictoryCounterTest {
-    private static final String DEFAULT = "meow";
+    private Player player1;
+    private Player player2;
+    private Player player3;
 
     private VictoryCounter counter;
 
     @Before
     public void initCounter() {
+        player1 = mock(Player.class);
+        player2 = mock(Player.class);
+        player3 = mock(Player.class);
+
         counter = new VictoryCounter(
-            new ArrayList<String>() {{
-                add(DEFAULT);
+            new ArrayList<Player>() {{
+                add(player1);
+                add(player2);
             }}
         );
     }
 
     @Test
     public void testThatScoresAreInitializedAt0() {
-        assertEquals(0, counter.getVictoryCountFor(DEFAULT));
+        assertEquals(0, counter.getVictoryCountFor(player1));
+        assertEquals(0, counter.getVictoryCountFor(player2));
+
         // The counter should ignore nonexistence and just count it as "0" points
-        assertEquals(0, counter.getVictoryCountFor("nonexistent"));
+        assertEquals(0, counter.getVictoryCountFor(player3));
     }
 
     @Test
     public void testThatScoreIsIncremented() {
-        assertEquals(0, counter.getVictoryCountFor(DEFAULT));
-        counter.addVictoryFor(new ArrayList<String>() {{
-            add(DEFAULT);
+
+        counter.addVictoryFor(new ArrayList<Player>() {{
+            add(player1);
         }});
-        assertEquals(1, counter.getVictoryCountFor(DEFAULT));
-        // The counter should ignore nonexistence and just count it as "0" points
-        assertEquals(0, counter.getVictoryCountFor("nonexistent"));
+
+        assertEquals(1, counter.getVictoryCountFor(player1));
+        assertEquals(0, counter.getVictoryCountFor(player2));
     }
 
     @Test
     public void testThatScoreForNonexistentPlayerIsntIncremented() {
-        assertEquals(0, counter.getVictoryCountFor("nonexistent"));
-        counter.addVictoryFor(new ArrayList<String>() {{
-            add("nonexistent");
+        counter.addVictoryFor(new ArrayList<Player>() {{
+            add(player3);
         }});
-        assertEquals(0, counter.getVictoryCountFor("nonexistent"));
+        assertEquals(0, counter.getVictoryCountFor(player2));
     }
 
     /**
@@ -57,7 +70,10 @@ public class VictoryCounterTest {
      */
     @Test
     public void testThatTotalWinnerCountNeverPassesPlayCount() {
-        final List<String> players = Arrays.asList("1", "2", "3", "4");
+        List<Player> players = new ArrayList<Player>() {{
+            add(player1);
+            add(player2);
+        }};
         counter = new VictoryCounter(players);
 
         for (int i = 0; i < 100; ++i) {
@@ -66,7 +82,7 @@ public class VictoryCounterTest {
         }
 
         int totalScore = 0;
-        for (String player : players) {
+        for (Player player : players) {
             totalScore += counter.getVictoryCountFor(player);
         }
         assertTrue(totalScore <= counter.getPlayCount() * players.size());
