@@ -1,11 +1,15 @@
 package com.github.l3pi.game;
 
+import com.github.l3pi.sys.Log;
 import com.github.l3pi.type.ResourceType;
+import com.github.l3pi.utilities.Tuple;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.github.l3pi.sys.Log.log;
 
 /**
  * Class tasked with storing a player's inventory (every associated chunk of data), including, but not limited to,
@@ -13,235 +17,193 @@ import java.util.stream.Collectors;
  */
 public class Inventory {
 
-    /** Cette classe représente une inventaire d'un joueur
-     *
+    /**
+     * Cette classe représente une inventaire d'un joueur
+     * <p>
      * resources c'est le hashmap qui associe un type de ressource et son nombre que posséde le joueur
      * dices c'est une liste de 2 dés
      * extension pour indiqué combien est étendue les capacité de l'inventaire
-     * cards c'est la liste des cartes que posséde de le joueur
-     *
-     * @param gold on initialise un inventaire avec ses golds
-     * */
-
-    private final List<Facet> faceInventory;
+     * cardInventory c'est la liste des cartes que posséde de le joueur
+     */
 
     private final HashMap<ResourceType, Integer> resources;
 
     private List<Dice> dices;
 
+    private final List<Facet> facetInventory;
+
+    private List<Card> cardInventory;
+
     private int extension;
 
-    private List<Card> cards;
+    private Hammer hammer;
 
-    private int hammerGold;
+    public Inventory(HashMap<ResourceType, Integer> resources, List<Dice> dices, List<Facet> facetInventory, List<Card> cardInventory, int extension, Hammer hammer) {
 
-    private int hammerCard;
+        this.resources = new HashMap<ResourceType, Integer>(resources);
+        this.dices = new ArrayList<>(dices);
+        this.facetInventory = new ArrayList<Facet>(facetInventory);
+        this.cardInventory = new ArrayList<Card>(cardInventory);
+        this.extension = extension;
+        this.hammer = hammer;
+    }
 
-    public Inventory(int gold) {
-        ArrayList dice1 = new ArrayList<Facet>() {{
-            add(new Facet("1 GOLD",
-                ((Game game, Player player) -> game.addGold(player, 1))));
-            add(new Facet("1 GOLD",
-                ((Game game, Player player) -> game.addGold(player, 1))));
-            add(new Facet("1 GOLD",
-                ((Game game, Player player) -> game.addGold(player, 1))));
-            add(new Facet("1 GOLD",
-                ((Game game, Player player) -> game.addGold(player, 1))));
-            add(new Facet("1 GOLD",
-                ((Game game, Player player) -> game.addGold(player, 1))));
-            add(new Facet("1 SOLAR",
-                ((Game game, Player player) -> game.getInventory(player).addResources(ResourceType.SOLAR, 1))));
-        }};
-
-        ArrayList dice2 = new ArrayList<Facet>() {{
-            add(new Facet("1 GOLD",
-                ((Game game, Player player) -> game.addGold(player, 1))));
-            add(new Facet("1 GOLD",
-                ((Game game, Player player) -> game.addGold(player, 1))));
-            add(new Facet("1 GOLD",
-                ((Game game, Player player) -> game.addGold(player, 1))));
-            add(new Facet("1 GOLD",
-                ((Game game, Player player) -> game.addGold(player, 1))));
-            add(new Facet("1 LUNAR",
-                ((Game game, Player player) -> game.getInventory(player).addResources(ResourceType.LUNAR, 1))));
-            add(new Facet("2 GLORY", 
-                ((Game game, Player player) -> game.getInventory(player).addResources(ResourceType.GLORY, 2))));
-        }};
-
-        this.dices = new ArrayList<Dice>(){{
-            add(new Dice(dice1));
-            add(new Dice(dice2));
-        }};
-
-        this.resources = new HashMap<ResourceType,Integer>(){{
+    public Inventory(List<Dice> dices) {
+        this(new HashMap<ResourceType, Integer>() {{
             put(ResourceType.GOLD, 0);
             put(ResourceType.LUNAR, 0);
             put(ResourceType.SOLAR, 0);
             put(ResourceType.GLORY, 0);
-        }};
-
-        this.faceInventory = new ArrayList<Facet>();
-        this.extension = 0;
-        this.cards = new ArrayList<Card>() {
-        };
-
-        addResources(ResourceType.GOLD,gold);
-
-        this.hammerCard = 0;
-        this.hammerGold = 0;
+        }}, dices, new ArrayList<>(), new ArrayList<>(), 0, new Hammer());
     }
 
-
-     /**getMaxRessources retourne le max possible de place dans l'inventaire pour une ressoure donné , si
-      * une ressource a étendue son maximum de capacité
-      *
-      * @param resourceType  c'est le type de ressource
-      * */
-
-     public int getMaxRessources(ResourceType resourceType){
-        switch (resourceType){
-            case GLORY:
-                return Integer.MAX_VALUE;
-            case GOLD :
-                return 12 + (4 * extension);
-            case LUNAR: case SOLAR:
-                return  6 + (3 * extension);
-            default:
-                return 0;
-        }
-     }
-
-     /** retourne une liste de 2 face qui correspond aux 2 lancé de dé , sont les face du lancé de dé
-      *
-      *
-      * */
-
-    List<Facet> throwDices() {  // == Faveur Majeur
-        return dices.stream().map(Dice::throwDice).collect(Collectors.toList());
-    }
-
-    /** forge modifié le dé de l'inventaire , fait appel aux méthode de la classe dé et face de dé
-     *
-     * */
-
-    void forge(Facet facetToForge,int choosenDice,int choosenFacet){
-        if (facetToForge != null) {
-            Dice dice = this.dices.get(choosenDice);
-            dice.addFace(facetToForge,choosenFacet);
-            this.dices.set(choosenDice,dice);
-        }
-    }
-    /** getDices retourne une liste de 2 element correspondant aux dés
-     *
-     * */
-
-    public List<Dice> getDices() {
-        return new ArrayList<>(dices);
-    }
-
-    /** retourne les face en haut du dé , visible au joueur pour les 2 dé
-     *
-     * */
-
-    public List<Facet> getFaceUp() {
-        return dices.stream().map(Dice::getFaceUp).collect(Collectors.toList());
-    }
-
-
-
-    public List<Facet> getFaceInventory() {
-        return new ArrayList<>(faceInventory);
-    }
     /**
-     * incrémente les extention de ressources
-     * */
-
-    void addExtension(){
-        extension++;
+     * @return toutes les ressources
+     */
+    public HashMap<ResourceType, Integer> getResources() {
+        return new HashMap<>(resources);
     }
-    /**getResource
-     * retourne le nombre de ressour que le joueur posséde pour un type de ressource donné en argument
-     * @param resourceType  le type de ressource que le joueur veut savoir combien il posséde
-     *
-     * */
 
+    /**
+     * getResource
+     * retourne le nombre de ressour que le joueur posséde pour un type de ressource donné en argument
+     *
+     * @param resourceType le type de ressource que le joueur veut savoir combien il posséde
+     */
     public int getResource(ResourceType resourceType) {
         return resources.get(resourceType);
     }
 
-    /** ajoute une valeur de ressource existante dans l'inventaire du joueur
-     * @param resourceType  le type de ressource
-     * @param value  le nombre de ressource a ajouter
+    /**
+     * getMaxRessources retourne le max possible de place dans l'inventaire pour une ressoure donné , si
+     * une ressource a étendue son maximum de capacité
      *
-     * */
+     * @param resourceType c'est le type de ressource
+     */
+    public int getMaxRessources(ResourceType resourceType) {
+        switch (resourceType) {
+            case GLORY:
+                return Integer.MAX_VALUE;
+            case GOLD:
+                return 12 + (4 * extension);
+            case LUNAR:
+            case SOLAR:
+                return 6 + (3 * extension);
+            default:
+                return 0;
+        }
+    }
 
-    public void addResources(ResourceType resourceType, int value) {
+    /**
+     * ajoute une valeur de ressource existante dans l'inventaire du joueur
+     *
+     * @param resourceType le type de ressource
+     * @param value        le nombre de ressource a ajouter
+     */
+    void addResources(ResourceType resourceType, int value) {
         int currentValue = resources.get(resourceType);
         int max = this.getMaxRessources(resourceType);
-        if((currentValue + value) >=0 && (currentValue + value) < max){
+        if (value < 0) {
+            resources.merge(resourceType, currentValue + value >= 0 ? value : -currentValue, Integer::sum);
+        } else if ((currentValue + value) >= 0 && (currentValue + value) < max) {
             resources.merge(resourceType, value, Integer::sum);
+        } else {
+            resources.merge(resourceType, max - currentValue, Integer::sum);
         }
-        else{
-            resources.merge(resourceType, max - currentValue , Integer::sum);
-        }
-    }
-    /**Ajouer une carte dans l'inventaire
-     * */
-
-    void addCard(Card card){
-        this.cards.add(card);
-    }
-    /**Retourne toute les carte disponible dans l'inventaire
-     * */
-
-    public List<Card> getCards(){
-     return new ArrayList<Card>(this.cards);
     }
 
-    public int getActiveHammerCardCount(){
-        return hammerCard - hammerGold/30;
-    }
-    public int getHammerGold(){
-        return hammerGold - ((hammerCard - getActiveHammerCardCount())*30);
-    }
-
-    /*
-     *@return nb of GOLRY win
+    /**
+     * Function pour Hammergold , permet de rajouter du gold sur la carte de deplacement de cette carte
+     *
+     * @param player le joueur qui effectue l'action
+     * @param gold   le nombre de gold
      */
-    int addGoldHammer(int gold){
-        int glory = 0;
-        while (gold > 0){
-            int tmp = (gold > 30 - getHammerGold() ? 30 - getHammerGold() : gold);
-            gold -= tmp;
-            glory += addGoldHammerOneCard(tmp);
+     public void addGold(Player player, int gold) {
+        Hammer hammer = getHammer();
+        if (hammer.getCardCount() > 0 && getMaxRessources(ResourceType.GOLD) > getResource(ResourceType.GOLD)) {
+            Tuple<Integer, Integer> repartition = player.chooseGoldRepartion(this, gold);
+            if (repartition.getY() + repartition.getX() <= gold) {
+                addResources(ResourceType.GOLD, repartition.getX());
+                hammer.addGold(repartition.getY());
+                log(Log.State.GREEN, "\t" + player + Log.State.GREEN + " a mis " + repartition.getX() + " gold dans son inventaire et " + repartition.getY() + " gold dans son marteau");
+            }
+        } else if (getMaxRessources(ResourceType.GOLD) <= getResource(ResourceType.GOLD) && hammer.getCardCount() > 0) {
+            hammer.addGold(gold);
+            log(Log.State.GREEN, "\t" + player + Log.State.GREEN + " a mis " + gold + " gold dans son marteau");
+        } else {
+            addResources(ResourceType.GOLD, gold);
+            log(Log.State.GREEN, "\t" + player + Log.State.GREEN + " a mis " + gold + " gold dans son inventaire");
         }
-        addResources(ResourceType.GLORY,glory);
-        return glory;
     }
 
-    private int addGoldHammerOneCard(int gold){
-        if(getActiveHammerCardCount() == 0){
-            return 0;
-        }
-        int glory = 0;
-        int oldGold = getHammerGold();
-        hammerGold+= gold;
 
-        if(oldGold < 15 && oldGold + gold > 15){
-            glory += 10;
-        }
-        if(oldGold + gold >= 30){
-            glory += 15;
-        }
-        return glory;
+    /**
+     * getDices retourne une liste de 2 element correspondant aux dés
+     */
+    public List<Dice> getDices() {
+        return new ArrayList<>(dices);
     }
 
-    void addHammerCard(){
-        hammerCard++;
+    /**
+     * retourne les face en haut du dé , visible au joueur pour les 2 dé
+     */
+    public List<Facet> getFaceUp() {
+        return dices.stream().map(Dice::getFaceUp).collect(Collectors.toList());
     }
+
+    /**
+     * retourne une liste de 2 face qui correspond aux 2 lancé de dé , sont les face du lancé de dé
+     */
+    List<Facet> throwDices() {  // == Faveur Majeur
+        return dices.stream().map(Dice::throwDice).collect(Collectors.toList());
+    }
+
+    /**
+     * forge modifié le dé de l'inventaire , fait appel aux méthode de la classe dé et face de dé
+     */
+    void forge(Facet facetToForge, int choosenDice, int choosenFacet) {
+        Dice dice = this.dices.get(choosenDice);
+        dice.forgeFacet(facetToForge, choosenFacet);
+    }
+
+    /**
+     * @return liste des facets qui ne sont pas actuellement forgées et qui se trouve dans l'inventaire
+     */
+    public List<Facet> getFacetInventory() {
+        return new ArrayList<>(facetInventory);
+    }
+
+
+    /**
+     * Ajouer une carte dans l'inventaire
+     */
+    void addCard(Card card) {
+        this.cardInventory.add(card);
+    }
+
+    /**
+     * Retourne toute les carte disponible dans l'inventaire
+     */
+    public List<Card> getCardInventory() {
+        return new ArrayList<Card>(cardInventory);
+    }
+
+
+    /**
+     * incrémente les extention de ressources
+     */
+    void addExtension() {
+        extension++;
+    }
+
+
+    public Hammer getHammer() {
+        return hammer;
+    }
+
 
     @Override
     public String toString() {
-        return String.format("\tDés :\t\t\t%s,\n\t\t\t\t\t%s,\n\tRessouces :\t\t%s\n\tCartes :\t\t%s", this.dices.get(0).toString(),this.dices.get(1).toString(), resources,cards);
+        return String.format("\tDés\t\t\t\t:\t%s,\n\t\t\t\t\t\t%s\n\tRessouces\t\t:\t%s\n\tCartes\t\t\t:\t%s\n\tExtensions\t\t:\t%d cartes\n\tMarteaux\t\t:\t%s", this.dices.get(0).toString(), this.dices.get(1).toString(), resources, cardInventory, extension, hammer);
     }
 }

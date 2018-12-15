@@ -1,8 +1,8 @@
 package com.github.l3pi.game;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collections;
+import java.util.List;
 
 public class Dice {
 
@@ -35,13 +35,14 @@ public class Dice {
         return facets.get(0);
     }
 
-    /** change une face de dé en séléctionnant une face de dé
+    /** change une face de dé en séléctionnant une face de dé et met cette face au dessus
      * @param choosenFacet la face de dé choisi pour changer de face
      * @param facetToForge c'est la face a forger dans le dé
      * */
 
-    void addFace(Facet facetToForge,int choosenFacet){
-        this.facets.set(choosenFacet,facetToForge);
+    void forgeFacet(Facet facetToForge, int choosenFacet) {
+        facets.set(choosenFacet, facetToForge);
+        Collections.swap(facets, choosenFacet, 0);
     }
     /** Selectionne une face de dé
      * @return la face de dé
@@ -49,6 +50,10 @@ public class Dice {
 
     public Facet getFacet(int i){
         return this.facets.get(i);
+    }
+
+    public List<Facet> getFacets() {
+        return new ArrayList<>(facets);
     }
 
     @Override
