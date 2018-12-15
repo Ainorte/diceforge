@@ -9,19 +9,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import static com.github.l3pi.sys.Log.log;
-
 public class RandomBot extends Player {
     private Random gen;
     private CardLocationType location = null;
 
 
     /** Cette classe représente un bot qui effectue les actions aléatoirement
-     * @param name le nom du bot
+     * @param number le numero du bot
      *
      * */
-    public RandomBot(String name) {
-        super(name);
+    public RandomBot(int number) {
+        super(number);
         gen = new Random();
     }
 
@@ -59,7 +57,7 @@ public class RandomBot extends Player {
 
     @Override
     public Card chooseCard(Game game){
-        List<Card> purchasableCards = game.getCardSanctuary().getPurchasableCard(game.getInventory(this));
+        List<Card> purchasableCards = game.getCardSanctuary().getPurchasableCard(game.getInventory(this).getResources());
         if (purchasableCards.size() > 0) {
             return purchasableCards.get(this.gen.nextInt(purchasableCards.size()));
         }
@@ -96,7 +94,7 @@ public class RandomBot extends Player {
 
     @Override
     public boolean tradeGoldForGlory(Game game){
-       return gen.nextBoolean();
+        return gen.nextBoolean();
     }
 
     /** Cette fonction est utilisé pour le tour en cours , le joueur choisis un dé de ses 2 dé pour forger une face
@@ -110,7 +108,7 @@ public class RandomBot extends Player {
     @Override
     public int chooseDice(List<Dice> dices){
         return this.gen.nextInt(dices.size());
-    };
+    }
 
     /** Cette fonction prend le tour en cours et une face de dé et choisis quel dé et quel face
      * forger la nouvelle face de dé acheté depuis le sanctuaire des dés
@@ -122,7 +120,7 @@ public class RandomBot extends Player {
 
 
     @Override
-    public int[] forgeMyDice(Game game,Facet facet) {
+    public int[] forgeDice(Game game, Facet facet) {
 
         return new int[]{this.gen.nextInt(1),this.gen.nextInt(5)};
     }
@@ -136,7 +134,7 @@ public class RandomBot extends Player {
     @Override
     public Tuple<Integer, Integer> chooseGoldRepartion(Inventory inventory, int gold) {
         int inv = inventory.getMaxRessources(ResourceType.GOLD) - inventory.getResource(ResourceType.GOLD);
-        int hammer = (30 - inventory.getHammerGold()) + (inventory.getActiveHammerCardCount()-1)*30;
+        int hammer = inventory.getHammer().getAvailableSpace();
 
         if(gen.nextInt(2) == 0){
             int i = gold <= inv ? gold : inv;
@@ -148,5 +146,10 @@ public class RandomBot extends Player {
             int i = gold - h <= inv ? gold - h : inv;
             return new Tuple<>(i,h);
         }
+    }
+
+    @Override
+    public boolean moreAction(Game game) {
+        return gen.nextBoolean();
     }
 }

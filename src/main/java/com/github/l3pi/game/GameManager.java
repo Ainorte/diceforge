@@ -1,7 +1,5 @@
 package com.github.l3pi.game;
 
-import com.github.l3pi.sys.Log;
-
 import java.util.List;
 
 import static com.github.l3pi.sys.Log.log;
@@ -10,32 +8,28 @@ import static com.github.l3pi.sys.Log.log;
  * Class tasked with handling a game lifecycle, including rounds.
  */
 public class GameManager {
-    /** Cette classe prend une liste de player et l'instancie a game , et fait tourner la partie
+    /**
+     * Cette classe permet de protéger l'execution de run de la classe Game
+     * @see Game
+     * @see com.github.l3pi.App
      *
-     * @param players la liste des joueurs pour cette partie ,
-     *                Voir App qui execute le jeu en entier
+     * @param game la partie à lancer ,
      *
-     * */
-    private List<Player> players;
+     */
+    private Game game;
 
-    public GameManager(List<Player> players) {
-        this.players = players;
+    public GameManager(Game game) {
+        this.game = game;
     }
 
-    /** Tourne une partie de jeu et renvoie le gagnant
-     *
-     * */
+    /**
+     * Tourne la partie de jeu
+     */
     public List<Player> run() {
-        Game game = new Game(players);
         log(game.toString());
-        for (int round = 1; round <= 9; round++) {
-            log(Log.State.LOG, String.format("\n==========Round %d==========\n", round));
+        while (!game.isFinish()) {
             game.round();
-            game.increaseRound();
-            log(game.toString());
-            log(Log.State.LOG, String.format("\n========End Round %d========\n", round));
         }
         return game.getBestPlayer();
     }
-
 }
