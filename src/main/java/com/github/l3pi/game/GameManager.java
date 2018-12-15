@@ -10,11 +10,10 @@ import static com.github.l3pi.sys.Log.log;
 public class GameManager {
     /**
      * Cette classe permet de protéger l'execution de run de la classe Game
-     * @see Game
-     * @see com.github.l3pi.App
      *
      * @param game la partie à lancer ,
-     *
+     * @see Game
+     * @see com.github.l3pi.App
      */
     private Game game;
 

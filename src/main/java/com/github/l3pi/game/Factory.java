@@ -23,9 +23,6 @@ public class Factory {
             numberOfFacets);
 
 
-
-
-
         diceSanctuary.put(new Facet("4 GOLD", 3,
                 ((Game game, Player player) -> game.getInventory(player).addGold(player, 4))),
             numberOfFacets);
@@ -39,7 +36,7 @@ public class Factory {
         List<Facet> pool4 = new ArrayList<>();
 
         pool4.add(new Facet("6 GOLD", 4,
-                ((Game game, Player player) -> game.getInventory(player).addGold(player, 6))));
+            ((Game game, Player player) -> game.getInventory(player).addGold(player, 6))));
 
         pool4.add(new Facet("1 GLORY + SOLAR", 4,
             ((Game game, Player player) -> {
@@ -52,19 +49,19 @@ public class Factory {
                 game.getInventory(player).addResources(ResourceType.LUNAR, 1);
             })));
         pool4.add(new Facet("1 GOLD / LUNAR / SOLAR", 4,
-                ((Game game, Player player) -> {
-                    ResourceType choosenResource = player.chooseResource(new ArrayList<ResourceType>(Arrays.asList(ResourceType.GOLD, ResourceType.LUNAR, ResourceType.SOLAR)));
-                    if (choosenResource == ResourceType.GOLD) {
-                        game.getInventory(player).addGold(player, 1);
-                    } else {
-                        game.getInventory(player).addResources(choosenResource, 1);
-                    }
-                })));
+            ((Game game, Player player) -> {
+                ResourceType choosenResource = player.chooseResource(new ArrayList<ResourceType>(Arrays.asList(ResourceType.GOLD, ResourceType.LUNAR, ResourceType.SOLAR)));
+                if (choosenResource == ResourceType.GOLD) {
+                    game.getInventory(player).addGold(player, 1);
+                } else {
+                    game.getInventory(player).addResources(choosenResource, 1);
+                }
+            })));
 
 
-        for(int i = 0;i<numberOfFacets;i++){
+        for (int i = 0; i < numberOfFacets; i++) {
             Collections.shuffle(pool4);
-            diceSanctuary.put(pool4.remove(0),1);
+            diceSanctuary.put(pool4.remove(0), 1);
         }
 
 
@@ -80,14 +77,9 @@ public class Factory {
             numberOfFacets);
 
 
-
-
         diceSanctuary.put(new Facet("2 LUNAR", 6,
                 ((Game game, Player player) -> game.getInventory(player).addResources(ResourceType.LUNAR, 2))),
             numberOfFacets);
-
-
-
 
 
         diceSanctuary.put(new Facet("2 SOLAR", 8,
@@ -95,16 +87,14 @@ public class Factory {
             numberOfFacets);
 
 
-
         diceSanctuary.put(new Facet("3 GLORY", 8,
                 ((Game game, Player player) -> game.getInventory(player).addResources(ResourceType.GLORY, 3))),
             numberOfFacets);
 
 
-
-        List<Facet> pool12= new ArrayList<>();
+        List<Facet> pool12 = new ArrayList<>();
         pool12.add(new Facet("4 GLORY", 12,
-                ((Game game, Player player) -> game.getInventory(player).addResources(ResourceType.GLORY, 4))));
+            ((Game game, Player player) -> game.getInventory(player).addResources(ResourceType.GLORY, 4))));
         pool12.add(new Facet("2 GLORY + LUNAR", 12,
             ((Game game, Player player) -> {
                 game.getInventory(player).addResources(ResourceType.GLORY, 2);
@@ -119,18 +109,18 @@ public class Factory {
                 game.getInventory(player).addResources(ResourceType.SOLAR, 1);
             })));
         pool12.add(new Facet("2 GOLD / LUNAR / SOLAR", 12,
-                ((Game game, Player player) -> {
-                    ResourceType choosenResource = player.chooseResource(new ArrayList<ResourceType>(Arrays.asList(ResourceType.GOLD, ResourceType.LUNAR, ResourceType.SOLAR)));
-                    if (choosenResource == ResourceType.GOLD) {
-                        game.getInventory(player).addGold(player, 2);
-                    } else {
-                        game.getInventory(player).addResources(choosenResource, 2);
-                    }
-                })));
+            ((Game game, Player player) -> {
+                ResourceType choosenResource = player.chooseResource(new ArrayList<ResourceType>(Arrays.asList(ResourceType.GOLD, ResourceType.LUNAR, ResourceType.SOLAR)));
+                if (choosenResource == ResourceType.GOLD) {
+                    game.getInventory(player).addGold(player, 2);
+                } else {
+                    game.getInventory(player).addResources(choosenResource, 2);
+                }
+            })));
 
-        for(int i = 0;i<numberOfFacets;i++){
+        for (int i = 0; i < numberOfFacets; i++) {
             Collections.shuffle(pool12);
-            diceSanctuary.put(pool12.remove(0),1);
+            diceSanctuary.put(pool12.remove(0), 1);
         }
 
         return new DiceSanctuary(diceSanctuary);
@@ -180,17 +170,17 @@ public class Factory {
                     .filter(p -> !p.equals(player))
                     .flatMap(p -> game.getInventory(p).throwDices().stream())
                     .collect(Collectors.toList());
-                Facet first = player.chooseFacetToApply(facets,game);
+                Facet first = player.chooseFacetToApply(facets, game);
                 facets.remove(first);
-                Facet second = player.chooseFacetToApply(facets,game);
+                Facet second = player.chooseFacetToApply(facets, game);
                 if (null != first && first.getName().equals("x3")) {
-                    second.getOperation().apply(game,player);
-                    second.getOperation().apply(game,player);
-                    second.getOperation().apply(game,player);
+                    second.getOperation().apply(game, player);
+                    second.getOperation().apply(game, player);
+                    second.getOperation().apply(game, player);
                 } else if (null != second && second.getName().equals("x3")) {
-                    first.getOperation().apply(game,player);
-                    first.getOperation().apply(game,player);
-                    first.getOperation().apply(game,player);
+                    first.getOperation().apply(game, player);
+                    first.getOperation().apply(game, player);
+                    first.getOperation().apply(game, player);
                 } else {
                     if (null != first) {
                         first.getOperation().apply(game, player);

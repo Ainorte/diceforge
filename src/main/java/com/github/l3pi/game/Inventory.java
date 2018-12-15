@@ -118,7 +118,7 @@ public class Inventory {
      * @param player le joueur qui effectue l'action
      * @param gold   le nombre de gold
      */
-     public void addGold(Player player, int gold) {
+    public void addGold(Player player, int gold) {
         Hammer hammer = getHammer();
         if (hammer.getCardCount() > 0 && getMaxRessources(ResourceType.GOLD) > getResource(ResourceType.GOLD)) {
             Tuple<Integer, Integer> repartition = player.chooseGoldRepartion(this, gold);

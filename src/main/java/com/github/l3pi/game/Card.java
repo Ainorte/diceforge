@@ -21,15 +21,14 @@ public class Card {
     private String formattedEffect;
 
     /**
-     Cette classe représente une carte dans le jeu
-
-     @param location la location de la carte sur le sanctuaire des cartes
-     @param name c'est le nom de la carte
-     @param operation c'est le lambda expression qui applique les effects de la carte
-     @param p c'est le prix de la carte
-     @param recurrent pour indiquer si les effets de la carte sont déclanché a chaque début de tour
-     @param resourceType c'est le type  de ressource pour necessaire pour acheter cette carte
-
+     * Cette classe représente une carte dans le jeu
+     *
+     * @param location     la location de la carte sur le sanctuaire des cartes
+     * @param name         c'est le nom de la carte
+     * @param operation    c'est le lambda expression qui applique les effects de la carte
+     * @param p            c'est le prix de la carte
+     * @param recurrent    pour indiquer si les effets de la carte sont déclanché a chaque début de tour
+     * @param resourceType c'est le type  de ressource pour necessaire pour acheter cette carte
      */
 
     public Card(int p, List<ResourceType> resourceType, CardLocationType location, Operation operation, String name, boolean recurrent, String formattedEffect) {
@@ -43,7 +42,7 @@ public class Card {
 
     }
 
-    public Card(int p,ResourceType resourceType, CardLocationType location,Operation operation, String name) {
+    public Card(int p, ResourceType resourceType, CardLocationType location, Operation operation, String name) {
         this(p, new ArrayList<ResourceType>() {{
             add(resourceType);
         }}, location, operation, name, false, "%s a effectué l'effet");
@@ -69,6 +68,7 @@ public class Card {
     public int getPrice() {
         return price;
     }
+
     public List<ResourceType> getResourceType() {
         return new ArrayList<>(resourceType);
     }
