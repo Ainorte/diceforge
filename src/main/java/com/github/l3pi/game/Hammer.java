@@ -4,12 +4,12 @@ public class Hammer {
     private int gold;
     private int card;
 
-    public Hammer() {
+    Hammer() {
         gold = 0;
         card = 0;
     }
 
-    public int getCardCount() {
+    int getCardCount() {
         return card - gold / 30;
     }
 

@@ -40,10 +40,10 @@ public class Inventory {
 
     public Inventory(HashMap<ResourceType, Integer> resources, List<Dice> dices, List<Facet> facetInventory, List<Card> cardInventory, int extension, Hammer hammer) {
 
-        this.resources = new HashMap<ResourceType, Integer>(resources);
+        this.resources = new HashMap<>(resources);
         this.dices = new ArrayList<>(dices);
-        this.facetInventory = new ArrayList<Facet>(facetInventory);
-        this.cardInventory = new ArrayList<Card>(cardInventory);
+        this.facetInventory = new ArrayList<>(facetInventory);
+        this.cardInventory = new ArrayList<>(cardInventory);
         this.extension = extension;
         this.hammer = hammer;
     }
@@ -147,7 +147,7 @@ public class Inventory {
     /**
      * retourne les face en haut du dé , visible au joueur pour les 2 dé
      */
-    public List<Facet> getFaceUp() {
+    List<Facet> getFaceUp() {
         return dices.stream().map(Dice::getFaceUp).collect(Collectors.toList());
     }
 
@@ -169,7 +169,7 @@ public class Inventory {
     /**
      * @return liste des facets qui ne sont pas actuellement forgées et qui se trouve dans l'inventaire
      */
-    public List<Facet> getFacetInventory() {
+    List<Facet> getFacetInventory() {
         return new ArrayList<>(facetInventory);
     }
 
@@ -184,8 +184,8 @@ public class Inventory {
     /**
      * Retourne toute les carte disponible dans l'inventaire
      */
-    public List<Card> getCardInventory() {
-        return new ArrayList<Card>(cardInventory);
+    List<Card> getCardInventory() {
+        return new ArrayList<>(cardInventory);
     }
 
 
