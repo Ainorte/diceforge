@@ -94,26 +94,19 @@ public class IntelligentBot extends Player {
                 if (facet.getName().equals("1 GOLD + LUNAR + GLORY + SOLAR")) {
                     return facet;
                 }
-            }
 
-            for (Facet facet : facetList) {
                 if (facet.getName().equals("3 GOLD / 2 GLORY")) {
                     return facet;
                 }
-            }
 
-            for (Facet facet : facetList) {
                 if (facet.getName().equals("1 GLORY + SOLAR")) {
                     return facet;
                 }
-            }
-            for (Facet facet : facetList) {
+
                 if (facet.getName().equals("2 GLORY + LUNAR")) {
                     return facet;
                 }
-            }
 
-            for (Facet facet : facetList) {
                 if (facet.getName().equals("2 GOLD / LUNAR / SOLAR")) {
                     return facet;
                 }
@@ -141,6 +134,45 @@ public class IntelligentBot extends Player {
 
     @Override
     public Facet chooseFacetToApply(List<Facet> facetList, Game game) {
+        if(facetList.size() >0) {
+            for (Facet facet : facetList) {
+                if (facet.getName().equals("1 GOLD + LUNAR + GLORY + SOLAR")) {
+                    return facet;
+                }
+
+                if (facet.getName().equals("3 GOLD / 2 GLORY")) {
+                    return facet;
+                }
+
+                if (facet.getName().equals("1 GLORY + SOLAR")) {
+                    return facet;
+                }
+
+                if (facet.getName().equals("2 GLORY + LUNAR")) {
+                    return facet;
+                }
+
+                if (facet.getName().equals("2 GOLD / LUNAR / SOLAR")) {
+                    return facet;
+                }
+
+                if (facet.getName().equals("4 GLORY")) {
+                    return facet;
+                }
+
+                if (facet.getName().equals("3 GLORY")) {
+                    return facet;
+                }
+
+                if (facet.getName().equals("2 GLORY")) {
+                    return facet;
+                }
+
+            }
+            Collections.shuffle(facetList);
+
+            return facetList.get(0);
+        }
         return null;
     }
 
@@ -331,8 +363,17 @@ public class IntelligentBot extends Player {
 
     @Override
     public ResourceType chooseResource(List<ResourceType> resource) {
-        Collections.shuffle(resource);
-        return resource.get(0);
+        if(resource.size() >0) {
+            if(resource.remove(ResourceType.GLORY)){
+                return ResourceType.GLORY;
+            }
+            if(resource.remove(ResourceType.SOLAR)){
+                return ResourceType.SOLAR;
+            }
+            Collections.shuffle(resource);
+            return resource.get(0);
+        }
+        return null;
     }
 
     /**
@@ -345,7 +386,16 @@ public class IntelligentBot extends Player {
 
     @Override
     public boolean tradeGoldForGlory(Game game) {
-        return gen.nextBoolean();
+        Inventory inventory = game.getInventory(this);
+
+        int maxGold = inventory.getMaxRessources(ResourceType.GOLD);
+        int gold = inventory.getResource(ResourceType.GOLD);
+
+        if(maxGold - gold < 2){
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -417,7 +467,16 @@ public class IntelligentBot extends Player {
 
     @Override
     public Tuple<Integer, Integer> chooseGoldRepartion(Inventory inventory, int gold) {
-        return new Tuple<>(0, 0);
+        int maxGold = inventory.getMaxRessources(ResourceType.GOLD);
+        int currentGold = inventory.getResource(ResourceType.GOLD);
+        if(currentGold + gold > maxGold){
+            int x = gold - (maxGold-currentGold);
+            int y = gold - x;
+            return new Tuple<>(x,y);
+        }
+        else{
+            return new Tuple<>(gold, 0);
+        }
     }
 
     @Override
