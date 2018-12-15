@@ -204,7 +204,7 @@ public class IntelligentBot extends RandomBot{
                 tmp = co;
             }
             if(card.getName() == "L'Ancien"){
-                tmp = this.maxRound*3;
+                tmp = 40;
             }
             if(card.getName() == "Les Herbes Folles"){
                 tmp = 21;
@@ -213,13 +213,13 @@ public class IntelligentBot extends RandomBot{
                 tmp = maxRound*5;
             }
             if(card.getName() == "Le Minotaure"){
-                tmp =  10*3;
+                tmp =  10;
             }
             if(card.getName() == "La Meduse" ){
                 tmp = 14*3;
             }
             if(card.getName() == "Le Miroir Abyssal"){
-                tmp = 35;
+                tmp = 20;
             }
 
             if(coef<tmp){
@@ -239,11 +239,7 @@ public class IntelligentBot extends RandomBot{
 
     @Override
     public int chooseAction(Game game){
-        List<Card> cards = game.getCardSanctuary().getPurchasableCard(game.getInventory(this));
-        if(cards.size()>=8){
-            return 1;
-        }
-        return 0;
+        return this.gen.nextInt(2);
     }
 
     /** Cette fonction est utilisé par les effects de cartes et non directement par le bot lui meme
@@ -336,8 +332,19 @@ public class IntelligentBot extends RandomBot{
 
     @Override
     public Tuple<Integer, Integer> chooseGoldRepartion(Inventory inventory, int gold) {
-        //TODO : Implement Balance
-        return new Tuple<>(0,0);
+        int inv = inventory.getMaxRessources(ResourceType.GOLD) - inventory.getResource(ResourceType.GOLD);
+        int hammer = (30 - inventory.getHammerGold()) + (inventory.getActiveHammerCardCount()-1)*30;
+
+        if(gen.nextInt(2) == 0){
+            int i = gold <= inv ? gold : inv;
+            int h = gold - i <= hammer ? gold - i : hammer;
+            return new Tuple<>(i,h);
+        }
+        else {
+            int h = gold <= hammer ? gold : hammer;
+            int i = gold - h <= inv ? gold - h : inv;
+            return new Tuple<>(i,h);
+        }
     }
 
 }
