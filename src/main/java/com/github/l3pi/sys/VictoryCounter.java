@@ -1,32 +1,35 @@
 package com.github.l3pi.sys;
 
-import java.util.*;
+import com.github.l3pi.game.Player;
+
+import java.util.List;
+import java.util.TreeMap;
 
 public class VictoryCounter {
+    private final TreeMap<Player, Integer> scores = new TreeMap<>();
     private int playCounter;
-    private final Map<String, Integer> scores = new HashMap<>();
 
-    public VictoryCounter(List<String> playerNames) {
-        for (String name : playerNames) {
-            scores.put(name, 0);
+    public VictoryCounter(List<Player> players) {
+        for (Player player : players) {
+            scores.put(player, 0);
         }
     }
 
-    public void addVictoryFor(List<String> players) {
+    public void addVictoryFor(List<Player> players) {
         playCounter++;
 
-        for (String name : players) {
-            addVictoryFor(name);
+        for (Player player : players) {
+            addVictoryFor(player);
         }
     }
 
-    private void addVictoryFor(String player) {
+    private void addVictoryFor(Player player) {
         if (scores.containsKey(player)) {
-            scores.replace(player, scores.get(player) + 1);
+            scores.merge(player, 1, Math::addExact);
         }
     }
 
-    int getVictoryCountFor(String player) {
+    int getVictoryCountFor(Player player) {
         return scores.getOrDefault(player, 0);
     }
 
@@ -38,7 +41,7 @@ public class VictoryCounter {
         return scores.values().stream().mapToInt(i -> i).sum();
     }
 
-    private double getWinPercentageFor(String player) {
+    private double getWinPercentageFor(Player player) {
         double percentage = 0.;
 
         if (scores.containsKey(player)) {
@@ -53,13 +56,15 @@ public class VictoryCounter {
 
         final int totalWinCount = (int) getTotalWinCount();
         b.append(String.format("Il y a eu %d parties\n", playCounter));
-        b.append(String.format("Il y a eu un total commun de %d victoire%s\n", totalWinCount, totalWinCount != 1 ? "s" : ""));
-        b.append(Log.State.fmt(Log.State.STATUS, "Nombre de victoires\n"));
+        b.append(String.format("Il y a eu un total cumulé de %d victoire%s\n", totalWinCount, totalWinCount != 1 ? "s" : ""));
+        b.append(Log.State.fmt(Log.State.BLUE, "Nombre de victoires\n"));
         scores.forEach(
             (player, score) ->
                 b
+                    .append(Log.State.GREEN)
                     .append("\t- ")
                     .append(player)
+                    .append(Log.State.GREEN)
                     .append(": ")
                     .append(score)
                     .append(" (")
@@ -67,6 +72,7 @@ public class VictoryCounter {
                     .append("%)\n")
         );
 
+        b.append(Log.State.RESET);
         return b.toString();
     }
 
