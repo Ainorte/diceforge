@@ -4,9 +4,11 @@ import com.github.l3pi.type.CardLocationType;
 import com.github.l3pi.type.ResourceType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Card {
+
     private int price;
     private List<ResourceType> resourceType;
 
@@ -16,7 +18,7 @@ public class Card {
     private String name;
     private boolean recurrent;
 
-    String formattedEffect;
+    private String formattedEffect;
 
     /**
      Cette classe représente une carte dans le jeu
@@ -30,9 +32,9 @@ public class Card {
 
      */
 
-    public Card(int p,List<ResourceType> resourceType, CardLocationType location,Operation operation,String name,boolean recurrent,String formattedEffect) {
+    public Card(int p, List<ResourceType> resourceType, CardLocationType location, Operation operation, String name, boolean recurrent, String formattedEffect) {
         this.price = p;
-        this.resourceType = resourceType;
+        this.resourceType = new ArrayList<>(resourceType);
         this.locationType = location;
         this.operation = operation;
         this.recurrent = recurrent;
@@ -41,38 +43,37 @@ public class Card {
 
     }
 
-
     public Card(int p,ResourceType resourceType, CardLocationType location,Operation operation, String name) {
-        this(p,new ArrayList<ResourceType>(){{add(resourceType);}},location,operation,name,false,"%s a effectué l'effet");
+        this(p, new ArrayList<ResourceType>() {{
+            add(resourceType);
+        }}, location, operation, name, false, "%s a effectué l'effet");
     }
 
-    public Card(int p,ResourceType resourceType, CardLocationType location,Operation operation, String name,String formattedEffect) {
-        this(p,new ArrayList<ResourceType>(){{add(resourceType);}},location,operation,name,false,formattedEffect);
+    public Card(int p, ResourceType resourceType, CardLocationType location, Operation operation, String name, String formattedEffect) {
+        this(p, new ArrayList<ResourceType>() {{
+            add(resourceType);
+        }}, location, operation, name, false, formattedEffect);
     }
 
 
-
-    public Card(int p,ResourceType resourceType, CardLocationType location,Operation operation, String name,boolean recurrent,String formattedEffect) {
-        this(p,new ArrayList<ResourceType>(){{add(resourceType);}},location,operation,name,recurrent,formattedEffect);
+    public Card(int p, ResourceType resourceType, CardLocationType location, Operation operation, String name, boolean recurrent, String formattedEffect) {
+        this(p, new ArrayList<ResourceType>() {{
+            add(resourceType);
+        }}, location, operation, name, recurrent, formattedEffect);
     }
 
     public String getName() {
         return name;
     }
 
-    public boolean isRecurrent() {
-        return recurrent;
-    }
-
     public int getPrice() {
         return price;
     }
-
     public List<ResourceType> getResourceType() {
-        return resourceType;
+        return new ArrayList<>(resourceType);
     }
 
-    public CardLocationType getLocationType() {
+    public CardLocationType getLocation() {
         return locationType;
     }
 
@@ -80,15 +81,24 @@ public class Card {
         return this.operation;
     }
 
-
-    public boolean isCardPurchasable(int money){
-
-        return this.price <= money;
+    public boolean isRecurrent() {
+        return recurrent;
     }
 
+    /**
+     * @param resources Inventaire de ressources du joueur
+     * @return un boolean , true si achetable, false si non
+     */
+    public boolean isPurchasable(HashMap<ResourceType, Integer> resources) {
+        boolean result = true;
+        for (int i = 0; i < resourceType.size() && result; i++) {
+            result = resources.get(resourceType.get(i)) >= price;
+        }
+        return result;
+    }
 
-    public String displayEffect(Player player){
-        return String.format(this.formattedEffect,player);
+    public String displayEffect(Player player) {
+        return String.format(this.formattedEffect, player);
     }
 
 
