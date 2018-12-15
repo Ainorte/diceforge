@@ -2,6 +2,8 @@ package com.github.l3pi;
 
 import com.github.l3pi.bot.IntelligentBot;
 import com.github.l3pi.bot.RandomBot;
+import com.github.l3pi.game.Factory;
+import com.github.l3pi.game.Game;
 import com.github.l3pi.game.GameManager;
 import com.github.l3pi.game.Player;
 import com.github.l3pi.sys.Log;
@@ -17,7 +19,6 @@ import static com.github.l3pi.sys.Log.log;
  * Hello world!
  */
 public class App {
-    private static VictoryCounter counter;
 
     public static void main(String[] args) {
         if (args.length != 2) {
@@ -37,56 +38,52 @@ public class App {
             Log.enableLog();
         }
 
-        initializeCounter(playerCount);
+        List<Player> players = createPlayers(playerCount);
 
-        log(Log.State.SYS, String.format("Le programme va lancer %d parties à %d joueurs", runCount, playerCount));
+        VictoryCounter counter = initializeCounter(players);
+
+        log(Log.State.SYS, String.format("Le programme va lancer %d parties à %d joueurs", runCount, players.size()));
 
         int currentRun = 1;
         do {
             log(Log.State.SYS, String.format("Partie %d/%d", currentRun, runCount));
-
-            run(playerCount);
+            List<Player> winners = run(players);
+            counter.addVictoryFor(winners);
         } while (++currentRun <= runCount);
 
         log(Log.State.SYS, counter.toString());
     }
 
-    private static void initializeCounter(int playerCount) {
-        List<String> names = new ArrayList<>();
 
+    private static List<Player> createPlayers(int playerCount) {
+        List<Player> players = new ArrayList<>();
         switch (playerCount) {
             case 4:
-                names.add("player3");
-                names.add("player4");
-            case 2:
+                players.add(0, new RandomBot(4));
+            case 3:
+                players.add(0, new IntelligentBot(3));
             default:
-                names.add(0, "player1");
-                names.add(1, "player2");
+                players.add(0, new IntelligentBot(2));
+                players.add(0, new RandomBot(1));
         }
 
-        counter = new VictoryCounter(names);
+        return players;
     }
 
-    private static void run(int playerCount) {
-        List<Player> players = new ArrayList<>();
+    private static VictoryCounter initializeCounter(List<Player> players) {
+        return new VictoryCounter(players);
+    }
 
-        switch (playerCount) {
-            case 4:
-                players.add(new RandomBot("player3"));
-                players.add(new RandomBot("player4"));
-            case 2:
-            default:
-                players.add(0, new IntelligentBot("player1")); //MODIFIER ICI
-                players.add(1, new RandomBot("player2"));
-        }
-        GameManager gameManager = new GameManager(players);
+    private static List<Player> run(List<Player> players) {
+        Game game = new Game(Factory.generateInventories(players), Factory.generateDiceSanctuary(players), Factory.generateCardSanctuary(players), 1, players.size() == 3 ? 10 : 9);
+        GameManager gameManager = new GameManager(game);
         List<Player> winners = gameManager.run();
 
-        counter.addVictoryFor(winners.stream().map(Player::getName).collect(Collectors.toList()));
+        log(Log.State.SYS,
+            (winners.size() == 1 ? "Le gagnant est: " : "Les gagnants sont ") +
+                winners.stream().map(Player::getName).collect(Collectors.joining(", ")) +
+                "\n");
 
-        String b = (winners.size() == 1 ? "Le gagnant est: " : "Les gagnants sont ") +
-            winners.stream().map(Player::getName).collect(Collectors.joining(", ")) +
-            "\n";
-        log(Log.State.SYS, b);
+        return winners;
     }
 }

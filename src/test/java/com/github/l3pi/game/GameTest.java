@@ -1,30 +1,53 @@
-/*package com.github.l3pi.game;
+package com.github.l3pi.game;
 
-import com.github.l3pi.bot.RandomBot;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.*;
 
 public class GameTest {
-    private Game game;
 
     @Before
-    public void initGame() {
-        game = mock(Game.class);
-        game.init(Arrays.asList(
-            new RandomBot("1"),
-            new RandomBot("2")
-        ));
+    public void setUp() throws Exception {
     }
 
     @Test
-    public void testThatMethodsAreAtLeastCalledOnce() {
-        game.round();
-        verify(game, atLeastOnce()).divineBlessing();
-        verify(game).recurrentAction(game.getPlayer(anyString()));
+    public void getRound() {
+    }
+
+    @Test
+    public void isFinish() {
+    }
+
+    @Test
+    public void round() {
+    }
+
+    @Test
+    public void getDiceSanctuary() {
+    }
+
+    @Test
+    public void getCardSanctuary() {
+    }
+
+    @Test
+    public void getPlayers() {
+    }
+
+    @Test
+    public void getPlayer() {
+    }
+
+    @Test
+    public void getInventory() {
+    }
+
+    @Test
+    public void getInventories() {
+    }
+
+    @Test
+    public void getBestPlayer() {
     }
 }
-*/
