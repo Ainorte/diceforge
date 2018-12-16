@@ -59,12 +59,12 @@ public class App {
         List<Player> players = new ArrayList<>();
         switch (playerCount) {
             case 4:
-                players.add(0, new RandomBot(4));
+                players.add(0, new IntelligentBot(4));
             case 3:
                 players.add(0, new IntelligentBot(3));
             default:
-                players.add(0, new IntelligentBot(2));
-                players.add(0, new RandomBot(1));
+                players.add(0, new RandomBot(2));
+                players.add(0, new IntelligentBot(1));
         }
 
         return players;

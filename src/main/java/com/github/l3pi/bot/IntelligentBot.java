@@ -65,23 +65,23 @@ public class IntelligentBot extends Player {
     @Override
     public Facet chooseFacetToForge(List<Facet> facetList, Game game) {
 
-
         List<Dice> mydices = game.getInventory(this).getDices();
         Dice dice1 = mydices.get(0);
         Dice dice2 = mydices.get(1);
 
         List<Facet> facetGold = facetList.stream().filter(x -> x.getName().contains("GOLD")).collect(Collectors.toList());
 
-        if (game.getRound() <= 3 &&
-            (dice1.getFacets().stream().mapToInt(x -> this.facetCoefficient.get(x.getName())).sum() <= 9) &&
-            (dice1.getFacets().stream().filter(x -> x.getName().contains("GOLD")).count()) >= 5 &&
-            facetGold.size()> 0) {
+        if (game.getRound() <= 3 && facetGold.size()> 0 &&
+            (((dice1.getFacets().stream().mapToInt(x -> this.facetCoefficient.get(x.getName())).sum() <= 9) &&
+                (dice1.getFacets().stream().filter(x -> x.getName().contains("GOLD")).count()) >= 5) ||
+                ((dice2.getFacets().stream().mapToInt(x -> this.facetCoefficient.get(x.getName())).sum() <= 9) &&
+                    (dice2.getFacets().stream().filter(x -> x.getName().contains("GOLD")).count()) >= 5))) {
 
 
             int bestFacetcoef = this.facetCoefficient.get("1 GOLD");
             return getFacet(facetGold, bestFacetcoef);
 
-        } else if (game.getRound() >= 2 && (dice1.getFacets().stream().mapToInt(x -> this.facetCoefficient.get(x.getName())).sum() > 9)) {
+        } else if (game.getRound() >= 2 && (dice1.getFacets().stream().mapToInt(x -> this.facetCoefficient.get(x.getName())).sum() > 9 || dice2.getFacets().stream().mapToInt(x -> this.facetCoefficient.get(x.getName())).sum() > 9)) {
 
             for (Facet facet : facetList) {
                 if (facet.getName().equals("1 GOLD + LUNAR + GLORY + SOLAR")) {
@@ -185,10 +185,10 @@ public class IntelligentBot extends Player {
         HashMap<String, Double> cardCoefficient = new HashMap<String, Double>() {
         };
 
-        cardCoefficient.put("Le Marteau du Forgeron", (double) 12);
+        cardCoefficient.put("Le Marteau du Forgeron", (double) 16);
         cardCoefficient.put("Le Coffre du Forgeron", (double) 12);
 
-        cardCoefficient.put("Les Sabots d'Argent", (double) 12);
+        cardCoefficient.put("Les Sabots d'Argent", (double) 14);
         cardCoefficient.put("Les Satyres", (double) (6));
 
         cardCoefficient.put("Le Passeur", (double) 5);
